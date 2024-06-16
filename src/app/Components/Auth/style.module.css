@@ -1,0 +1,167 @@
+.userForm {
+  margin: auto;
+  min-height: 70vh;
+  width: 96%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+.userForm .selectBtn {
+  padding: 10px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.userForm .selectBtn button {
+  padding: 10px 25px;
+  font-size: 0.9rem;
+  border: none;
+  outline: none;
+  background: rgba(181, 178, 189, 0.631372549);
+  cursor: pointer;
+  color: cadetblue;
+}
+.userForm .selectBtn .defaultBtn {
+  padding: 10px 25px;
+  font-size: 0.9rem;
+  border: none;
+  outline: none;
+  background: rgba(91, 72, 144, 0.831372549);
+  cursor: pointer;
+  color: #93c0ca;
+}
+.userForm .login {
+  min-height: 65vh;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  box-shadow: 0 0 7px 0;
+  border-radius: 9px;
+}
+.userForm .login form {
+  height: 300px;
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.userForm .login form input {
+  width: 80%;
+  margin: 10px 0px;
+  height: 50px;
+}
+.userForm .login form div {
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.userForm .login form div p {
+  display: flex;
+  align-items: center;
+  width: 190px;
+  justify-content: center;
+  margin-top: 10px;
+}
+.userForm .login form div p input {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  margin-right: 6px;
+}
+.userForm .login form div .forgot {
+  color: blue;
+  cursor: pointer;
+}
+.userForm .login form button {
+  width: 80%;
+  padding: 5px;
+  border: none;
+  background: rgba(65, 116, 244, 0.8941176471);
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-radius: 8px;
+}
+.userForm .login .register {
+  width: 80%;
+  text-align: center;
+}
+.userForm .login .register p span {
+  color: blue;
+  cursor: pointer;
+}
+.userForm .registerForm {
+  min-height: 65vh;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  box-shadow: 0 0 7px 0;
+  border-radius: 9px;
+}
+.userForm .registerForm form {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.userForm .registerForm form input {
+  width: 80%;
+  margin: 10px 0px;
+  height: 50px !important;
+}
+.userForm .registerForm form div {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+.userForm .registerForm form div input {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  margin-right: 6px;
+}
+.userForm .registerForm form div p span {
+  color: blue;
+  cursor: pointer;
+}
+.userForm .registerForm form button {
+  width: 80%;
+  padding: 5px;
+  border: none;
+  background: rgba(65, 116, 244, 0.8941176471);
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.userForm .registerForm .register {
+  width: 80%;
+  text-align: center;
+}
+.userForm .registerForm .register p span {
+  color: blue;
+  cursor: pointer;
+}/*# sourceMappingURL=style.module.css.map */

@@ -1,0 +1,126 @@
+// .table {
+//     width: 100%;
+//     border-collapse: collapse;
+  
+//     th, td {
+//       padding: 12px 15px;
+//       text-align: left;
+//       border-bottom: 1px solid #ddd;
+//     }
+  
+//     th {
+//       background-color: #f2f2f2;
+//       font-weight: bold;
+//     }
+  
+//     tbody tr:nth-child(even) {
+//       background-color: #f2f2f2;
+//     }
+  
+//     tbody tr:hover {
+//       background-color: #ddd;
+//     }
+  
+//     img {
+//       max-width: 50px;
+//       max-height: 50px;
+//       display: block;
+//       margin: 0 auto; // Center the image horizontally
+//     }
+  
+//     a {
+//       margin-right: 10px;
+//       text-decoration: none;
+//       color: blue;
+//     }
+  
+//     button {
+//       background-color: red;
+//       color: white;
+//       border: none;
+//       padding: 5px 10px;
+//       cursor: pointer;
+//     }
+  
+//     @media only screen and (max-width: 600px) {
+//       th, td {
+//         display: block;
+//         width: 100%;
+//       }
+  
+//       td {
+//         text-align: center;
+//       }
+  
+//       img {
+//         max-width: 100%;
+//         max-height: auto;
+//       }
+  
+//       button {
+//         margin-top: 10px;
+//       }
+//     }
+//   }
+  
+.table {
+    width: 100%;
+    border-collapse: collapse;
+  
+    th, td {
+      padding: 6px 9px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+  
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+  
+    tbody tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  
+    tbody tr:hover {
+      background-color: #ddd;
+    }
+  
+    img {
+      width: 90px;
+      max-height: 50px;
+      display: block;
+      margin-right: 20px;
+    }
+  
+    a {
+      margin-right: 10px;
+      text-decoration: none;
+      color: blue;
+    }
+  
+    button {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 5px 6px;
+      cursor: pointer;
+    }
+  
+    @media only screen and (max-width: 600px) {
+      
+      th {
+        font-size: 8px;
+      }
+  
+      img {
+        max-width: 100%;
+        max-height: auto;
+      }
+  
+      button {
+        margin-top: 10px;
+      }
+    }
+  }
+  

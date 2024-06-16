@@ -1,0 +1,289 @@
+.loading{
+    p{
+       
+    }
+}
+
+.container {
+  .row {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    height: 80vh;
+
+    .col {
+      height: auto;
+      padding: 20px 10px;
+      width: 100%;
+      max-width: 350px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      
+      .author_card {
+        box-shadow: 0 20px 28px 6px #00000017;
+        border-radius: 10px;
+        overflow: hidden;
+
+        .author_card_cover {
+          height: 150px;
+        }
+
+        .author_card_profile {
+          height: auto;
+          padding: 10px;
+          text-align: center;
+
+          .author_card_avatar {
+            height: 6rem;
+            width: 6rem;
+            
+            img {
+              height: 100%;
+              width: 100%;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+
+      .wizard {
+        height: auto;
+
+        .list_group {
+          height: 100%;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          line-height: 30px;
+
+          a {
+            padding: 10px;
+            color: black;
+            text-decoration: none;
+            transition: color 0.3s;
+            &:hover {
+              color: #ac32e4;
+            }
+
+            .icon{
+               margin-right: 10px;
+            }
+          }
+
+          .list_group_item.active:not(.disabled)::before {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            content: "";
+          }
+
+          .list_group_item.active:not(.disabled) {
+            background-color: transparent;
+            color: #ac32e4;
+            cursor: default;
+            pointer-events: none;
+            border-bottom: 1px solid blue;
+            border-left: 1px solid blue;
+            border-bottom-left-radius: 10px;
+          }
+
+          .ord {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          
+           div {
+              div{
+                 .icon{
+                    margin-right: 10px;
+                 }
+              }
+           }
+          }
+        }
+      }
+    }
+    .aboutUserDetails {
+      display: none;
+    }
+
+    .pages {
+      width: 60%;
+      max-width: 1200px;
+      max-height: 86vh;
+      overflow-y: scroll;
+
+      .form_row {
+        height: 70%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px;
+
+        .form_col {
+          width: 92%;
+          height: 60px;
+          display: flex;
+          margin: 10px;
+
+          .form_group {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            input {
+              height: 80%;
+              font-size: 1.1rem;
+              padding: 0 10px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+            }
+          }
+        }
+
+        .form_col_full {
+          width: 92%;
+          display: flex;
+          justify-content: center;
+
+          button {
+            padding: 10px 30px;
+            margin: 20px 0;
+            cursor: pointer;
+            border: none;
+            background: #8faeb6;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.2s;
+
+            &:hover {
+              background: #4c8c9c;
+            }
+          }
+        }
+        .passwordUpdate {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+
+          display: flex;
+          justify-content: center;
+          .oldPass {
+            width: 92%;
+
+            .form_group {
+              display: flex;
+              flex-direction: column;
+              input {
+                height: 40px;
+              }
+            }
+          }
+          .form_col {
+            width: 92%;
+            .form_group {
+              width: 100%;
+
+              input {
+                width: 100%;
+              }
+            }
+          }
+
+          .updateBtn {
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+
+            button {
+              padding: 10px 30px;
+              border: none;
+              color: #fff;
+              background: #8faeb6;
+              font-size: 1rem;
+              border-radius: 8px;
+              transition: all 0.2s;
+              cursor: pointer;
+              &:hover {
+                background: #4c8c9c;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 933px) {
+    .row {
+      flex-direction: column;
+      .col {
+        display: none;
+      }
+      .col,
+      .pages {
+        width: 100%;
+        max-width: none;
+        
+      }
+      .aboutUserDetails {
+        display: initial;
+        width: 100%;
+        padding: 7px;
+        display: flex;
+        justify-content: space-between;
+        box-shadow: 0 0 4px 0;
+        z-index: 99;
+        position:absolute;
+        top:-47px;
+        background: #fff; 
+
+        .links {
+          width: 80%;
+          ul {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+
+            .activeList {
+              color: blue;
+              border-bottom: 1px solid blue;
+            }
+            li {
+              text-align: center;
+              list-style: none;
+              font-size: 1.3rem;
+              cursor: pointer;
+              color: orangered;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
+
+    .pages {
+    
+      .form_row {
+        .form_col {
+          width: 100%;
+          margin: 10px 0;
+
+          .form_group {
+            width: 100%;
+          }
+        }
+
+        .form_col_full {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+

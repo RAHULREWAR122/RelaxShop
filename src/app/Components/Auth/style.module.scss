@@ -1,0 +1,200 @@
+.userForm{
+   margin: auto;
+   min-height: 70vh;
+   width: 96%;
+   padding: 10px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   flex-direction: column;
+     
+   .selectBtn{
+      padding: 10px;
+      width: 100%;
+      max-width: 600px;
+      text-align:center;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      
+      button{
+          padding: 10px 25px;
+          font-size: .9rem;
+          border: none;
+          outline: none;
+          background: #b5b2bda1;
+          cursor: pointer;   
+          color: cadetblue;
+
+          
+      }
+      .defaultBtn{
+         padding: 10px 25px;
+         font-size: .9rem;
+         border: none;
+         outline: none;
+         background: #5b4890d4;
+         cursor: pointer;   
+         color: #93c0ca;
+
+      }
+   }
+   .login{
+     min-height: 65vh;
+     width: 100%;
+     max-width: 1200px;
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+     flex-direction: column;
+     text-align: center;
+     box-shadow: 0 0 7px 0;
+     border-radius: 9px;      
+     form{
+        height: 300px;
+        padding: 20px;
+        width: 100%;  
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+          
+        
+        input {
+             width: 80%;
+             margin: 10px 0px;
+             height: 50px;
+        }
+
+        div{ 
+             width: 90%;
+             display: flex;
+             justify-content: space-evenly;
+             align-items: center;
+             font-size: .9rem;
+             
+          p{
+             display: flex;
+             align-items: center;
+             width: 190px;
+             justify-content: center;
+             margin-top: 10px;
+             input{
+                height: 20px;
+                width: 20px;
+                cursor: pointer;
+                margin-right: 6px;
+            }
+          }
+          .forgot{
+             color: blue;
+             cursor: pointer;
+          }
+        }
+      
+        button{
+             width: 80%;
+             padding: 5px;
+             border: none;
+             background: #4174f4e4;
+             color: #fff;
+             font-size: 1.3rem;
+             font-weight: 600;
+             border-radius: 8px;
+
+        }
+    }
+
+    .register{
+         width: 80%;
+         text-align: center;
+         p{
+           
+            span{
+                color: blue;
+                cursor: pointer;
+         
+            }
+      }
+    }
+   }
+
+   
+//    Sign Up
+  .registerForm{
+    min-height: 65vh;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 0 0 7px 0;
+    border-radius: 9px;      
+    form{
+       height: auto;
+       width: 100%;  
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       flex-direction: column;
+         
+       
+       input {
+            width: 80%;
+            margin: 10px 0px;
+            height: 50px !important;
+       }
+
+       div{ 
+            width: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .9rem;
+           
+            input{
+               height: 20px;
+               width: 20px;
+               cursor: pointer;
+               margin-right: 6px;
+         }
+         p{
+             span{
+                color: blue;
+                cursor: pointer;      
+             }
+         }
+         
+       }
+     
+       button{
+            width: 80%;
+            padding: 5px;
+            border: none;
+            background: #4174f4e4;
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-radius: 8px;
+            margin-top: 10px;
+            cursor: pointer;
+       }
+   }
+
+   .register{
+        width: 80%;
+        text-align: center;
+        p{
+          
+           span{
+               color: blue;
+               cursor: pointer;
+        
+           }
+     }
+   }
+  }
+
+}

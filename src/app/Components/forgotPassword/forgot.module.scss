@@ -1,0 +1,177 @@
+
+.forgotPasswordPage{
+      height: 82vh;
+      position: absolute;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      top: 110px;
+      bottom: 0;
+
+}
+.forgotPasswordPageTrue {
+      height: 82vh;
+      position: absolute;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      top: 110px;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: none;
+      
+
+.linkPage{
+     position: absolute;
+     min-height: 50%;
+     cursor: default;
+     width: 80%;
+     max-width: 900px;
+     background: #523b6844;
+     box-shadow: 0 0 12px 12px #e4e4e9;
+     border-radius: 10px;
+     font-family: Arial, sans-serif;
+     background-color: #f7f7f7;
+     border: 1px solid #ddd;
+     padding: 20px;
+     border-radius: 5px;
+
+   .cancel{
+     color: #fff;
+     font-weight: 700;
+     padding: 10px;
+     position: absolute;
+     right: 2px;
+     top: -9px;
+     background: red;
+     border-radius: 50%;
+     cursor: pointer;
+    }
+
+     .highlight {
+        color: #ff6600; /* Or any other color you prefer */
+        font-weight: bold;
+    }
+    
+    .resetLink {
+        color: #007bff; /* Or any other color you prefer */
+        text-decoration: none;
+        font-weight: bold;
+    }
+    
+    .resetLink:hover {
+        text-decoration: underline;
+    }
+    
+    .teamName {
+        font-weight: bold;
+        color: #333; /* Or any other color you prefer */
+    }
+       
+    }
+    .forgotPage{
+        display: none;
+    }
+}
+.forgotPage{
+     margin-top: 40px;
+     display: flex;
+     justify-content: center;
+     
+     .matched{
+       background: #8cafb4a3;
+       transition: all .4s;
+     } 
+
+     .myPage ,  .matched{
+        transition: all .4s;
+        border-radius: 7px;
+        height: 380px;
+        width: 330px;
+        box-shadow: 0 5px 9px 6px #ded4d4;
+        text-align: center;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        h4{
+            margin-top: 10px;
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: #b325b8;
+        }
+
+        .sendEmail , .resetPassword {
+            margin-top: 40px;
+            width: 100%;
+            height: 60%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            label{
+                text-align: left;
+                align-self: flex-start;
+                font-size: .7rem;
+                margin-left: 13px;
+                color: #b325b8;
+                margin-bottom: 5px;
+            }
+
+            input{
+                 width: 90%;
+                 height: 50px;
+                 border-radius: 4px;
+                 border: 1px solid #b325b8;
+                 outline: none;
+                 font-size: 1.1rem;
+                 margin: 5px 0px;           
+                }
+            button{
+                 margin-top: 30px;
+                 padding: 10px 40px;
+                 border: none;
+                 background:#b325b8;
+                 cursor: pointer;
+                 color: #fff;
+                 font-size: 1rem;
+                 font-weight: 600;
+                 border-radius: 7px;
+
+                 &:hover{
+                    background:#822985;
+                 }
+            }
+            .msgErr{
+                font-size: .7rem;
+                align-self: flex-start;
+                margin-left: 18px;
+                color: red;
+            }
+            .msgSuccess{
+                font-size: .7rem;
+                align-self: flex-start;
+                margin-left: 18px;
+                color: green;
+            }
+        }
+
+        
+        .orLogin{
+            text-align: center;
+            margin-bottom: 20px;
+
+             h4{
+                 cursor: pointer;
+                 &:hover{
+                     color: #b521baa8;
+                 }
+            }
+        }
+
+    
+    }
+
+}

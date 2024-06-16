@@ -1,0 +1,153 @@
+
+.back{
+  color: #9baab2;
+  position: absolute;
+  cursor: pointer;
+  left: 20px;
+  background: #e7dbdb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  &:hover{
+     color: green;
+     font-size: 2.3rem;
+     background: #bfd8e9;
+  }
+  }
+.ordersPage{ 
+  
+  h3{
+     text-align: center;
+     border-bottom: 1px solid #cacccd;
+    
+  }
+  .orderTable {
+  max-width: 1100px;
+  width: 100%;
+  margin: auto;
+  height: auto;
+  min-height: 75vh;
+  .order_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+  
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+      font-size: .8rem;
+    }
+  
+    td {
+      background-color: #ffffff9b;
+    
+      font-size: .8rem;
+    }
+  
+    tr:hover{
+      background: #d6cfcfa6;
+    }
+    
+  
+    p {
+      color: blue;
+      cursor: pointer;
+    }
+  }
+  
+
+
+}
+}
+// [OrderPage]
+.OrderPage {
+  min-height: 50vh;
+  width: 97%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  .singleItem {
+    width: 100%;
+    max-width: 1300px;
+    height: auto;
+    padding: 10px;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .info {
+      width: 50%;
+     border: 1px solid #d6dcde;
+      display: flex;
+      //  align-items: center;
+      padding: 10px;
+      flex-direction: column;
+      line-height: 46px;
+      border-radius: 8px;
+      h5,
+      p {
+        opacity: 0.7;
+        font-size: 0.9rem;
+      }
+
+      .itemsInfo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        table {
+          width: 100%;
+          margin: auto;
+          text-align: center;
+
+          tbody {
+            tr {
+              margin: 10px;
+              cursor: pointer;
+              font-weight: 300;
+              
+            }
+            .active{
+                  background: #bdbd40;
+                  overflow: hidden;
+                 &:hover{
+                     background: #eaea42;
+                 }
+                }
+          }
+        }
+      }
+      button {
+        padding: 10px;
+        background: green;
+        color: #fff;
+        font-weight: 600;
+        font-size: 1.2rem;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        &:hover {
+          background: #195a19;
+        }
+      }
+    }
+    .thumbnail {
+      width: 40%;
+      border: 1px solid #e5e9ed;
+      height: 70vh;
+      img{
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+      }
+    }
+  }
+}

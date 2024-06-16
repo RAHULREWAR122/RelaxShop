@@ -1,0 +1,409 @@
+.nav {
+  height: 120px;
+  width: 100%;
+}
+.nav .topNav {
+  height: 60%;
+  background: #1e1c1c;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav .topNav .logo {
+  color: #fff;
+  font-size: 1.4rem;
+}
+.nav .topNav .logo h3 a {
+  color: #fff;
+}
+.nav .topNav .men_women {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+.nav .topNav .men_women .active {
+  background: #313139;
+  color: burlywood;
+}
+.nav .topNav .men_women h4 {
+  cursor: pointer;
+  height: 100%;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+  color: #fff;
+}
+.nav .topNav .men_women h4:hover {
+  color: blueviolet;
+}
+.nav .topNav .absoluteSearch {
+  display: none;
+}
+.nav .topNav .searchInp {
+  width: 52%;
+  background: #fff;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 2.4rem;
+  overflow: hidden;
+}
+.nav .topNav .searchInp input {
+  width: 94%;
+  height: 90%;
+  border: none;
+  outline: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  opacity: 0.6;
+}
+.nav .topNav .searchInp .searcher {
+  position: absolute;
+  right: 15px;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.nav .topNav .user_cart {
+  width: auto;
+  padding: 10px;
+  color: #fff;
+  font-size: 1.2rem;
+  width: 10%;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  align-items: center;
+}
+.nav .topNav .user_cart span {
+  cursor: pointer;
+  padding: 3px;
+}
+.nav .topNav .user_cart .login {
+  padding: 6px 10px;
+  margin-left: 0px;
+  border: none;
+  background: transparent;
+  color: #b43ec6;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 5px;
+  background: #f4f9f4;
+  border-radius: 9px;
+}
+.nav .topNav .user_cart .account {
+  z-index: 1000;
+  position: absolute;
+  background: #7e2c7e;
+  min-width: 100px;
+  right: 5px;
+  top: 31px;
+  font-size: 0.9rem;
+  height: 100px;
+  cursor: auto;
+  padding: 3px;
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+.nav .topNav .user_cart .account ul {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.nav .topNav .user_cart .account ul li {
+  list-style: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+.nav .topNav .user_cart .account ul li:hover {
+  color: #dba4df;
+}
+.nav .topNav .menu {
+  font-size: 1.9rem;
+  color: #fff;
+  display: none;
+}
+.nav .topNav .closeMenu {
+  display: none;
+}
+.nav .linksNav {
+  height: 40%;
+  background: #313139;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.nav .linksNav .men_women_links {
+  display: none;
+}
+.nav .linksNav .closeMenu {
+  display: none;
+}
+.nav .linksNav .close {
+  display: none;
+}
+.nav .linksNav .men {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 40%;
+  height: 100%;
+  color: #fff;
+}
+.nav .linksNav .men li {
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+.nav .linksNav .men li:hover {
+  color: rgba(25, 197, 250, 0.462745098);
+}
+.nav .linksNav .men img {
+  display: none;
+}
+.nav .linksNav .women {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 40%;
+  height: 100%;
+  color: #fff;
+}
+.nav .linksNav .women li {
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+.nav .linksNav .women li:hover {
+  color: rgba(25, 197, 250, 0.462745098);
+}
+.nav .linksNav .women img {
+  display: none;
+}
+.nav .linksNav .others {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 60%;
+  height: 100%;
+  color: #fff;
+}
+.nav .linksNav .others li {
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+.nav .linksNav .others li:hover {
+  color: rgba(25, 197, 250, 0.462745098);
+}
+.nav .linksNav .others img {
+  display: none;
+}
+
+@media screen and (max-width: 1060px) {
+  .nav .topNav {
+    z-index: 100;
+    background: #943293;
+  }
+  .nav .topNav .logo {
+    font-size: 1.3rem;
+  }
+  .nav .topNav .men_women {
+    display: none;
+  }
+  .nav .topNav .user_cart {
+    width: 20%;
+  }
+  .nav .topNav .menu {
+    margin-right: 5px;
+    display: initial;
+    cursor: pointer;
+    margin-top: 4px;
+  }
+  .nav .absoluteSearch1 input {
+    display: none;
+  }
+  .nav .absoluteSearch1 .abSearcher {
+    color: #fff;
+    right: 46vw;
+    position: absolute;
+    top: 23px;
+    font-size: 1.7rem;
+    cursor: pointer;
+  }
+  .nav .categoryNavLinks {
+    display: none;
+    transition: all 0.3s;
+  }
+  .nav .linksNav {
+    transition: all 0.6s;
+    display: flex !important;
+    flex-direction: column;
+    height: auto;
+    width: 70vw;
+    z-index: 60;
+    background: #d5b8b8;
+    background: transparent;
+    -webkit-backdrop-filter: 30px;
+            backdrop-filter: 30px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    box-shadow: 0 0 5px 0;
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+  }
+  .nav .linksNav .close {
+    display: initial;
+    position: absolute;
+    font-size: 2rem;
+    right: 3px;
+    cursor: pointer;
+    color: red;
+  }
+  .nav .linksNav .close:hover {
+    color: #ac1818;
+  }
+  .nav .linksNav .men_women_links {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    padding: 10px;
+    font-size: 1.3rem;
+  }
+  .nav .linksNav .men_women_links h4 {
+    transition: all 0.2s;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+  .nav .linksNav .men_women_links h4:hover {
+    color: burlywood;
+  }
+  .nav .linksNav .men_women_links .active {
+    background: #313139;
+    color: #fff;
+  }
+  .nav .linksNav .men,
+  .nav .linksNav .women,
+  .nav .linksNav .others {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+  }
+  .nav .linksNav .men li,
+  .nav .linksNav .women li,
+  .nav .linksNav .others li {
+    width: 90%;
+    background: #b2abab;
+    font-size: 1.2rem;
+    margin-top: 2px;
+    height: auto;
+    padding: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .nav .linksNav .men li:hover,
+  .nav .linksNav .women li:hover,
+  .nav .linksNav .others li:hover {
+    color: #7e7eb7;
+    background: rgba(188, 178, 178, 0.568627451);
+  }
+  .nav .linksNav .men img,
+  .nav .linksNav .women img,
+  .nav .linksNav .others img {
+    display: initial;
+    height: 80px;
+    width: 80px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .nav .topNav .searchInp {
+    display: none;
+  }
+  .nav .topNav .logo {
+    font-size: 1rem;
+  }
+  .nav .topNav .user_cart {
+    width: 15%;
+    margin-left: 50%;
+    gap: 14px;
+  }
+  .nav .topNav .absoluteSearch {
+    width: 100%;
+    height: 20%;
+    display: flex !important;
+    position: absolute;
+    top: 100px;
+    -webkit-backdrop-filter: blur(1px);
+            backdrop-filter: blur(1px);
+  }
+  .nav .topNav .absoluteSearch input {
+    height: 60px;
+    width: 80%;
+    border-radius: 2rem;
+    margin: auto;
+  }
+  .nav .topNav .absoluteSearch .abSearcher {
+    color: #fff;
+    position: absolute;
+    top: -78px;
+    font-size: 1.7rem;
+    cursor: pointer;
+    right: 50vw;
+  }
+}
+@media screen and (max-width: 600px) {
+  .nav .topNav {
+    display: flex;
+    justify-content: space-around;
+  }
+  .nav .topNav .logo h3 {
+    font-weight: 300;
+  }
+  .nav .topNav .user_cart {
+    width: 34%;
+    margin-left: 28%;
+  }
+  .nav .topNav .absoluteSearch {
+    width: 100%;
+    height: 20%;
+    display: flex !important;
+    position: absolute;
+    top: 100px;
+    -webkit-backdrop-filter: blur(1px);
+            backdrop-filter: blur(1px);
+  }
+  .nav .topNav .absoluteSearch input {
+    height: 60px;
+    width: 80%;
+    border-radius: 2rem;
+    margin: auto;
+  }
+  .nav .topNav .absoluteSearch .abSearcher {
+    color: #fff;
+    position: absolute;
+    top: -78px;
+    font-size: 1.7rem;
+    cursor: pointer;
+    right: 50vw;
+  }
+}/*# sourceMappingURL=nav.module.css.map */
