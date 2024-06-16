@@ -1,3 +1,3 @@
-[submodule "RelaxShop-"]
-     path = RelaxShop-
-     url = https://github.com/RAHULREWAR122/Next_Js_E_Commerce
+ [submodule "RelaxShop"]
+     path = RelaxShop
+     url = https://github.com/RAHULREWAR122/RelaxShop.git
