@@ -63,7 +63,7 @@ function Navbar() {
   useEffect(() => {
     fetchSearchTitle();
   }, []);
-
+  
   const fetchSearchTitle = async () => {
     try {
       const req = await axios.get(`${process.env.NEXT_PUBLIC_HOST_NAME}/api/Products`);
@@ -71,9 +71,10 @@ function Navbar() {
         setTitle(req.data.result);
       }
     } catch (error) {
-      return;
+      console.log("Error in fetching title");
     }
   };
+  
 
   const handleInputChange = (event) => {
     const searchTerm = event.target.value.toLowerCase();
