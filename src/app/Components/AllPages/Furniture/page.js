@@ -8,7 +8,7 @@ async function Furniture() {
   const data = await fetchData();
   const furniture = data && data.result.filter((item)=>item.category === "furniture"); 
   
-  if(!data && !furniture ){
+  if(!data ){
      return <MiniScroller/>
   }
 

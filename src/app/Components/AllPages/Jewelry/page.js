@@ -7,7 +7,7 @@ async function Jewelry() {
   const data = await fetchData();
   const jewelry = data && data.result.filter((item)=>item.category === "jewelry"); 
   
-  if(!data && !jewelry){
+  if(!data){
     return <MiniScroller/>
   }
 

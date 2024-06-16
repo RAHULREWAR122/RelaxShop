@@ -9,7 +9,7 @@ async function GirlsJeans() {
   const data = await fetchData();
   const GJeans = data && data.result.filter((item)=>item.category === "GJeans"); 
   
-  if(!data && !GJeans){
+  if(!data ){
     return <MiniScroller/>
   }
   

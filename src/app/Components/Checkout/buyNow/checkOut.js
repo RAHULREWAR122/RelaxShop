@@ -261,7 +261,7 @@ function CheckOut({ mainItem }) {
           );
 
           if (response.data.success) {
-            for (const product of mainItem) {
+            for (const product of mainItem.result) {
               const localItem = items.find((item) => item._id === product._id);
 
               if (localItem) {

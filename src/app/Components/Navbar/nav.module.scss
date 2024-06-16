@@ -1,13 +1,14 @@
 .nav {
- height: 120px;
+  height: 120px;
   width: 100%;
+  // position: fixed;
   .topNav {
     height: 60%;
     background: #1e1c1c;
     display: flex;
     align-items: center;
     justify-content: space-between;
-      
+        
 
     .logo {
       color: #fff;

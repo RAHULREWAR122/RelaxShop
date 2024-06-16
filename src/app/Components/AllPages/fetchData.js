@@ -7,8 +7,10 @@ export const fetchData = async () => {
     if(req.data){
       return req.data;
     }
+    return;
   }catch (error) {
-     return;
+    console.log("") 
+    return;
   }
 };
 

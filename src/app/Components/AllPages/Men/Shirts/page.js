@@ -9,7 +9,7 @@ async function Shirts() {
   const data = await fetchData();
   const shirts = data && data.result.filter((item)=>item.category === "shirts"); 
   
-  if(!data && !shirts){
+  if(!data){
     return <MiniScroller/>
   }
 

@@ -8,10 +8,11 @@ async function Jeans() {
   const data = await fetchData();
   const mJeans = data && data.result.filter((item)=>item.category === "mJeans"); 
   
-  if(!data && !mJeans){
+  if(!data){
     return <MiniScroller/>
   }
-
+    
+  
   return (
     <div className="cards">
       {mJeans.map((item ,i)=> {

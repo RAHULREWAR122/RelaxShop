@@ -9,7 +9,7 @@ async function Langha() {
   const data = await fetchData();
   const langha = data && data.result.filter((item)=>item.category === "langha"); 
   
-  if(!data && !langha){
+  if(!data){
     return <MiniScroller/>
   }
   

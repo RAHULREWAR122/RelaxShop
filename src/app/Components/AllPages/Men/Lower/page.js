@@ -3,13 +3,12 @@ import Link from 'next/link';
 import { fetchData } from '../../fetchData';
 import MiniScroller from '@/app/Components/miniScroller/page';
 
-
-async function Lower() { 
+async function Lower() {  
   
   const data = await fetchData();
   const lower = data && data.result.filter((item)=>item.category === "lower"); 
   
-  if(data && !lower){
+  if(!data){
     return <MiniScroller/>
   }
 

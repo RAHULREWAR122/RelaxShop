@@ -8,7 +8,7 @@ async function Electric() {
   const data = await fetchData();
   const electric = data && data.result.filter((item)=>item.category === "electric"); 
   
-  if(!data && !electric){
+  if(!data){
      return <MiniScroller/>
   }
   

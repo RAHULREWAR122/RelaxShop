@@ -5,48 +5,43 @@ import { CiStar } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
 import { MdNavigateNext } from "react-icons/md";
 import OtherProducts from "./otherProducts";
-import { addToCart, cartSelector , clearCart } from "@/app/Redux/cartSlice";
+import { addToCart, cartSelector, clearCart } from "@/app/Redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import LoadingBar from 'react-top-loading-bar'
+import LoadingBar from 'react-top-loading-bar';
 import { usePathname } from "next/navigation";
 import LoadingScroller from "../../laodingScroller/page";
-import MiniScroller from "../../miniScroller/page";
 
-
-function ShowInfo({ newData , params }) {
+function ShowInfo({ newData, params }) {
   const [mainImg, setMainImg] = useState(null);
-  const [progress , setProgress] = useState(0);
-  let id = params.productInfo;
+  const [progress, setProgress] = useState(0);
+  const [loading, setLoading] = useState(false);
   
+  const id = params.productInfo;
   const pathName = usePathname();
-  
-  if(!newData){
-    return <h2>Loading...</h2>
-    
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  useEffect(() => {
+    setProgress(0);
+  }, [pathName]);
+
+  if (!newData) {
+    return <h2>Loading...</h2>;
   }
-   
-  useEffect(()=>{
-        setProgress(0)
-  },[pathName])
 
+  const data = newData.find((item) => item._id === String(id));
+  const imgs = data?.imgs || [];
 
-  let data = newData && newData.find((item) => item._id === String(id));
+  if (!data) {
+    return <h2>Loading...</h2>;
+  }
+
   const handleImageClick = (image) => {
     setMainImg(image);
   };
-  
-
-   
-  const dispatch = useDispatch();
-  const imgs = data && data.imgs.map((item) => item);
-  
-  if(!data && imgs){
-     return <h1>Loading</h1>
-  } 
-
 
   const handleAddToCart = (item) => {
     try {
@@ -60,10 +55,9 @@ function ShowInfo({ newData , params }) {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
-
+      });
     } catch (error) {
-      console.log("Error in Adding Cart")    
+      console.log("Error in Adding Cart");
       toast.error('Error, item not added in Cart', {
         position: "top-right",
         autoClose: 5000,
@@ -73,37 +67,32 @@ function ShowInfo({ newData , params }) {
         draggable: true,
         progress: undefined,
         theme: "light",
-        transition: Bounce,
-        });
+      });
     }
-    
   };
-  const route = useRouter();
 
-  const [loading ,setLoading] = useState(false);
-  
-  const handleBuyProduct = (url ,item) => {
+  const handleBuyProduct = (url) => {
     setLoading(true);
-    if(pathName === url){
-       setLoading(false)
+    if (pathName === url) {
+      setLoading(false);
+    } else {
+      router.push(url);
     }
-    route.push(url);
   };
-
 
   return (
     <>
-      {loading && <LoadingScroller/>}
+      {loading && <LoadingScroller />}
       <div className={style.infoPage}>
-       <LoadingBar
-        className={style.progressBar}
-        color='red'
-        progress={progress}
-        waitingTime={380}
-        height={3}
-        shadow={true}
-        onLoaderFinished={() => setProgress(0)}
-      />
+        <LoadingBar
+          className={style.progressBar}
+          color="red"
+          progress={progress}
+          waitingTime={380}
+          height={3}
+          shadow={true}
+          onLoaderFinished={() => setProgress(0)}
+        />
 
         <ToastContainer
           position="top-right"
@@ -117,38 +106,26 @@ function ShowInfo({ newData , params }) {
           pauseOnHover
           theme="light"
         />
-        {/* Same as */}
-        <ToastContainer />
         <div className={style.imgsInfo}>
           <div className={style.mainImg}>
             <img src={mainImg || data.thumbnail} alt={data.title} />
           </div>
           <div className={style.dummyImgs}>
-            {imgs.map((item, ind) => {
-              return (
-                <img
-                  key={ind}
-                  src={item}
-                  alt={item.title}
-                  onClick={() => handleImageClick(item)}
-                />
-              );
-            })}
+            {imgs.map((item, ind) => (
+              <img
+                key={ind}
+                src={item}
+                alt={item.title}
+                onClick={() => handleImageClick(item)}
+              />
+            ))}
           </div>
 
           <div className={style.btns}>
-            <button
-              onClick={() => handleAddToCart(data, (data.availableQty = 1))}
-            >
+            <button onClick={() => handleAddToCart({ ...data, availableQty: 1 })}>
               <IoCartOutline className={style.cart} /> Add To Cart
             </button>
-            <button
-              onClick={() => {
-                handleBuyProduct(
-                  `/Components/Checkout/buyNow`
-                );
-              }}
-            >
+            <button onClick={() => handleBuyProduct(`/Components/Checkout/buyNow`)}>
               <MdNavigateNext className={style.navigate} /> Buy Now
             </button>
           </div>
@@ -156,7 +133,7 @@ function ShowInfo({ newData , params }) {
 
         <div className={style.aboutItems}>
           <div className={style.basicDet}>
-            <h2> {data.title}</h2>
+            <h2>{data.title}</h2>
             <h4>₹ {data.price}</h4>
             <h3 className={style.rating}>
               {data.rating} <CiStar className={style.star} />
@@ -165,16 +142,15 @@ function ShowInfo({ newData , params }) {
           </div>
           <div className={style.prdDetails}>
             <h2>Product Details</h2>
-
-            <h4>Name : {data.title}</h4>
-            <h4>Price : {data.price}</h4>
-            <h4>Net Quantity : {data.availableQty}</h4>
-            <h4>Country Origen : India</h4>
-            <h4>Desc : {data.desc}</h4>
+            <h4>Name: {data.title}</h4>
+            <h4>Price: {data.price}</h4>
+            <h4>Net Quantity: {data.availableQty}</h4>
+            <h4>Country of Origin: India</h4>
+            <h4>Description: {data.desc}</h4>
           </div>
         </div>
       </div>
- 
+
       <div className={style.similarData}>
         <h2>People also viewed</h2>
         <OtherProducts data={data} />

@@ -8,7 +8,7 @@ async function Hoodies() {
   const data = await fetchData();
   const hoodies = data && data.result.filter((item)=>item.category === "hoodies"); 
   
-  if(!data && !hoodies){
+  if(!data){
      return <MiniScroller/>
   }
 

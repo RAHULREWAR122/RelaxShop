@@ -2,44 +2,38 @@
 import React, { useEffect, useState } from "react";
 import MtCart from "./mtCart";
 import style from "./cart.module.scss";
-
-
 import { useDispatch, useSelector } from "react-redux";
-import { cartSelector, removeFromCart  , setCartItems , getCartFromLocalStorage} from "@/app/Redux/cartSlice";
-import { CiCirclePlus } from "react-icons/ci";
-import { CiCircleMinus } from "react-icons/ci";
-import { clearCart,  increaseQuantity,
-  decreaseQuantity,
- } from "@/app/Redux/cartSlice";
-
+import { cartSelector, removeFromCart, setCartItems, getCartFromLocalStorage } from "@/app/Redux/cartSlice";
+import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
+import { clearCart, increaseQuantity, decreaseQuantity } from "@/app/Redux/cartSlice";
 import { usePathname, useRouter } from "next/navigation";
-import MiniScroller from "../miniScroller/page";
+
 import LoadingScroller from "../laodingScroller/page";
 
+
 function Cart() {
-  const [loading , setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const items = useSelector(cartSelector);
-   
-  const notItemImg = items.map((item) => !item.thumbnail);
-  if (!notItemImg) {
-    return <h1>Loading...</h1>;
-  }
-  
+  const router = useRouter();
+  const pathName = usePathname();
+
   useEffect(() => {
     dispatch(setCartItems(getCartFromLocalStorage()));
   }, [dispatch]);
 
-
-  const route = useRouter();
+  if (!items) {
+    return <h1>Loading...</h1>;
+  }
 
   const handleRemoveFromCart = (id) => {
     dispatch(removeFromCart(id));
   };
 
-  const handleIncreaseQty = (id, newQty) => {
+  const handleIncreaseQty = (id) => {
     dispatch(increaseQuantity({ id }));
   };
+
   const handleDecreaseQty = (id) => {
     dispatch(decreaseQuantity({ id }));
   };
@@ -48,14 +42,12 @@ function Cart() {
     dispatch(clearCart());
   };
 
-  const pathName = usePathname(); 
-  
   const handleContinue = (url) => {
-    setLoading(true)
-    if(pathName === url){
-       setLoading(false)
+    setLoading(true);
+    if (pathName === url) {
+      setLoading(false);
     }
-      route.push(url);
+    router.push(url);
   };
 
   const totalQuantity = items.reduce((total, item) => total + item.qty, 0);
@@ -63,7 +55,6 @@ function Cart() {
   const { totalPrice, discount, newTotal } = items.reduce(
     (accumulator, item) => {
       const itemTotal = item.price * item.qty;
-
       let itemDiscount = 0;
 
       if (totalQuantity >= 2 && totalQuantity <= 10) {
@@ -85,11 +76,11 @@ function Cart() {
     { totalPrice: 0, discount: 0, newTotal: 0 }
   );
 
-  const disInPer = parseInt((discount / totalPrice) * 100).toFixed(2);
+  const disInPer = ((discount / totalPrice) * 100).toFixed(2);
 
   return (
     <div className={style.cartPage}>
-      {loading  && <LoadingScroller/>}
+      {loading && <LoadingScroller />}
       {items.length >= 1 && (
         <div className={style.cartItems}>
           <div className={style.flex}>
@@ -98,47 +89,42 @@ function Cart() {
               Clear Cart
             </button>
           </div>
-          {items &&
-            items.map((item, i) => {
-              return (
-                <div key={i} className={style.item}>
-                  <div className={style.oneItem}>
-                    <img src={item.thumbnail} alt={item.title} />
-                    <div className={style.info}>
-                      <h3>
-                        {item.title.length > 10
-                          ? item.title.slice(0, 14) + "..."
-                          : item.title}
-                      </h3>
-                      <h4>₹ {item.price * item.qty}</h4>
-                      <h4 className={style.qty}>
-                        Qty :{" "}
-                        <CiCircleMinus
-                          onClick={() => handleDecreaseQty(item._id)}
-                          className={`${
-                            item.qty === 1 ? style.qty1 : "qtyUpdate"
-                          } `}
-                        />
-                        <span>{item.qty}</span>{" "}
-                        <CiCirclePlus
-                          onClick={() => handleIncreaseQty(item._id)}
-                          className="qtyUpdate"
-                        />
-                      </h4>
-                      <button onClick={() => handleRemoveFromCart(item._id)}>
-                        X Remove
-                      </button>
-                    </div>
-                  </div>
-                  <div className={style.sold}>
-                    <p>
-                      Sold by &nbsp;:<span>Relax Shop</span>
-                    </p>
-                    <p>Free Delivery</p>
-                  </div>
+          {items.map((item, i) => (
+            <div key={i} className={style.item}>
+              <div className={style.oneItem}>
+                <img src={item.thumbnail} alt={item.title} />
+                <div className={style.info}>
+                  <h3>
+                    {item.title.length > 10
+                      ? item.title.slice(0, 14) + "..."
+                      : item.title}
+                  </h3>
+                  <h4>₹ {item.price * item.qty}</h4>
+                  <h4 className={style.qty}>
+                    Qty :{" "}
+                    <CiCircleMinus
+                      onClick={() => handleDecreaseQty(item._id)}
+                      className={`${item.qty === 1 ? style.qty1 : "qtyUpdate"}`}
+                    />
+                    <span>{item.qty}</span>{" "}
+                    <CiCirclePlus
+                      onClick={() => handleIncreaseQty(item._id)}
+                      className="qtyUpdate"
+                    />
+                  </h4>
+                  <button onClick={() => handleRemoveFromCart(item._id)}>
+                    X Remove
+                  </button>
                 </div>
-              );
-            })}
+              </div>
+              <div className={style.sold}>
+                <p>
+                  Sold by &nbsp;:<span>Relax Shop</span>
+                </p>
+                <p>Free Delivery</p>
+              </div>
+            </div>
+          ))}
         </div>
       )}
 
@@ -163,7 +149,7 @@ function Cart() {
               onClick={() => handleContinue("/Components/Checkout/buyNow")}
               className={style.continue}
             >
-             {loading ? "loading..." : "Continue"}
+              {loading ? "loading..." : "Continue"}
             </button>
           </div>
         </div>

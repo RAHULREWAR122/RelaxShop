@@ -11,7 +11,7 @@ async function TShirts() {
   let tShirt = data && data.result.filter((item)=>item.category === "mTshirt");
   
 
-  if(!data && !tShirt){
+  if(!data){
      return <MiniScroller/>
   }
   if(tShirt.length === 0){
