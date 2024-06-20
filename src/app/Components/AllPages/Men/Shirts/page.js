@@ -7,7 +7,7 @@ import MiniScroller from '@/app/Components/miniScroller/page';
 async function Shirts() { 
   
   const data = await fetchData();
-  const shirts = data && data.result.filter((item)=>item.category === "shirts"); 
+  const shirts = data && data.filter((item)=>item.category === "shirts"); 
   
   if(!data){
     return <MiniScroller/>

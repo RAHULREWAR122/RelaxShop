@@ -1,0 +1,342 @@
+.homePage {
+  min-height: 80vh;
+  width: 100%;
+  margin-top: -11px;
+  box-sizing: border-box;
+}
+.homePage .hero {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 545px;
+}
+.homePage .hero #slide_Cont {
+  height: 100%;
+  width: 100%;
+  max-height: 545px;
+}
+.homePage .hero #slide_Cont .mainDiv {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  max-height: 545px;
+}
+.homePage .hero #slide_Cont .mainDiv .fadeImgs {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  height: 100%;
+  max-height: 545px;
+}
+@keyframes goRight {
+  0% {
+    left: -150%;
+    opacity: 0;
+  }
+  100% {
+    left: 6%;
+    opacity: 0.3;
+  }
+}
+@keyframes opacityAni {
+  0% {
+    opacity: 0.3;
+    box-shadow: 0 0 0 0;
+    border-radius: 20px;
+  }
+  50% {
+    opacity: 0.8;
+    border-radius: 10px;
+    box-shadow: 0 0 12px 0 orange;
+  }
+  100% {
+    opacity: 1;
+    border-radius: 5px;
+    box-shadow: 0 0 20px 0 black;
+  }
+}
+@keyframes opPer {
+  100% {
+    opacity: 1;
+    border-radius: 5px;
+    box-shadow: 0 0 20px 0 black;
+  }
+}
+.homePage .hero #slide_Cont .mainDiv .texts {
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  animation: goRight 0.7s ease-in-out forwards, opacityAni 6.4s linear forwards, opPer 6.4s linear forwards;
+  position: absolute;
+  z-index: 155;
+  color: #fff;
+  background: rgba(127, 137, 186, 0.38);
+  bottom: 7%;
+  right: 20%;
+  max-width: 500px;
+  min-width: 200px;
+  min-height: 220px;
+  word-wrap: break-word;
+  padding: 20px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.homePage .hero #slide_Cont .mainDiv .texts .box {
+  width: 100%;
+  height: 100%;
+  min-height: 130px;
+  color: #74858c;
+  padding: 15px;
+  position: relative;
+}
+.homePage .hero #slide_Cont .mainDiv .texts .box h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  color: #212727;
+}
+.homePage .hero #slide_Cont .mainDiv .texts .box p {
+  font-weight: 700;
+  color: skyblue;
+}
+.homePage .hero #slide_Cont .mainDiv .texts .box button {
+  padding: 10px 40px;
+  position: absolute;
+  bottom: -43px;
+  left: 18%;
+  transform: translateX(-50%);
+  background: #737b7c;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.homePage .hero #slide_Cont .mainDiv .texts .box button:hover {
+  color: rgba(0, 0, 0, 0.3333333333);
+  background: #fff;
+}
+.homePage .topOffers {
+  margin-top: 60px;
+  height: 40vh;
+  width: 100%;
+}
+.homePage .topOffers h1 {
+  font-size: 1.6rem;
+  color: #74858c;
+  margin-left: 20px;
+}
+.homePage .topOffers h1 .arrow {
+  margin-bottom: -6px;
+  margin-left: 10px;
+  opacity: 0.7;
+}
+.homePage .topOffers .carouselShow {
+  height: 100%;
+  width: 100%;
+}
+.homePage .topOffers .carouselShow button {
+  z-index: 50;
+}
+.homePage .topOffers .carouselShow .item {
+  margin-left: 60px;
+  margin-right: 60px;
+  height: 200px;
+  width: 310px;
+  box-shadow: 0 0 10px 0 #cbd1d7;
+  padding: 10px;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: row;
+}
+.homePage .topOffers .carouselShow .item:hover {
+  margin-top: -10px;
+}
+.homePage .topOffers .carouselShow .item .img {
+  width: 60%;
+  height: 100%;
+}
+.homePage .topOffers .carouselShow .item .img img {
+  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+}
+.homePage .topOffers .carouselShow .item .info {
+  width: 50%;
+  padding: 10px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.homePage .topOffers .carouselShow .item .info .other {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  height: 80%;
+  width: 100%;
+  justify-content: space-between;
+}
+.homePage .topOffers .carouselShow .item .info .other button {
+  padding: 10px;
+  border: none;
+  color: #fff;
+  background: green;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 1.1rem;
+}
+.homePage .topOffers .carouselShow .item .info .other span .star {
+  margin-bottom: -2px;
+  margin-right: 5px;
+  color: yellow;
+}
+.homePage .trending {
+  margin-top: 60px;
+  min-height: 82.4vh;
+  width: 100%;
+}
+.homePage .trending h1 {
+  font-size: 1.6rem;
+  color: #74858c;
+  margin-left: 20px;
+}
+.homePage .trending h1 .arrow {
+  margin-bottom: -6px;
+  margin-left: 10px;
+  opacity: 0.7;
+}
+.homePage .trending .cards {
+  display: flex;
+  padding: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 90%;
+  width: 100%;
+}
+.homePage .trending .cards .card {
+  position: relative;
+  margin: 7px;
+  height: 350px;
+  width: 230px;
+  border: 1px solid #e3e3ec;
+  transition: all 0.3s;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.homePage .trending .cards .card:hover {
+  box-shadow: 0 0 25px 0 rgba(160, 162, 176, 0.862745098);
+  transform: scale(0.96);
+}
+.homePage .trending .cards .card .img {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.2s;
+}
+.homePage .trending .cards .card .img img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: all 0.8s;
+}
+.homePage .trending .cards .card .img::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: rgba(213, 200, 200, 0.2705882353);
+}
+.homePage .trending .cards .card .title {
+  position: absolute;
+  bottom: 10px;
+  left: 18%;
+  color: #003666;
+  font-weight: 700;
+}
+.homePage .trending .cards .card .item > .title:hover {
+  color: red;
+}
+
+@media screen and (max-width: 664px) {
+  .homePage .topOffers .carouselShow .item {
+    height: 150px;
+    width: 280px;
+    margin-left: 30%;
+  }
+  .homePage .topOffers .carouselShow .item .info h4 {
+    font-size: 0.7rem;
+  }
+  .homePage .topOffers .carouselShow .item .info .other button {
+    padding: 1px;
+    font-size: 0.9rem;
+  }
+  .homePage .trending .cards .card {
+    height: 190px;
+    width: 140px;
+  }
+  .homePage .trending .cards .card .title {
+    font-size: 0.7rem;
+  }
+}
+@media screen and (max-width: 550px) {
+  .homePage .topOffers .carouselShow .item {
+    height: 150px;
+    width: 280px;
+    margin-left: 24%;
+  }
+}
+@media screen and (max-width: 440px) {
+  .homePage .topOffers .carouselShow .item {
+    height: 150px;
+    width: 280px;
+    margin-left: 13%;
+  }
+}
+@media screen and (max-width: 1060px) {
+  .homePage {
+    margin-top: -49px;
+  }
+  .homePage .hero #slide_Cont .mainDiv .texts {
+    right: 40%;
+  }
+  .homePage .hero #slide_Cont .mainDiv .texts .box h1 {
+    font-size: 1.6rem;
+  }
+  .homePage .hero #slide_Cont .mainDiv .texts .box p {
+    font-size: 1rem;
+  }
+  .homePage .hero #slide_Cont .mainDiv .texts .box button {
+    left: 25%;
+  }
+}
+@media screen and (max-width: 650px) {
+  .homePage {
+    margin-top: -49px;
+  }
+  .homePage .hero #slide_Cont .mainDiv .texts {
+    height: 200px;
+    right: 40%;
+    bottom: 0;
+    top: auto;
+    padding: 3px 10px;
+  }
+  .homePage .hero #slide_Cont .mainDiv .texts .box h1 {
+    line-height: 25px;
+    font-size: 1rem;
+  }
+  .homePage .hero #slide_Cont .mainDiv .texts .box p {
+    font-size: 0.8rem;
+  }
+  .homePage .hero #slide_Cont .mainDiv .texts .box button {
+    bottom: 20px;
+    left: 44%;
+  }
+}/*# sourceMappingURL=landing.module.css.map */

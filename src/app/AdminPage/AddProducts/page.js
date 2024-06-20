@@ -12,7 +12,7 @@ const AddProductForm = () => {
     rating: "",
     availableQty: "",
     category: "",
-    imgs: ["", "", ""],
+    imgs: ["", "", "", ""],
   });
 
   const handleChange = (e) => {
@@ -31,22 +31,24 @@ const AddProductForm = () => {
     });
   };
 
-  console.log(formData.slug);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formDataToSubmit = {
+      ...formData,
+      imgs: formData.imgs.filter((img) => img.trim() !== ""),
+    };
+
     try {
       const req = await axios.post(
         `${process.env.NEXT_PUBLIC_HOST_NAME}/api/Products`,
-        { formData: formData }
+        { formData: formDataToSubmit }
       );
       if (req.data.success) {
         alert("data added");
-        console.log(req.data);
       } else {
         alert("error in adding data");
       }
     } catch (err) {
-      console.log("error in adding data", err);
       return;
     }
 
@@ -59,9 +61,11 @@ const AddProductForm = () => {
       rating: "",
       availableQty: "",
       category: "",
-      imgs: ["", "", ""],
+      imgs: ["", "", "", ""],
     });
+    return;
   };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.h2}>Add Product</h2>
@@ -131,15 +135,17 @@ const AddProductForm = () => {
         </div>
         <div className={styles.formGroup}>
           <label>Image URLs</label>
-          {formData.imgs.map((img, index) => (
-            <input
-              key={index}
+          {formData.imgs.map((img, index) => {
+              return <div key={index}>
+              <input
               type="text"
               name={`img${index}`}
               value={img}
               onChange={(e) => handleImgChange(e, index)}
             />
-          ))}
+            <br /><br />
+            </div>
+          })}
         </div>
         <button type="submit">Add Product</button>
       </form>

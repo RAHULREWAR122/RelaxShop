@@ -4,6 +4,7 @@ import style from "../order.module.scss";
 import { fetchOrdersDataDB } from "../orderFetchFunction";
 import { IoMdArrowBack } from "react-icons/io";
 import { useRouter } from "next/navigation";
+import MiniScroller from "../../miniScroller/page";
    
 
 
@@ -22,7 +23,7 @@ function OrderTrack({ params }) {
       const getData = await fetchOrdersDataDB();
       setOrderData(getData.result);
     } catch (error) {
-      console.error("Error fetching orders data:", error);
+     return;
     }
   };
 
@@ -31,7 +32,7 @@ function OrderTrack({ params }) {
     orderData.find((item) => item._id === String(params.orderTrack));
 
   if (!item) {
-    return <h1>Wait...</h1>;
+    return <MiniScroller/>;
   }
 
   const handleSelectItem = (i)=>{
@@ -41,9 +42,7 @@ function OrderTrack({ params }) {
   const handleUrl = (url)=>{
     router.push(url)
  }  
-
-console.log(item)
-
+  
   const { email, orderId, amount, paymentInfo, address, products , dis } = item;
 
   return (<>

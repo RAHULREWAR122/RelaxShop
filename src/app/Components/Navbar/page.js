@@ -9,7 +9,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { MdOutlineLogout } from "react-icons/md";
 import { IoIosSearch } from "react-icons/io";
 import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -18,6 +18,10 @@ import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
+import { HiMiniSpeakerWave } from "react-icons/hi2";
+import { PiSpeakerSimpleSlashFill } from "react-icons/pi";
+
+
 function Navbar() {
   const [selectCat, setSelectCat] = useState("men");
   const [menuClose, setMenu] = useState(true);
@@ -25,11 +29,31 @@ function Navbar() {
   const [user, setUser] = useState({ value: null });
   const [userAccount, setUserAccount] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [title, setTitle] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
+  const [voiceCheck , setVoiceCheck] = useState(false); 
+
 
   const router = useRouter();
   let pathName = usePathname();
   const searchPar = useSearchParams();
   const getToken = searchPar.get("token");
+   
+  useEffect(() => {
+    if (searchTerm.length >= 1) {
+      if(voiceCheck){
+      const utter = new SpeechSynthesisUtterance(searchTerm);
+      const delay = 1500;
+      const timeoutId = setTimeout(() => {
+        window.speechSynthesis.speak(utter);
+      }, delay);
+ 
+      return () => clearTimeout(timeoutId);
+    }
+  }
+  }, [searchTerm]);
+
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -56,10 +80,6 @@ function Navbar() {
     }
   }, [pathName, router]);
 
-  const [title, setTitle] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredData, setFilteredData] = useState([]);
-
   useEffect(() => {
     fetchSearchTitle();
   }, []);
@@ -71,7 +91,7 @@ function Navbar() {
         setTitle(req.data.result);
       }
     } catch (error) {
-      console.log("Error in fetching title");
+       return;    
     }
   };
   
@@ -100,8 +120,11 @@ function Navbar() {
     setUser({ value: null });
     setTimeout(() => {
       router.push("/");
+      let utterance = new SpeechSynthesisUtterance("LogOut Success")
+      window.speechSynthesis.speak(utterance)
       setProgress(100);
     }, 100);
+    
   };
 
   const handleRoutes = (url) => {
@@ -111,7 +134,7 @@ function Navbar() {
         setProgress(100);
       }, 400);
     }
-    router.push(url);
+    router.push(url);  
     return;
   };
 
@@ -121,6 +144,7 @@ function Navbar() {
       setProgress(100);
     }, 100);
   };
+
 
   const handleMenuButton = () => {
     setMenu(!menuClose);
@@ -171,7 +195,13 @@ function Navbar() {
               <div className={style.searchInp}>
                 <input type="text" name="" value={searchTerm}
                   onChange={handleInputChange} id="" placeholder="Search Item here" />
+                <div className={style.searcher}>
                 <CiSearch className={style.searcher} />
+                <span className={style.voiceCheck}>
+                  {!voiceCheck ?  <PiSpeakerSimpleSlashFill onClick={()=>setVoiceCheck(true)} /> : <HiMiniSpeakerWave onClick={()=>setVoiceCheck(false)}/>}
+                </span>   
+                </div>
+                  
               </div>
               {searchTerm && filteredData.length >= 0 && <div className={style.titleList}>
                 {filteredData.length === 0 && <div className={style.itemNotAvailable}>
@@ -212,7 +242,6 @@ function Navbar() {
                     onMouseLeave={() => setUserAccount(false)}
                   />
                 )}
-
                 {userAccount && (
                   <div
                     onMouseOver={() => setUserAccount(true)}
@@ -221,7 +250,7 @@ function Navbar() {
                   >
                     <ul>
                       <li onClick={() => setUserAccount(false)}>
-                        <span onClick={() => handleRoutes("/Components/UserProfile")}> my Profile</span>
+                        <span onClick={() => handleRoutes("/Components/UserProfile")}>my Profile</span>
                       </li>
                       <hr />
                       <li onClick={() => setUserAccount(false)}>

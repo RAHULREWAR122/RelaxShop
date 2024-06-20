@@ -34,17 +34,18 @@ export async function PUT(req, content) {
 }
 
 
-export async function DELETE(req,content){
-    const prId = content.params.prod;
-    const data = {_id : prId};
-    await mongoose.connect(db);
-    const result = await Product.deleteOne(data);
+export async function DELETE(req,connect){
+  const prId = connect.params.prod;
+  const data = {_id : prId};
+  await mongoose.connect(db);
+  const result = await Product.deleteOne(data);
+  
+  
+
+  if(result){
+     return NextResponse.json({result ,status:200 ,success :true})
+  }else{
     
-   
-    if(result){
-       return NextResponse.json({result ,status:200 ,success :true})
-    }else{
-      
-      return NextResponse.json({result:"Error in delete" ,status:404 ,success :false})
-    }
+    return NextResponse.json({result:"Error in delete" ,status:404 ,success :false})
+  }
 }

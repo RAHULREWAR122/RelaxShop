@@ -7,7 +7,7 @@ import MiniScroller from '@/app/Components/miniScroller/page';
 async function Langha() {  
 
   const data = await fetchData();
-  const langha = data && data.result.filter((item)=>item.category === "langha"); 
+  const langha = data && data.filter((item)=>item.category === "langha"); 
   
   if(!data){
     return <MiniScroller/>

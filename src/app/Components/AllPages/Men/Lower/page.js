@@ -6,7 +6,7 @@ import MiniScroller from '@/app/Components/miniScroller/page';
 async function Lower() {  
   
   const data = await fetchData();
-  const lower = data && data.result.filter((item)=>item.category === "lower"); 
+  const lower = data && data.filter((item)=>item.category === "lower"); 
   
   if(!data){
     return <MiniScroller/>

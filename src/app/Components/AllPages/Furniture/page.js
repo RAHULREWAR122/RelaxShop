@@ -6,7 +6,7 @@ import MiniScroller from '../../miniScroller/page';
 
 async function Furniture() {
   const data = await fetchData();
-  const furniture = data && data.result.filter((item)=>item.category === "furniture"); 
+  const furniture = data && data.filter((item)=>item.category === "furniture"); 
   
   if(!data ){
      return <MiniScroller/>

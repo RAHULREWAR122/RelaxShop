@@ -1,0 +1,239 @@
+.container .row {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  height: 80vh;
+}
+.container .row .col {
+  height: auto;
+  padding: 20px 10px;
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.container .row .col .author_card {
+  box-shadow: 0 20px 28px 6px rgba(0, 0, 0, 0.0901960784);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.container .row .col .author_card .author_card_cover {
+  height: 150px;
+}
+.container .row .col .author_card .author_card_profile {
+  height: auto;
+  padding: 10px;
+  text-align: center;
+}
+.container .row .col .author_card .author_card_profile .author_card_avatar {
+  height: 6rem;
+  width: 6rem;
+}
+.container .row .col .author_card .author_card_profile .author_card_avatar img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.container .row .col .wizard {
+  height: auto;
+}
+.container .row .col .wizard .list_group {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  line-height: 30px;
+}
+.container .row .col .wizard .list_group a {
+  padding: 10px;
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.container .row .col .wizard .list_group a:hover {
+  color: #ac32e4;
+}
+.container .row .col .wizard .list_group a .icon {
+  margin-right: 10px;
+}
+.container .row .col .wizard .list_group .list_group_item.active:not(.disabled)::before {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  content: "";
+}
+.container .row .col .wizard .list_group .list_group_item.active:not(.disabled) {
+  background-color: transparent;
+  color: #ac32e4;
+  cursor: default;
+  pointer-events: none;
+  border-bottom: 1px solid blue;
+  border-left: 1px solid blue;
+  border-bottom-left-radius: 10px;
+}
+.container .row .col .wizard .list_group .ord {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.container .row .col .wizard .list_group .ord div div .icon {
+  margin-right: 10px;
+}
+.container .row .aboutUserDetails {
+  display: none;
+}
+.container .row .pages {
+  width: 60%;
+  max-width: 1200px;
+  max-height: 86vh;
+  overflow-y: scroll;
+}
+.container .row .pages .form_row {
+  height: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+}
+.container .row .pages .form_row .form_col {
+  width: 92%;
+  height: 60px;
+  display: flex;
+  margin: 10px;
+}
+.container .row .pages .form_row .form_col .form_group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.container .row .pages .form_row .form_col .form_group input {
+  height: 80%;
+  font-size: 1.1rem;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.container .row .pages .form_row .form_col_full {
+  width: 92%;
+  display: flex;
+  justify-content: center;
+}
+.container .row .pages .form_row .form_col_full button {
+  padding: 10px 30px;
+  margin: 20px 0;
+  cursor: pointer;
+  border: none;
+  background: #8faeb6;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+.container .row .pages .form_row .form_col_full button:hover {
+  background: #4c8c9c;
+}
+.container .row .pages .form_row .passwordUpdate {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+}
+.container .row .pages .form_row .passwordUpdate .oldPass {
+  width: 92%;
+}
+.container .row .pages .form_row .passwordUpdate .oldPass .form_group {
+  display: flex;
+  flex-direction: column;
+}
+.container .row .pages .form_row .passwordUpdate .oldPass .form_group input {
+  height: 40px;
+}
+.container .row .pages .form_row .passwordUpdate .form_col {
+  width: 92%;
+}
+.container .row .pages .form_row .passwordUpdate .form_col .form_group {
+  width: 100%;
+}
+.container .row .pages .form_row .passwordUpdate .form_col .form_group input {
+  width: 100%;
+}
+.container .row .pages .form_row .passwordUpdate .updateBtn {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+.container .row .pages .form_row .passwordUpdate .updateBtn button {
+  padding: 10px 30px;
+  border: none;
+  color: #fff;
+  background: #8faeb6;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.container .row .pages .form_row .passwordUpdate .updateBtn button:hover {
+  background: #4c8c9c;
+}
+@media (max-width: 933px) {
+  .container .row {
+    flex-direction: column;
+  }
+  .container .row .col {
+    display: none;
+  }
+  .container .row .col,
+  .container .row .pages {
+    width: 100%;
+    max-width: none;
+  }
+  .container .row .aboutUserDetails {
+    display: initial;
+    width: 100%;
+    padding: 7px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 0 4px 0;
+    z-index: 99;
+    position: absolute;
+    top: -47px;
+    background: #fff;
+  }
+  .container .row .aboutUserDetails .links {
+    width: 80%;
+  }
+  .container .row .aboutUserDetails .links ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+  .container .row .aboutUserDetails .links ul .activeList {
+    color: blue;
+    border-bottom: 1px solid blue;
+  }
+  .container .row .aboutUserDetails .links ul li {
+    text-align: center;
+    list-style: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: orangered;
+    font-weight: 600;
+  }
+  .container .pages .form_row .form_col {
+    width: 100%;
+    margin: 10px 0;
+  }
+  .container .pages .form_row .form_col .form_group {
+    width: 100%;
+  }
+  .container .pages .form_row .form_col_full {
+    width: 100%;
+  }
+}/*# sourceMappingURL=profileSetting.module.css.map */

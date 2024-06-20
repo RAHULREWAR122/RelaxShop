@@ -2,11 +2,12 @@ import axios from "axios";
 
 export async function fetchOrdersDataDB(){
     try {
-        let req = await axios.get("http://localhost:4100/api/status") 
-        return req.data;
-
+        let req = await axios.get(`${process.env.NEXT_PUBLIC_HOST_NAME}/api/status`);
+        if(req.data){
+           return req.data;
+        }
      } catch (error) {
-        console.log("error in fetch order data") 
-     }  
+        return;
+      }  
 
 }

@@ -7,7 +7,7 @@ import MiniScroller from '@/app/Components/miniScroller/page';
 async function Sari() {  
 
   const data = await fetchData();
-  const sari = data && data.result.filter((item)=>item.category === "sari"); 
+  const sari = data && data.filter((item)=>item.category === "sari"); 
   
   if(!data){
     return <MiniScroller/>

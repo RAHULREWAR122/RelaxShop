@@ -12,9 +12,11 @@ function AdminNavbar({setShowAside}) {
       route.push("/")
   }
   
+  
   return (
     <div className={style.nav}>
      <MdOutlineMenu onClick={() => setShowAside(true)} className={style.adminMenu} />  
+     <h4 style={{color:"#fff"}}>Welcome to Admin Page</h4>
      <div className={style.logoutAdmin}>
        <button onClick={handleLogOut}>
          Logout

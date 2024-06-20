@@ -1,7 +1,20 @@
 import { Orders } from "@/app/MongoDb/Orders";
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
+import { db } from "@/app/MongoDb/mongoose";
 
+export async function GET(req,res){
+  await mongoose.connect(db);
+  let data = await Orders.find();
+ 
+  if(data && data.length > 0){
+       return NextResponse.json({result : data , status: 200, success : true});
+  }else{
+      return NextResponse.json({result : "Data not found" , status: 404, success : false});
+  }
+
+}
 
 export async function POST(req, content) {
   try {

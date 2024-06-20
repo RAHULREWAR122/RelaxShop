@@ -6,13 +6,14 @@ import MiniScroller from '../../miniScroller/page';
 async function Electric() {
    
   const data = await fetchData();
-  const electric = data && data.result.filter((item)=>item.category === "electric"); 
+  const electric = data && data.filter((item)=>item.category === "electric"); 
   
   if(!data){
      return <MiniScroller/>
   }
   
-  
+
+
   return (
     <div className="cards">
       {electric.map((item ,i)=> {

@@ -1,7 +1,135 @@
-.orderTable {
-  border: 1px solid red;
-  padding: 20px;
-  width: 90%;
+.back {
+  color: #9baab2;
+  position: absolute;
+  cursor: pointer;
+  left: 20px;
+  background: #e7dbdb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+}
+.back:hover {
+  color: green;
+  font-size: 2.3rem;
+  background: #bfd8e9;
+}
+
+.ordersPage h3 {
+  text-align: center;
+  border-bottom: 1px solid #cacccd;
+}
+.ordersPage .orderTable {
+  max-width: 1300px;
+  width: 100%;
   margin: auto;
   height: auto;
+  min-height: 73vh;
+}
+.ordersPage .orderTable .order_table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.ordersPage .orderTable .order_table th,
+.ordersPage .orderTable .order_table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+.ordersPage .orderTable .order_table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+.ordersPage .orderTable .order_table td {
+  background-color: rgba(255, 255, 255, 0.6078431373);
+  font-size: 0.8rem;
+}
+.ordersPage .orderTable .order_table tr:hover {
+  background: rgba(214, 207, 207, 0.6509803922);
+}
+.ordersPage .orderTable .order_table p {
+  color: blue;
+  cursor: pointer;
+}
+
+.OrderPage {
+  min-height: 50vh;
+  width: 97%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+}
+.OrderPage .singleItem {
+  width: 100%;
+  max-width: 1300px;
+  height: auto;
+  padding: 10px;
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.OrderPage .singleItem .info {
+  width: 50%;
+  border: 1px solid #d6dcde;
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  line-height: 46px;
+  border-radius: 8px;
+}
+.OrderPage .singleItem .info h5,
+.OrderPage .singleItem .info p {
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+.OrderPage .singleItem .info .itemsInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.OrderPage .singleItem .info .itemsInfo table {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+.OrderPage .singleItem .info .itemsInfo table tbody tr {
+  margin: 10px;
+  cursor: pointer;
+  font-weight: 300;
+}
+.OrderPage .singleItem .info .itemsInfo table tbody .active {
+  background: #bdbd40;
+  overflow: hidden;
+}
+.OrderPage .singleItem .info .itemsInfo table tbody .active:hover {
+  background: #eaea42;
+}
+.OrderPage .singleItem .info button {
+  padding: 10px;
+  background: green;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.OrderPage .singleItem .info button:hover {
+  background: #195a19;
+}
+.OrderPage .singleItem .thumbnail {
+  width: 40%;
+  border: 1px solid #e5e9ed;
+  height: 70vh;
+}
+.OrderPage .singleItem .thumbnail img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }/*# sourceMappingURL=order.module.css.map */

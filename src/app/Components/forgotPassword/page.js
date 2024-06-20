@@ -2,11 +2,10 @@
 import React from "react";
 import style from "./forgot.module.scss";
 import { useState, useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { Button } from "react-bootstrap";
-import { sendEmailData } from "./api";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -20,6 +19,10 @@ function ForgotPassword() {
     password: "",
     cPassword: "",
   });
+  const [showPage, setShowPage] = useState(false);
+  let [getToken , setGetToken] = useState('')
+  const [showResetPage , setShowResetPage] = useState(false);
+  const [reqResetPassUser , setReqResetPassUser] = useState("")
   
 
   let token = localStorage.getItem("token");
@@ -29,10 +32,6 @@ function ForgotPassword() {
         }
   },[token])
 
-  const [showPage, setShowPage] = useState(false);
-  let [getToken , setGetToken] = useState('')
-  const [showResetPage , setShowResetPage] = useState(false);
-  const [reqResetPassUser , setReqResetPassUser] = useState("")
   const router = useRouter();
   const searchPar = useSearchParams();
    
@@ -125,7 +124,6 @@ function ForgotPassword() {
           `${process.env.NEXT_PUBLIC_HOST_NAME}/api/forgotPassword`,
           { data: data }
         );
-        console.log(req.data);
         if (req.data.success) {        
           toast.success('Password Reset Successfully, Please Login Now.', {
             position: "top-right",

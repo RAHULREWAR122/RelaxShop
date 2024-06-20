@@ -6,13 +6,17 @@ import MiniScroller from '@/app/Components/miniScroller/page';
 async function Jeans() {  
   
   const data = await fetchData();
-  const mJeans = data && data.result.filter((item)=>item.category === "mJeans"); 
+  const mJeans = data && data.filter((item)=>item.category === "mJeans"); 
   
+  console.log(data)
+
   if(!data){
     return <MiniScroller/>
   }
-    
   
+
+  
+
   return (
     <div className="cards">
       {mJeans.map((item ,i)=> {

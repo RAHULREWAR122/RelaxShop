@@ -1,15 +1,15 @@
 .nav {
   height: 120px;
   width: 100%;
-  // position: fixed;
+  position: fixed;
+  z-index:66;
   .topNav {
-    height: 60%;
+    height: 70%;
     background: #1e1c1c;
     display: flex;
     align-items: center;
     justify-content: space-between;
         
-
     .logo {
       color: #fff;
       font-size: 1.4rem;
@@ -61,6 +61,7 @@
      align-items: center;
      flex-direction: column;
      max-width: 1000px;     
+     
 
     .searchInp {
       width: 100%;
@@ -73,6 +74,8 @@
       border-radius: 2.4rem;
       overflow: hidden;
       position: relative;
+     
+     
       input {
         width: 95%;
         height: 90%;
@@ -85,10 +88,26 @@
 
 
       .searcher {
+
         position: absolute;
-        right: 15px;
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         cursor: pointer;
+        right: 30px;
+        top: 8px;
+      }
+
+      .voiceCheck{
+        position: absolute;
+        background: #dee2e685;
+        // margin-top: -10px; 
+        padding: 4px;  
+        right: -7px;
+        top: 2px;
+        border-radius: 50%;
+        transition : all .2s;
+        &:hover{
+           box-shadow: 0 0 4px 0;
+        }
       }
 
       
@@ -339,13 +358,13 @@
       transition: all 0.6s;
       display: flex !important;
       flex-direction: column;
-      height: auto;
-      width: 70vw;
+      height: 100vh;
+      width: 80vw;
       z-index: 60;
       background: #d5b8b8;
       background: transparent;
       backdrop-filter: 30px;
-      position: absolute;
+      position: fixed;
       z-index: 200;
       right: 0;
       top: 0;
@@ -470,3 +489,4 @@
     }
   }
 }
+

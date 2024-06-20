@@ -5,7 +5,7 @@ import ShowInfo from './showInfo';
 async function ProductInfo({params}) {
    
   const data =await fetchData(); 
-  const newData = data && data.result;
+  const newData = data && data;
   
   if(!newData){
      return <h2>Loading...</h2>

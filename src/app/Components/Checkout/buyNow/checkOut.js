@@ -17,12 +17,11 @@ import axios from "axios";
 import { v4 } from "uuid";
 import SHA256 from "crypto-js/sha256";
 import Link from "next/link";
+import MiniScroller from "../../miniScroller/page";
 
 function CheckOut({ mainItem }) {
-  const [scriptLoading, setScriptLoading] = useState(false);
   const [disabled, setDisabled] = useState(true);
-  const [userName, setUserName] = useState({ val: null });
-  const [addressData, setAddressData] = useState({
+  const [addressData , setAddressData] = useState({
     name: "",
     email: "",
     phone: "",
@@ -34,6 +33,7 @@ function CheckOut({ mainItem }) {
     complectAddress: "",
     feedback: "",
   });
+  
 
   const [searchPin, setSearchPin] = useState("");
   const [myUserD, setMyUserD] = useState({ name: null, email: null });
@@ -67,9 +67,8 @@ function CheckOut({ mainItem }) {
           pinCode
         }));
         setSearchPin(pinCode)
-        console.log(response.data.result.name);
+
       } else {
-        
         setSearchPin("")
         setAddressData((prevData) => ({
           ...prevData,
@@ -114,11 +113,11 @@ function CheckOut({ mainItem }) {
         `https://api.postalpincode.in/pincode/${pin}`
       );
       const pinData = response.data;
-
+      console.log(response)
       if (pinData && pinData[0].Status === "Success") {
         const { Country, State, District, Name, Pincode } =
           pinData[0].PostOffice[0];
-
+        
         setAddressData((prevData) => ({
           ...prevData,
           country: Country,
@@ -149,7 +148,6 @@ function CheckOut({ mainItem }) {
       ...prevData,
       [name]: value,
     }));
-    console.log(addressData);
   };
 
   const handleSubmitAddress = (e) => {
@@ -184,10 +182,16 @@ function CheckOut({ mainItem }) {
 
   useEffect(() => {
     dispatch(setCartItems(getCartFromLocalStorage()));
+  
   }, [dispatch]);
+  
+  if(addressData.email === ""){
+     return <MiniScroller/>
+ }
+
 
   const totalQuantity = items.reduce((total, item) => total + item.qty, 0);
-
+  
   const { totalPrice, discount, newTotal } = items.reduce(
     (accumulator, item) => {
       const itemTotal = item.price * item.qty;
@@ -226,8 +230,7 @@ function CheckOut({ mainItem }) {
 
   const handlePayment = async (e) => {
     e.preventDefault();
-    console.log(discount);
-
+  
     if (!token) {
       alert("Please Login");
       router.push("/Components/Auth/UserAuthentication");
@@ -259,6 +262,7 @@ function CheckOut({ mainItem }) {
             `${process.env.NEXT_PUBLIC_HOST_NAME}/api/status`,
             payload
           );
+          console.log(res.data)
 
           if (response.data.success) {
             for (const product of mainItem.result) {

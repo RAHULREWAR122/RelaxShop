@@ -18,7 +18,6 @@ export const addToCart = createAsyncThunk("cart/addToCart", async (item) => {
 export const removeFromCart = createAsyncThunk(
   "cart/removeFromCart",
   async (id) => {
-    console.log("id get is ", id);
     return id;
   }
 );

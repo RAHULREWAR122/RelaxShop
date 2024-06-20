@@ -8,7 +8,7 @@ async function TShirts() {
    
   let data = await fetchData();
   
-  let tShirt = data && data.result.filter((item)=>item.category === "mTshirt");
+  let tShirt = data && data.filter((item)=>item.category === "mTshirt");
   
 
   if(!data){

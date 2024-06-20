@@ -60,7 +60,6 @@
   padding: 20px;
 }
 .cartPage .cartItems .flex {
-  border: 1px solid red;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -166,7 +165,7 @@
   margin-left: 5px;
   width: auto;
   right: 10%;
-  height: 75vh;
+  align-self: flex-end;
 }
 .cartPage .priceDetails .totalPrice {
   display: flex;

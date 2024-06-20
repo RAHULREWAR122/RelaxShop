@@ -1,0 +1,157 @@
+.forgotPasswordPage {
+  height: 82vh;
+  position: absolute;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  top: 110px;
+  bottom: 0;
+}
+
+.forgotPasswordPageTrue {
+  height: 82vh;
+  position: absolute;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  top: 110px;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: none;
+}
+.forgotPasswordPageTrue .linkPage {
+  position: absolute;
+  min-height: 50%;
+  cursor: default;
+  width: 80%;
+  max-width: 900px;
+  background: rgba(82, 59, 104, 0.2666666667);
+  box-shadow: 0 0 12px 12px #e4e4e9;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 5px;
+}
+.forgotPasswordPageTrue .linkPage .cancel {
+  color: #fff;
+  font-weight: 700;
+  padding: 10px;
+  position: absolute;
+  right: 2px;
+  top: -9px;
+  background: red;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.forgotPasswordPageTrue .linkPage .highlight {
+  color: #ff6600; /* Or any other color you prefer */
+  font-weight: bold;
+}
+.forgotPasswordPageTrue .linkPage .resetLink {
+  color: #007bff; /* Or any other color you prefer */
+  text-decoration: none;
+  font-weight: bold;
+}
+.forgotPasswordPageTrue .linkPage .resetLink:hover {
+  text-decoration: underline;
+}
+.forgotPasswordPageTrue .linkPage .teamName {
+  font-weight: bold;
+  color: #333; /* Or any other color you prefer */
+}
+.forgotPasswordPageTrue .forgotPage {
+  display: none;
+}
+
+.forgotPage {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+.forgotPage .matched {
+  background: rgba(140, 175, 180, 0.6392156863);
+  transition: all 0.4s;
+}
+.forgotPage .myPage, .forgotPage .matched {
+  transition: all 0.4s;
+  border-radius: 7px;
+  height: 380px;
+  width: 330px;
+  box-shadow: 0 5px 9px 6px #ded4d4;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+.forgotPage .myPage h4, .forgotPage .matched h4 {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #b325b8;
+}
+.forgotPage .myPage .sendEmail, .forgotPage .myPage .resetPassword, .forgotPage .matched .sendEmail, .forgotPage .matched .resetPassword {
+  margin-top: 40px;
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.forgotPage .myPage .sendEmail label, .forgotPage .myPage .resetPassword label, .forgotPage .matched .sendEmail label, .forgotPage .matched .resetPassword label {
+  text-align: left;
+  align-self: flex-start;
+  font-size: 0.7rem;
+  margin-left: 13px;
+  color: #b325b8;
+  margin-bottom: 5px;
+}
+.forgotPage .myPage .sendEmail input, .forgotPage .myPage .resetPassword input, .forgotPage .matched .sendEmail input, .forgotPage .matched .resetPassword input {
+  width: 90%;
+  height: 50px;
+  border-radius: 4px;
+  border: 1px solid #b325b8;
+  outline: none;
+  font-size: 1.1rem;
+  margin: 5px 0px;
+}
+.forgotPage .myPage .sendEmail button, .forgotPage .myPage .resetPassword button, .forgotPage .matched .sendEmail button, .forgotPage .matched .resetPassword button {
+  margin-top: 30px;
+  padding: 10px 40px;
+  border: none;
+  background: #b325b8;
+  cursor: pointer;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 7px;
+}
+.forgotPage .myPage .sendEmail button:hover, .forgotPage .myPage .resetPassword button:hover, .forgotPage .matched .sendEmail button:hover, .forgotPage .matched .resetPassword button:hover {
+  background: #822985;
+}
+.forgotPage .myPage .sendEmail .msgErr, .forgotPage .myPage .resetPassword .msgErr, .forgotPage .matched .sendEmail .msgErr, .forgotPage .matched .resetPassword .msgErr {
+  font-size: 0.7rem;
+  align-self: flex-start;
+  margin-left: 18px;
+  color: red;
+}
+.forgotPage .myPage .sendEmail .msgSuccess, .forgotPage .myPage .resetPassword .msgSuccess, .forgotPage .matched .sendEmail .msgSuccess, .forgotPage .matched .resetPassword .msgSuccess {
+  font-size: 0.7rem;
+  align-self: flex-start;
+  margin-left: 18px;
+  color: green;
+}
+.forgotPage .myPage .orLogin, .forgotPage .matched .orLogin {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.forgotPage .myPage .orLogin h4, .forgotPage .matched .orLogin h4 {
+  cursor: pointer;
+}
+.forgotPage .myPage .orLogin h4:hover, .forgotPage .matched .orLogin h4:hover {
+  color: rgba(181, 33, 186, 0.6588235294);
+}/*# sourceMappingURL=forgot.module.css.map */

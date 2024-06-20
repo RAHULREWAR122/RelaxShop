@@ -3,7 +3,6 @@ import CryptoJS from "crypto-js";
 import jwt from "jsonwebtoken";
 import { User } from "@/app/MongoDb/User";
 
-
 export async function POST(req) {
   let data = await req.json();
   const { email, sendMail } = data.data;

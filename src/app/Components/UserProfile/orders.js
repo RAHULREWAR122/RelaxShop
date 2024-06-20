@@ -6,9 +6,9 @@ import { useState, useEffect } from "react";
 import style from "../Orders/order.module.scss";
 import axios from "axios";
 import { fetchOrdersDataDB } from "../Orders/orderFetchFunction";
+import MiniScroller from "../miniScroller/page";
 
 function OrdersInfo() {
-  // function OrdersInfo({userOrders , setUserOrders}) {
   const router = useRouter();
   const [userOrders, setUserOrders] = useState([]);
   const [orderData, setOrderData] = useState([]);
@@ -37,11 +37,10 @@ function OrdersInfo() {
           );
           if (req) {
             setUserOrders(req.data.result);
-            console.log(req);
           }
           return req;
         } catch (error) {
-          console.log("Error in fetching orders:", error);
+          return;
         }
       }
     };
@@ -52,26 +51,34 @@ function OrdersInfo() {
     setLoading(false);
   }, 1000);
 
-  if(!userOrders){
-     return <h4>loading...</h4>
+  if (!userOrders) {
+    return <MiniScroller />;
+  }
+
+  if (userOrders.length >= 1) {
+    setTimeout(() => {
+      setLoading(false);
+    }, 100);
+  } else if (userOrders.length === 0) {
+    setTimeout(() => {
+      setLoading(false);
+    }, 7000);
   }
 
   return (
     <>
       {loading ? (
-        <div className={style.loading} >
-          <p>loading...</p>
-        </div>
+        <MiniScroller />
       ) : userOrders && userOrders.length === 0 ? (
         <h1 style={{ textAlign: "center", marginTop: "0px" }}>
           No Orders Available
         </h1>
       ) : (
-        <div className={style.ordersPage} >
-          <div className={style.orderTable} >
-            <table className={style.order_table} >
+        <div className={style.ordersPage}>
+          <div className={style.orderTable}>
+            <table className={style.order_table}>
               <thead>
-                <tr style={{fontSize:".8rem"}}>
+                <tr style={{ fontSize: ".8rem" }}>
                   <th>S.No</th>
                   <th>Order ID</th>
                   <th>Email</th>
@@ -82,10 +89,10 @@ function OrdersInfo() {
                 {userOrders &&
                   userOrders.map((order, i) => {
                     return (
-                      <tr style={{fontSize:".8rem"}} key={order._id}>
+                      <tr style={{ fontSize: ".8rem" }} key={order._id}>
                         <td>{i + 1}.</td>
                         <td>{order.orderId}</td>
-                        <td>{order.email.slice(0,9)}</td>
+                        <td>{order.email.slice(0, 9)}</td>
                         <td>₹{order.amount}</td>
                       </tr>
                     );

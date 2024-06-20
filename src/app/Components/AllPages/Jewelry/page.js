@@ -5,7 +5,7 @@ import MiniScroller from '../../miniScroller/page';
 
 async function Jewelry() {  
   const data = await fetchData();
-  const jewelry = data && data.result.filter((item)=>item.category === "jewelry"); 
+  const jewelry = data && data.filter((item)=>item.category === "jewelry"); 
   
   if(!data){
     return <MiniScroller/>

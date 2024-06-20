@@ -8,7 +8,7 @@ const {mongoose } = require("mongoose");
 export  async function GET(req ,content){     
     await mongoose.connect(db);
     let data = await Product.find({ availableQty: { $gt: 0 } });
-    
+   
     if(data && data.length > 0){
          return NextResponse.json({result : data , status: 200, success : true});
     }else{
@@ -29,3 +29,4 @@ export async function POST(req ,content){
         return NextResponse.json({result :"Something went wrong" , status : 404 ,success : false })
   }
 }
+

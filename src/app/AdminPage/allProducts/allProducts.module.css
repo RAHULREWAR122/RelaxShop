@@ -1,0 +1,207 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+.allProductsTable {
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+}
+.allProductsTable .table {
+  width: 95%;
+  min-height: 70vh;
+  border-collapse: collapse;
+  align-self: center;
+}
+.allProductsTable .table th,
+.allProductsTable .table td {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+.allProductsTable .table td {
+  position: relative;
+}
+.allProductsTable .table td .detail {
+  background: rgb(0, 208, 255);
+  position: absolute;
+  top: 57%;
+  left: 20%;
+  padding: 10px;
+  max-width: 190px;
+  font-size: 0.9rem;
+  word-wrap: break-word;
+}
+.allProductsTable .table td span {
+  background: green;
+  padding: 5px;
+  color: #fff;
+}
+.allProductsTable .table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+.allProductsTable .table .aboutOrder {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0%;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-backdrop-filter: blur(1px);
+          backdrop-filter: blur(1px);
+  z-index: 200;
+}
+.allProductsTable .table .aboutOrder .orderInfo {
+  height: 60%;
+  width: 80%;
+  max-height: 400px;
+  max-width: 900px;
+  border: 2px solid pink;
+  position: relative;
+  -webkit-backdrop-filter: blur(1px);
+          backdrop-filter: blur(1px);
+  overflow: scroll;
+}
+.allProductsTable .table .aboutOrder .orderInfo h4 {
+  background: red;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  color: #fff;
+  padding: 20px;
+}
+.allProductsTable .table .aboutOrder .orderInfo .itemShowInfo {
+  height: 50%;
+  background: green;
+}
+.allProductsTable .table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.allProductsTable .table tbody tr:hover {
+  background-color: #ddd;
+}
+.allProductsTable .table img {
+  width: 90px;
+  max-height: 50px;
+  display: block;
+  margin-right: 20px;
+}
+.allProductsTable .table a {
+  margin-right: 10px;
+  text-decoration: none;
+  color: blue;
+}
+.allProductsTable .table button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 6px;
+  cursor: pointer;
+}
+@media only screen and (max-width: 600px) {
+  .allProductsTable .table th,
+  .allProductsTable .table td {
+    font-size: 8px;
+  }
+  .allProductsTable .table img {
+    max-width: 100%;
+    max-height: auto;
+  }
+  .allProductsTable .table button {
+    margin-top: 10px;
+  }
+}
+.allProductsTable .pagination,
+.allProductsTable .lessThen {
+  margin-top: 20px;
+  height: 60px;
+  display: flex;
+  width: 40%;
+  min-width: 330px;
+  max-width: 600px;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  box-shadow: 0 0 5px 0;
+  border-radius: 10px;
+}
+.allProductsTable .pagination ul,
+.allProductsTable .lessThen ul {
+  margin: 0 auto;
+  text-align: center;
+}
+.allProductsTable .pagination ul li,
+.allProductsTable .lessThen ul li {
+  cursor: pointer;
+  display: inline-block;
+  list-style-type: none;
+  margin-left: 5px;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  align-self: center;
+  font-weight: 400;
+  justify-content: center;
+  background-position: 0 -35px;
+  transition: all 0.5s linear;
+  line-height: 30px;
+}
+.allProductsTable .pagination ul li:hover,
+.allProductsTable .lessThen ul li:hover {
+  transform: scale(0.96);
+  border: 1px solid gray;
+}
+.allProductsTable .pagination ul li.active,
+.allProductsTable .lessThen ul li.active {
+  background-image: linear-gradient(90deg, #0895ff, #37d5ff);
+  background-repeat: no-repeat;
+  color: #fff;
+  background-position: 0 0;
+  font-weight: 600;
+}
+.allProductsTable .pagination .rem,
+.allProductsTable .lessThen .rem {
+  cursor: no-drop;
+  opacity: 0.3;
+}
+.allProductsTable .pagination .rem:hover,
+.allProductsTable .lessThen .rem:hover {
+  background: transparent;
+}
+.allProductsTable .pagination button,
+.allProductsTable .lessThen button {
+  line-height: 35px;
+  width: 60px;
+  border: 0;
+  background-color: rgba(120, 131, 150, 0.1019607843);
+  background-image: rgba(113, 124, 144, 0.1019607843);
+  border-radius: 50px;
+  font-weight: 600;
+  background-position: 0 -45px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.allProductsTable .pagination button:hover,
+.allProductsTable .lessThen button:hover {
+  background: #7dc3cd;
+}
+.allProductsTable .pagination button.active,
+.allProductsTable .lessThen button.active {
+  background-color: rgba(0, 0, 0, 0.0705882353);
+}
+@media screen and (max-width: 1067px) {
+  .allProductsTable .pagination {
+    padding: 1em 1.2em;
+  }
+  .allProductsTable button {
+    width: 60px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .allProductsTable .lessThen {
+    display: none;
+  }
+  .allProductsTable ul li:last-child {
+    display: none;
+  }
+}/*# sourceMappingURL=allProducts.module.css.map */

@@ -9,15 +9,17 @@ import { clearCart, increaseQuantity, decreaseQuantity } from "@/app/Redux/cartS
 import { usePathname, useRouter } from "next/navigation";
 
 import LoadingScroller from "../laodingScroller/page";
+import ShowLoginModel from "../showLoginModel/page";
 
 
 function Cart() {
   const [loading, setLoading] = useState(false);
+  const [showModel , setShowModel] = useState(false);
   const dispatch = useDispatch();
   const items = useSelector(cartSelector);
   const router = useRouter();
   const pathName = usePathname();
-
+  
   useEffect(() => {
     dispatch(setCartItems(getCartFromLocalStorage()));
   }, [dispatch]);
@@ -42,13 +44,34 @@ function Cart() {
     dispatch(clearCart());
   };
 
+  const checkToken = localStorage.getItem("token");
+
   const handleContinue = (url) => {
     setLoading(true);
     if (pathName === url) {
       setLoading(false);
+      router.push(pathName);
+    } 
+    if(checkToken){
+      router.push(url);  
+      setShowModel(false)
+    }else{
+      setLoading(false);
+      setShowModel(true);
     }
-    router.push(url);
+
+    return;
+
+    
+
+    
+
+
+    // router.push(url);
   };
+  
+
+
 
   const totalQuantity = items.reduce((total, item) => total + item.qty, 0);
 
@@ -78,7 +101,8 @@ function Cart() {
 
   const disInPer = ((discount / totalPrice) * 100).toFixed(2);
 
-  return (
+  return (<>
+    {showModel && <ShowLoginModel setShowModel={setShowModel}/>}
     <div className={style.cartPage}>
       {loading && <LoadingScroller />}
       {items.length >= 1 && (
@@ -156,7 +180,7 @@ function Cart() {
       )}
 
       {items.length < 1 && <MtCart />}
-    </div>
+    </div></>
   );
 }
 

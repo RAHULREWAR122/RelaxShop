@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { User } from "@/app/MongoDb/User";
 import CryptoJS from "crypto-js";
 const jwt = require("jsonwebtoken");
-// import mongoose from "mongoose";
 
 import { db } from "@/app/MongoDb/mongoose";
 import mongoose from "mongoose";

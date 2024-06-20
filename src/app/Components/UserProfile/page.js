@@ -11,12 +11,10 @@ import OrdersPage from "../Orders/page";
 import style from "./profileSetting.module.scss";
 import { FaUserAstronaut } from "react-icons/fa";
 import { GiShoppingCart } from "react-icons/gi";
+import MiniScroller from "../miniScroller/page";
 
 export default function Profile() {
   const [userOrders, setUserOrders] = useState([]);
-  
-
-  
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -28,7 +26,6 @@ export default function Profile() {
   });
   const [listState, setListState] = useState("profile_setting");
 
-  console.log(listState);
   const handleListData = (data) => {
     setListState(data);
   };
@@ -39,8 +36,6 @@ export default function Profile() {
 
   useEffect(() => {
     if (!token) {
-      console.log("Token Null");
-      
       router.push("/");
       return;
     } else {
@@ -66,7 +61,6 @@ export default function Profile() {
           pinCode: pinCode,
         }));
       } else {
-        console.error("Fetch User Details Failed:", response.data.error);
         setUserData((prevUserData) => ({
           ...prevUserData,
           email: "",
@@ -76,7 +70,7 @@ export default function Profile() {
         }));
       }
     } catch (error) {
-      console.error("Error fetching user details:", error);
+     return;
     }
   };
 
@@ -98,7 +92,6 @@ export default function Profile() {
           position: "top-right",
           autoClose: 1000,
         });
-        console.log(response.data);
       } else {
         toast.error(response.data.result, {
           position: "top-right",
@@ -107,7 +100,10 @@ export default function Profile() {
       }
       return;
     } catch (error) {
-      console.log("Error updating user:", error);
+      toast.error(`Error in Update Profile`, {
+        position: "top-right",
+        autoClose: 1000,
+      });
       return;
     }
   };
@@ -150,7 +146,11 @@ export default function Profile() {
         return;
       }
     } catch (error) {
-      console.log("Error updating user:", error.message);
+      toast.error(`Error updating user`, {
+        position: "top-right",
+        autoClose: 1000,
+      });
+
       return;
     }
   };
@@ -162,6 +162,11 @@ export default function Profile() {
       [name]: value,
     });
   };
+
+ 
+  if(userData.email === ''){
+    return <MiniScroller/>
+  }
 
   return (
     <div>
@@ -212,7 +217,6 @@ export default function Profile() {
                         Orders
                       </div>
                     </div>
-                    <span>{userOrders.length}</span>
                   </div>
                 </a>
                 <a

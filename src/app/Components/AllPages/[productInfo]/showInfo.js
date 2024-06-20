@@ -10,15 +10,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import LoadingBar from 'react-top-loading-bar';
+import LoadingBar from "react-top-loading-bar";
 import { usePathname } from "next/navigation";
 import LoadingScroller from "../../laodingScroller/page";
+import ShowLoginModel from "../../showLoginModel/page";
+
+
+
 
 function ShowInfo({ newData, params }) {
   const [mainImg, setMainImg] = useState(null);
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(false);
-  
+  const [showModel, setShowModel] = useState(false);
+
   const id = params.productInfo;
   const pathName = usePathname();
   const dispatch = useDispatch();
@@ -46,7 +51,7 @@ function ShowInfo({ newData, params }) {
   const handleAddToCart = (item) => {
     try {
       dispatch(addToCart(item));
-      toast.success('Item Added In Cart', {
+      toast.success("Item Added In Cart", {
         position: "top-right",
         autoClose: 1000,
         hideProgressBar: false,
@@ -58,7 +63,7 @@ function ShowInfo({ newData, params }) {
       });
     } catch (error) {
       console.log("Error in Adding Cart");
-      toast.error('Error, item not added in Cart', {
+      toast.error("Error, item not added in Cart", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -71,17 +76,37 @@ function ShowInfo({ newData, params }) {
     }
   };
 
+  let checkToken = localStorage.getItem("token");
+
   const handleBuyProduct = (url) => {
     setLoading(true);
     if (pathName === url) {
       setLoading(false);
-    } else {
+      router.push(pathName);
+    }
+    if (checkToken) {
       router.push(url);
+      dispatch(clearCart());
+    } else {
+      setLoading(false);
+    }
+
+    return;
+  };
+
+  const handleAddCartAndBuy = (item) => {
+    if (checkToken) {
+      dispatch(addToCart(item));
+      setShowModel(false);
+    } else {
+      setShowModel(true);
     }
   };
 
+
   return (
     <>
+      {showModel && <ShowLoginModel setShowModel={setShowModel} />}
       {loading && <LoadingScroller />}
       <div className={style.infoPage}>
         <LoadingBar
@@ -122,10 +147,17 @@ function ShowInfo({ newData, params }) {
           </div>
 
           <div className={style.btns}>
-            <button onClick={() => handleAddToCart({ ...data, availableQty: 1 })}>
+            <button
+              onClick={() => handleAddToCart({ ...data, availableQty: 1 })}
+            >
               <IoCartOutline className={style.cart} /> Add To Cart
             </button>
-            <button onClick={() => handleBuyProduct(`/Components/Checkout/buyNow`)}>
+            <button
+              onClick={() => {
+                handleBuyProduct(`/Components/Checkout/buyNow`),
+                  handleAddCartAndBuy({ ...data, availableQty: 1 });
+              }}
+            >
               <MdNavigateNext className={style.navigate} /> Buy Now
             </button>
           </div>

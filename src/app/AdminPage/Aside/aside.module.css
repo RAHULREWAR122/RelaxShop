@@ -1,0 +1,91 @@
+.nav {
+  height: 60px;
+  background: #76765e;
+  display: flex;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+}
+.nav .adminMenu {
+  color: red;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+.nav .logoutAdmin {
+  margin-right: 20px;
+}
+.nav .logoutAdmin button {
+  padding: 7px 20px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border: none;
+  background: green;
+  color: #fff;
+  border-radius: 7px;
+  transition: all 0.2s;
+}
+.nav .logoutAdmin button:hover {
+  background: red;
+}
+
+.asideBar {
+  transition: all 0.3s;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.0941176471);
+  min-height: 100vh;
+  position: absolute;
+  top: 0;
+  left: -100%;
+  opacity: 0;
+}
+.asideBar.show {
+  left: 0;
+  opacity: 1;
+}
+.asideBar .aside {
+  height: 100%;
+  width: 30%;
+  max-width: 400px;
+  min-width: 200px;
+  background: #36362e;
+  position: absolute;
+  transition: all 0.3s;
+  z-index: 40;
+}
+.asideBar .aside .cancel {
+  position: absolute;
+  right: 0;
+  color: #fff;
+  font-size: 2.4rem;
+  cursor: pointer;
+}
+.asideBar .aside .adminUser {
+  border: 1px solid red;
+  height: 70px;
+  margin-top: 20px;
+  background: green;
+}
+.asideBar .aside .links {
+  margin-top: 50px;
+  color: #fff;
+}
+.asideBar .aside .links .ul {
+  display: flex;
+  flex-direction: column;
+}
+.asideBar .aside .links .ul li {
+  border-bottom: 2px solid rgba(20, 95, 166, 0.8196078431);
+  padding: 20px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  gap: 40px;
+  cursor: pointer;
+}
+.asideBar .aside .links .ul li:hover {
+  background: #4c5d70;
+}/*# sourceMappingURL=aside.module.css.map */

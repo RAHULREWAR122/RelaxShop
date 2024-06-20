@@ -28,7 +28,7 @@ function OtherProducts({ data }) {
       }
       return req.data;
     } catch (error) {
-      console.log("Error in fetching Data");
+       return;
     }
   };
   if(!filteredData){

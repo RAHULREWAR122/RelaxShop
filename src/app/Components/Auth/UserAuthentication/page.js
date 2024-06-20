@@ -1,11 +1,9 @@
 "use client";
 import React, { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import style from "../style.module.scss";
 import axios from "axios";
 import { usePathname, useRouter } from "next/navigation";
-import MiniScroller from "../../miniScroller/page";
 import { useState } from "react";
 import LoadingScroller from "../../laodingScroller/page";
 
@@ -52,15 +50,19 @@ function UserAuth() {
   const getAllEmail = async () => {
     try {
       const checkEmailExist = await axios.get(`${process.env.NEXT_PUBLIC_HOST_NAME}/api/User`);
-      setGetEmails(checkEmailExist.data.result);
+      if(checkEmailExist.data){
+        setGetEmails(checkEmailExist.data.result);
+      }
       return checkEmailExist.data;
       
     } catch (error) {
-       console.log("Error in fetch Emails")
-       return;
+      toast.error(`try again later.`, {
+        position: "top-right",
+        autoClose: 1000,
+      });
+      route.push("/") 
+      return;
     }
-
-  
   };
 
   const handleUserRegister = async (e) => {
@@ -234,7 +236,6 @@ function Login({setShowRegister}) {
       progress: undefined,
       theme: "light",
     });
-    console.log(state)
   };
 
   const handleOnChange = (e) => {
@@ -258,7 +259,6 @@ function Login({setShowRegister}) {
        return;
     }
    
-
     if (data.email === "" || data.password === "") {
       toast.error(`both fields are required`, {
         position: "top-right",
@@ -276,7 +276,6 @@ function Login({setShowRegister}) {
       });
 
       if (req.data.success) {
-        console.log(req.data.myUser)
         localStorage.setItem("token" , req.data.token);
         localStorage.setItem("myUser" ,  JSON.stringify(req.data.myUser) )
         setTimeout(() => {
