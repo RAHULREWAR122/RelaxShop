@@ -2,8 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const updateLocalStorage = (items) => {
   localStorage.setItem("cart", JSON.stringify(items));
 };
-
-// Function to retrieve cart data from localStorage
 export const getCartFromLocalStorage = () => {
   if (typeof window !== "undefined" && localStorage) {
     const cart = localStorage.getItem("cart");
