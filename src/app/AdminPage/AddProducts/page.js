@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import styles from "./AddProductForm.module.scss";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 const AddProductForm = () => {
   const [formData, setFormData] = useState({
@@ -44,14 +45,26 @@ const AddProductForm = () => {
         { formData: formDataToSubmit }
       );
       if (req.data.success) {
-        alert("data added");
+          toast.success('item Added Successfully', {
+            position: "top-right",
+            autoClose: 1100,
+            theme: "light",
+          }); 
       } else {
-        alert("error in adding data");
+        toast.error('Please try again.', {
+          position: "top-right",
+          autoClose: 1100,
+          theme: "light",
+        }); 
       }
     } catch (err) {
+      toast.error('Something went wrong...', {
+        position: "top-right",
+        autoClose: 1100,
+        theme: "light",
+      }); 
       return;
     }
-
     setFormData({
       ...formData,
       title: "",
@@ -65,8 +78,22 @@ const AddProductForm = () => {
     });
     return;
   };
-
-  return (
+  
+    
+  return (<>
+     <ToastContainer
+          position="top-right"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+   
     <div className={styles.container}>
       <h2 className={styles.h2}>Add Product</h2>
       <form onSubmit={handleSubmit}>
@@ -150,7 +177,7 @@ const AddProductForm = () => {
         <button type="submit">Add Product</button>
       </form>
     </div>
-  );
+</>  );
 };
 
 export default AddProductForm;

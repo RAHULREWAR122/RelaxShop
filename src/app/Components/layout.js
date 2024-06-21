@@ -10,13 +10,7 @@ function Layout({children}) {
   return (
     <>
      {path === "/Components/AdminPage"  ? null : <Navbar/>}
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+     
       {children}
       {path === "/Components/AdminPage"  ? null : <Footer/>}
      

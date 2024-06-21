@@ -2,6 +2,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import style from './allProducts.module.scss';
+import { ToastContainer, toast } from "react-toastify";
+
 
 function AllProductsShowPage() {
   const [items, setItems] = useState([]);
@@ -33,15 +35,28 @@ function AllProductsShowPage() {
   }
 
   const handleDeleteItem = async (id)=>{
-      try {
+    toast.success('Wait...', {
+      position: "top-right",
+      autoClose: 1400,
+      theme: "light",
+    }); 
+    try {
         let req =  await axios.delete(`${process.env.NEXT_PUBLIC_HOST_NAME}/api/Products/${id}`)
          console.log(req);
          if(req.data.success){
-          alert("item deleted successfully");
-          
+          toast.success('item Added Successfully', {
+            position: "top-right",
+            autoClose: 1100,
+            theme: "light",
+          }); 
          }else{
-         alert("error in delete item")
+         toast.error('Please try Again', {
+          position: "top-right",
+          autoClose: 1100,
+          theme: "light",
+        });
          }
+       return;  
       } catch (err) {
          console.log("error in Delete item" , err);
          return;
@@ -50,7 +65,19 @@ function AllProductsShowPage() {
 
   return (
     <>
-      <div className={style.allProductsTable}>
+<ToastContainer
+          position="top-right"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+  <div className={style.allProductsTable}>
         <table className={style.table}>
           <thead>
             <tr>

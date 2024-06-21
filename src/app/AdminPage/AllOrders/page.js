@@ -41,7 +41,8 @@ function AllOrdersShowPage() {
   }
 
   return (
-    <>
+      <>
+    
       <div className={style.allProductsTable}>
         <table className={style.table}>
           <thead>

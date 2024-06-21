@@ -2,9 +2,19 @@ import React from "react";
 import style from "./footer.module.css";
 import { FaFacebook, FaTwitter, FaInstagram ,FaLinkedin ,FaGithub } from "react-icons/fa";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 function Footer() {
+  const searchPar = useSearchParams();
+  const getToken = searchPar.get("token");
+  
+   const pathName = usePathname();
   return (
+    <>
+     {pathName === "/Components/forgotPassword" && getToken ? null : 
+
+
     <footer className={style.footer}>
       <div className={style.footerContainer}>
         <div className={style.footerSection}>
@@ -38,27 +48,7 @@ function Footer() {
             <li>
               <Link href="/Components/AllPages/Jewelry">Jewelry</Link>
             </li>
-            <li>
-              <Link href="/Components/AllPages/Men/Jeans">Men Jeans</Link>
-            </li>
-            <li>
-              <Link href="/Components/AllPages/Men/Lower">Lower</Link>
-            </li>
-            <li>
-              <Link href="/Components/AllPages/Men/t_Shirts">TShirts</Link>
-            </li>
-            <li>
-              <Link href="/Components/AllPages/Women/Sari">Sari</Link>
-            </li>
-            <li>
-              <Link href="/Components/AllPages/Women/Langha">Langha</Link>
-            </li>
-            <li>
-              <Link href="/Components/AllPages/Women/Jeans">Girls Jeans</Link>
-            </li>
-            <li>
-              <Link href="/Components/AllPages/Women/t_Shirts">Girls TShirts</Link>
-            </li>   
+              
           </ul>
         </div>
         <div className={style.footerSection}>
@@ -80,8 +70,8 @@ function Footer() {
       <div className={style.bottomFooter}>
         <p>&copy; 2024 Your E-commerce. All rights reserved.</p>
       </div>
-    </footer>
-  );
+    </footer>}
+  </>);
 }
 
 export default Footer;

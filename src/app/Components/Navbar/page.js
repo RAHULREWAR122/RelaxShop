@@ -297,7 +297,7 @@ function Navbar() {
               </div>
 
               {selectCat === "men" && (
-                <div className={style.men}>
+                <ul className={style.men}>
                   <li
                     onClick={() => {
                       handleRoutes("/Components/AllPages/Men/t_Shirts");
@@ -354,11 +354,11 @@ function Navbar() {
                       width={90}
                     />
                   </li>
-                </div>
+                </ul>
               )}
 
               {selectCat === "women" && (
-                <div className={style.men}>
+                <ul className={style.men}>
                   <li
                     onClick={() => {
                       handleRoutes("/Components/AllPages/Women/t_Shirts");
@@ -415,7 +415,7 @@ function Navbar() {
                       width={90}
                     />
                   </li>
-                </div>
+                </ul>
               )}
               <div className={style.others}>
                 <li onClick={() => { handleRoutes("/Components/AllPages/Shoes"); handleMenuButton(); }}>

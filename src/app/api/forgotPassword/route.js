@@ -34,12 +34,16 @@ function generateToken(email) {
 export async function PUT(req, content) {
   try {
     const payload = await req.json();
-    const { getToken , password, cPassword} = payload.data;
-     
+    const { getToken , password, cPassword , validToken} = payload.data;
+    
+    const { searchParams } = new URL(request.url);
+
+    const token = searchParams.get('token');
+      
     let user = jwt.verify(getToken, process.env.JWT_SECRET);
   
     let filter = await User.findOne({ email: user.email });
-   
+      
     const bytes = CryptoJS.AES.decrypt(
       filter.password,
       process.env.ENCRYPTION_KEY
@@ -50,7 +54,13 @@ export async function PUT(req, content) {
       process.env.ENCRYPTION_KEY
     ).toString();
     
-    
+    if(validToken !== getToken){
+      return NextResponse.json({
+        result: "Something went wrong",
+        success: false,
+        statue: 500,
+      });   
+    }
 
     if (password === cPassword) {
       await User.findByIdAndUpdate(filter._id, { password: incPass });

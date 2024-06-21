@@ -1,0 +1,38 @@
+
+.errorPage{
+    background: linear-gradient(to bottom ,#4848a9 ,skyblue);
+    height: 98.8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mid{
+   height: 70%;
+   width: 80%;
+   background: #fff;
+}
+.mid{
+    text-align: center;
+}
+.mid h1{
+     font-size: 6rem;
+     color: #4848a9;  
+    line-height: 2;
+}
+.mid div{
+       margin-top: 3%;
+       padding: 10px;
+       display: flex;
+       justify-content: center;
+    }
+.mid div button{
+    width: 60%;
+    padding: 10px;
+    background: skyblue;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}

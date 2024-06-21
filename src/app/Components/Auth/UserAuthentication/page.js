@@ -255,7 +255,7 @@ function Login({setShowRegister}) {
     if(data.email === "rrewar756@gmail.com" && data.password === "Rahul_09062004"){
        const adminToken = "xyz_rr_Token";
        localStorage.setItem("adminToken", adminToken);
-       route.push("/AdminPage/dashboard");
+       route.push("/AdminPage/allProducts");
        return;
     }
    

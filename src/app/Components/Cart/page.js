@@ -155,7 +155,6 @@ function Cart() {
       {items.length >= 1 && (
         <div className={style.priceDetails}>
           <h2>Price Details</h2>
-
           <div className={style.totalPrice}>
             <p>Total Product Price</p>
             <p>+ ₹ {totalPrice}</p>

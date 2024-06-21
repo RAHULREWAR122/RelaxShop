@@ -177,7 +177,6 @@ a{
   display: flex;
   align-items: center;
   gap: 18px;
-  /* justify-content: space-evenly; */
 }
 .btns p{
    margin-bottom: -3px;
@@ -186,4 +185,74 @@ a{
 .qtyUpdate{
    font-size: 1.9rem;
    cursor: pointer;
+}
+
+
+
+.login-prompt {
+  position: fixed;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 55;
+  height: 100%;
+  width: 100%;
+  
+}
+
+.login-prompt-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 40%;
+  height: 30%;
+  min-width: 290px;
+  min-height: 300px;
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  
+}
+
+.cancelLogin{
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 15px;
+    border: none;
+     background: red;
+     color: #fff;
+     cursor: pointer;
+
+
+}
+
+.login-prompt h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.login-prompt p {
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.login-button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
 }

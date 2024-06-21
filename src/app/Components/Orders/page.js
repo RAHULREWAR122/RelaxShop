@@ -8,6 +8,8 @@ import axios from "axios";
 import Link from "next/link";
 import Scroller from "@/app/Scroller/scroller";
 import MiniScroller from "../miniScroller/page";
+import { ToastContainer, toast } from "react-toastify";
+
 
 function OrdersPage() {
   const [orderData, setOrderData] = useState([]);
@@ -78,17 +80,34 @@ function OrdersPage() {
      
    
   const handleDeleteOrder = async (id)=>{
+    toast.success('Wait...', {
+      position: "top-right",
+      autoClose: 1400,
+      theme: "light",
+    }); 
     try {
       let req =  await axios.delete(`${process.env.NEXT_PUBLIC_HOST_NAME}/api/Orders/${id}`)
-       if(req.data.success){
-        alert("Order deleted successfully");
-        
-       }else{
-       alert("error in delete Order")
-       }
+   
+      if(req.data.success){
+        toast.success('order Delete Successfully', {
+          position: "top-right",
+          autoClose: 1000,
+          theme: "light",
+        });  
+       }else{  
+        toast.error('OOps!, something went wrong.', {
+          position: "top-right",
+          autoClose: 1000,
+          theme: "light",
+        });
+      }
        return;
     } catch (err) {
-       console.log("error in Delete item" , err);
+       toast.error('OOps!, something went wrong.', {
+        position: "top-right",
+        autoClose: 1000,
+        theme: "light",
+      });
        return;
     }  
 }
@@ -96,6 +115,18 @@ function OrdersPage() {
    
   return (
     <>
+        <ToastContainer
+          position="top-right"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
     {loading ? (
         <div className={style.loading}>
           <MiniScroller/>

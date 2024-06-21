@@ -240,8 +240,8 @@ export default function Profile() {
                </div>
                <div className={style.links}>
                   <ul>
-                    <li className={listState === "profile_setting" ? style.activeList: null} onClick={() => handleListData("profile_setting")}>Profile</li>
-                    <li className={listState === "Orders" ? style.activeList : null} onClick={() => handleListData("Orders")}>Orders</li>
+                    <li className={listState === "profile_setting" ? style.activeList: ""} onClick={() => handleListData("profile_setting")}>Profile</li>
+                    <li className={listState === "Orders" ? style.activeList : ""} onClick={() => handleListData("Orders")}>Orders</li>
                     </ul>  
                </div>
            </div>

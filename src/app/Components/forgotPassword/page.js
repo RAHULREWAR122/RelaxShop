@@ -37,7 +37,8 @@ function ForgotPassword() {
    
 
   let checkToken = searchPar.get("token");
- 
+  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEmailData({
@@ -69,8 +70,11 @@ function ForgotPassword() {
       );
       if (req.data.success) {
         setGetToken(req.data.result.token)  
+        let validToken = req.data.result.token;
+        localStorage.setItem("validToken",validToken)
+        
         setReqResetPassUser(req.data.result.existUserName)
-        toast.success('Request Send Successfully', {
+         toast.success('Request Send Successfully', {
           position: "top-right",
           autoClose: 1000,
           theme: "light",
@@ -105,14 +109,18 @@ function ForgotPassword() {
   
   const handleReset = async () => {
     let { password, cPassword } = passwordData;
-   
+    let validToken = localStorage.getItem("validToken"); 
+
     if (password === cPassword && password.length >= 1) {
+       
       let data = {
         password: password,
         cPassword: cPassword,
         sendMail: false,
         getToken: checkToken,
+        validToken
       };
+
       toast.success('Wait...', {
         position: "top-right",
         autoClose: 1000,
@@ -147,7 +155,9 @@ function ForgotPassword() {
           password: "",
           cPassword: "",
         });
-      },1500) 
+      },1500)
+      localStorage.removeItem("validToken"); 
+     
       return;
 
       } catch (error) {
@@ -168,6 +178,7 @@ function ForgotPassword() {
       return;
      }
   };
+
 
   return (
     <div
@@ -260,7 +271,7 @@ function ForgotPassword() {
           {!showResetPage && (
             <div className={style.orLogin}>
               <span>or</span>
-              <h4 className={style.loginBtn}>Login?</h4>
+              <h4 onClick={()=>router.push("/Components/Auth/UserAuthentication")} className={style.loginBtn}>Login?</h4>
             </div>
           )}
         </div>

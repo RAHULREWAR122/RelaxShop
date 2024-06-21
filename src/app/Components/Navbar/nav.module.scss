@@ -1,15 +1,15 @@
 .nav {
   height: 120px;
   width: 100%;
-  position: fixed;
   z-index:66;
+  
   .topNav {
     height: 70%;
     background: #1e1c1c;
     display: flex;
     align-items: center;
     justify-content: space-between;
-        
+          
     .logo {
       color: #fff;
       font-size: 1.4rem;
@@ -358,9 +358,9 @@
       transition: all 0.6s;
       display: flex !important;
       flex-direction: column;
-      height: 100vh;
+      height: 100%;
       width: 80vw;
-      z-index: 60;
+      z-index: 70;
       background: #d5b8b8;
       background: transparent;
       backdrop-filter: 30px;
@@ -370,7 +370,7 @@
       top: 0;
       box-shadow: 0 0 5px 0;
       backdrop-filter: blur(10px);
-
+    
       .close {
         display: initial;
         position: absolute;
@@ -413,17 +413,17 @@
       .women,
       .others {
         display: flex;
-        justify-content: space-evenly;
+        justify-content:space-evenly;
         align-items: center;
         flex-direction: column;
         width: 100%;
-        padding: 10px;
+        padding: 0;
         li {
           width: 90%;
           background: #b2abab;
           font-size: 1.2rem;
           margin-top: 2px;
-          height: auto;
+          height: 56px;
           padding: 5px;
           display: flex;
           justify-content: space-around;
@@ -435,8 +435,8 @@
         }
         img {
           display: initial;
-          height: 80px;
-          width: 80px;
+          height: 40px;
+          width: 40px;
         }
       }
     }
