@@ -114,7 +114,7 @@ function OrdersPage() {
 
    
   return (
-    <>
+    <div className={style.MyOrders}>
         <ToastContainer
           position="top-right"
           autoClose={1000}
@@ -164,7 +164,7 @@ function OrdersPage() {
     </table>
       </div>
     </div>)}
-</>  );
+</div>  );
 }
 
 export default OrdersPage;

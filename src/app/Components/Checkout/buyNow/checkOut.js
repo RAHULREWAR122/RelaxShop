@@ -113,7 +113,7 @@ function CheckOut({ mainItem }) {
         `https://api.postalpincode.in/pincode/${pin}`
       );
       const pinData = response.data;
-      console.log(response)
+      
       if (pinData && pinData[0].Status === "Success") {
         const { Country, State, District, Name, Pincode } =
           pinData[0].PostOffice[0];
@@ -262,10 +262,9 @@ function CheckOut({ mainItem }) {
             `${process.env.NEXT_PUBLIC_HOST_NAME}/api/status`,
             payload
           );
-          console.log(res.data)
-
+            console.log(response.data)
           if (response.data.success) {
-            for (const product of mainItem.result) {
+            for (const product of mainItem) {
               const localItem = items.find((item) => item._id === product._id);
 
               if (localItem) {

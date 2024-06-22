@@ -10,12 +10,12 @@ export const metadata = {
   
 async function BuyNow() {
   let mainItem = await fetchData();
+ 
   
 
 if(!mainItem){
      return <MiniScroller/>  
 }
-
 
 
   return (<>
