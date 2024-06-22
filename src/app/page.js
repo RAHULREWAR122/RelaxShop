@@ -89,13 +89,17 @@ export default function Home() {
  
   let token = localStorage.getItem("token")
   useEffect(() => {
-    if(!token){
+    const hasPromptBeenShown = localStorage.getItem("loginPromptShown");
+
+    if (!hasPromptBeenShown && !token) {
       const timer = setTimeout(() => {
         setShowLoginPrompt(true);
-      }, 14000); 
-      return () => clearTimeout(timer); 
+        localStorage.setItem("loginPromptShown", "true");
+      }, 14000);
+
+      return () => clearTimeout(timer);
     }
-   }, [token]);
+  }, []);
 
   useEffect(() => {
     topOffersData();

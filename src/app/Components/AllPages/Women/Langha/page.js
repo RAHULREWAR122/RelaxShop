@@ -1,47 +1,18 @@
-import { CiStar } from 'react-icons/ci';
-import Link from 'next/link';
-import { fetchData } from '../../fetchData';
+import LanghaItems from ".";
 
-import MiniScroller from '@/app/Components/miniScroller/page';
+export const metadata = {
+  title: "RelaxShop | Langha",
+  description:
+    "Explore a stunning collection of langhas at RelaxShop. Discover traditional Indian langha skirts, designer langha choli sets, bridal wear, and more. Shop now for exquisite embroidered langhas and stylish ethnic wear with fast shipping and easy returns.",
+  keywords:
+    "RelaxShop ,traditional langha, designer langha skirts, bridal langha choli, embroidered langha, Indian ethnic langha, buy langha online, affordable langha skirts, discount langha choli, party wear langha, wedding langha dress, latest langha designs, custom langha outfits, langha with dupatta, Bollywood style langha, fashion langha choli, RelaxShop langha.",
+};
 
-async function Langha() {  
-
-  const data = await fetchData();
-  const langha = data && data.filter((item)=>item.category === "langha"); 
-  
-  if(!data){
-    return <MiniScroller/>
-  }
-  
-  
+function Langha() {
   return (
-    <div className="cards">
-      {langha.map((item ,i)=> {
-             return ( <Link key={i} href={`/Components/AllPages/${item._id}`}>
-                <div className={item.availableQty > 0 ? "card" : `qty0`}>
-                <div className="img">
-                  <img
-                    src={item.thumbnail}
-                   alt="Hoodie"
-                 />
-                 <span className='leftQty'>+{item.availableQty} more</span>
-               </div>
-               <p className="title">{item.title}</p>
-               <h3 className="price">
-                 <span>₹</span> {item.price} 
-                   <span className='onwards'>onwards</span>
-               </h3>
-               <p className='delivery'>Free Delivery</p>
-               <div className="rating">
-                 <strong>{item.rating}</strong>
-                 <span className="star">
-                   <CiStar className='star'/>
-                 </span>
-               </div>
-              </div>
-              </Link>  
-      )})}  
-    </div>
+    <>
+      <LanghaItems />
+    </>
   );
 }
 

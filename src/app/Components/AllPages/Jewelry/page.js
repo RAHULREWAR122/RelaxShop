@@ -1,44 +1,18 @@
-import { CiStar } from 'react-icons/ci';
-import Link from 'next/link';
-import { fetchData } from '../fetchData';
-import MiniScroller from '../../miniScroller/page';
+import JewelryItems from '.';
 
-async function Jewelry() {  
-  const data = await fetchData();
-  const jewelry = data && data.filter((item)=>item.category === "jewelry"); 
-  
-  if(!data){
-    return <MiniScroller/>
-  }
+export const metadata = {
+  title: "RelaxShop | Jewelry",
+  description :" Discover affordable jewelry at RelaxShop. Shop our wide selection of necklaces, bracelets, earrings, and rings perfect for any occasion. High-quality jewelry at budget-friendly prices.",
+  keywords: "RelaxShop , affordable jewelry, cheap jewelry, necklaces, bracelets, earrings, rings, budget-friendly jewelry, high-quality jewelry, jewelry for women, jewelry for men, fashion jewelry, RelaxShop jewelry",
+};
 
+
+
+ function Jewelry() {
   return (
-    <div className="cards">
-      {jewelry.map((item ,i)=> {
-             return ( <Link  key={i}  href={`/Components/AllPages/${item._id}`}>
-                <div className={item.availableQty > 0 ? "card" : `qty0`}>
-                <div className="img">
-                  <img
-                    src={item.thumbnail}
-                   alt="Hoodie"
-                 />
-                 <span className='leftQty'>+{item.availableQty} more</span>
-               </div>
-               <p className="title">{item.title}</p>
-               <h3 className="price">
-                 <span>₹</span> {item.price} 
-                   <span className='onwards'>onwards</span>
-               </h3>
-               <p className='delivery'>Free Delivery</p>
-               <div className="rating">
-                 <strong>{item.rating}</strong>
-                 <span className="star">
-                   <CiStar className='star'/>
-                 </span>
-               </div>
-              </div>
-              </Link>  
-      )})}  
-    </div>
+    <>
+    <JewelryItems/>
+    </>
   );
 }
 export default Jewelry;

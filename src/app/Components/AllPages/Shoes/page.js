@@ -1,45 +1,17 @@
-import { CiStar } from 'react-icons/ci';
-import Link from 'next/link';
-import {  fetchData } from '../fetchData';
-import MiniScroller from '../../miniScroller/page';
+import ShoesItems from ".";
+export const metadata = {
+  title: "RelaxShop | Shoes",
+  description :"Discover a wide range of stylish men's shoes at RelaxShop. Explore fashionable men's dress shoes, casual shoes, sneakers, boots, and more—all at affordable prices. Shop now for high-quality and comfortable men's footwear with fast shipping and easy returns.",
+  keywords: "RelaxShop ,stylish men's shoes, trendy men's footwear, fashionable men's shoes, men's dress shoes, men's casual shoes, men's sneakers, men's boots, affordable men's shoes, discount men's footwear, buy men's shoes online, men's formal shoes, men's athletic shoes, men's loafers, men's oxfords, branded men's shoes, RelaxShop men's shoes.",
+};
 
-async function Shoes() {  
 
-  const data = await fetchData();
-  const shoes = data && data.filter((item)=>item.category === "shoes"); 
-  
-  if(!data){
-    return <MiniScroller/>
-  }
-  
+function Shoes() {  
+
   return (
-    <div className="cards">
-      {shoes.map((item ,i)=> {
-             return ( <Link key={i} href={`/Components/AllPages/${item._id}`}>
-                <div className={item.availableQty > 0 ? "card" : `qty0`}>
-                <div className="img">
-                  <img
-                    src={item.thumbnail}
-                   alt="Hoodie"
-                 />
-                 <span className='leftQty'>+{item.availableQty} more</span>
-               </div>
-               <p className="title">{item.title}</p>
-               <h3 className="price">
-                 <span>₹</span> {item.price} 
-                   <span className='onwards'>onwards</span>
-               </h3>
-               <p className='delivery'>Free Delivery</p>
-               <div className="rating">
-                 <strong>{item.rating}</strong>
-                 <span className="star">
-                   <CiStar className='star'/>
-                 </span>
-               </div>
-              </div>
-              </Link>  
-      )})}  
-    </div>
+   <>
+   <ShoesItems/>
+   </>
   );
 }
 

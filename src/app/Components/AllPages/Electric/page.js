@@ -1,48 +1,20 @@
-import { CiStar } from 'react-icons/ci';
-import Link from 'next/link';
-import { fetchData } from '../fetchData';
-import MiniScroller from '../../miniScroller/page';
+import ElectricItems from ".";
 
-async function Electric() {
+
+
+
+export const metadata = {
+  title: "RelaxShop | Electronic",
+  description :"Electric items",
+  keywords: "RelaxShop , Low-cost headphones, Low-price headphones earPhone, headphone, Earbuds, earbuds,Buy Wireless Earbuds Online in India, Budget-friendly earphones, Cheap electronic gadgets,Affordable tech accessories ",
+};
+
+ function Electric() {
    
-  const data = await fetchData();
-  const electric = data && data.filter((item)=>item.category === "electric"); 
-  
-  if(!data){
-     return <MiniScroller/>
-  }
-  
-
-
-  return (
-    <div className="cards">
-      {electric.map((item ,i)=> {
-             return ( <Link  key={i} href={`/Components/AllPages/${item._id}`}>
-                <div className={item.availableQty > 0 ? "card" : `qty0`}>
-                <div className="img">
-                  <img
-                    src={item.thumbnail}
-                   alt="Hoodie"
-                 />
-                 <span className='leftQty'>+{item.availableQty} more</span>
-               </div>
-               <p className="title">{item.title}</p>
-               <h3 className="price">
-                 <span>₹</span> {item.price} 
-                   <span className='onwards'>onwards</span>
-               </h3>
-               <p className='delivery'>Free Delivery</p>
-               <div className="rating">
-                 <strong>{item.rating}</strong>
-                 <span className="star">
-                   <CiStar className='star'/>
-                 </span>
-               </div>
-              </div>
-              </Link>  
-      )})}  
-    </div>
-  );
+   
+  return (<>
+           <ElectricItems/>
+    </>  );
 }
 
 export default Electric;

@@ -15,7 +15,8 @@ async function BuyNow() {
 if(!mainItem){
      return <MiniScroller/>  
 }
-  
+
+
 
   return (<>
      {mainItem &&       
@@ -29,3 +30,4 @@ if(!mainItem){
 }
 
 export default BuyNow;
+

@@ -1,8 +1,6 @@
 "use client";
 import React from 'react'
-// import  "./uStyle.css"
 import { ToastContainer, toast } from "react-toastify";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import style from "./profileSetting.module.scss"
 
 

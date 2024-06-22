@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import ProfileSetting from "./profileSetting";
 import OrdersInfo from "./orders";
-import Address from "./address";
+
 import OrdersPage from "../Orders/page";
 import style from "./profileSetting.module.scss";
 import { FaUserAstronaut } from "react-icons/fa";
@@ -260,7 +260,6 @@ export default function Profile() {
                 handleUpdateUser={handleUpdateUser}
               />
             )}
-            {listState === "address" && <Address />}
           </div>
         </div>
       </div>

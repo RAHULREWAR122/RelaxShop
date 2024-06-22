@@ -4,6 +4,7 @@ import Navbar from './Navbar/page'
 import { usePathname } from 'next/navigation'
 import Footer from './Footer/footer';
 
+
 function Layout({children}) {
    const path= usePathname();
    

@@ -45,10 +45,6 @@ function Footer() {
             <li>
               <Link href="/Components/AllPages/Hoodies">Hoodies</Link>
             </li>
-            <li>
-              <Link href="/Components/AllPages/Jewelry">Jewelry</Link>
-            </li>
-              
           </ul>
         </div>
         <div className={style.footerSection}>

@@ -1,48 +1,16 @@
-import { CiStar } from 'react-icons/ci';
-import Link from 'next/link';
-import { fetchData } from '../../fetchData';
+import SariItems from ".";
 
-import MiniScroller from '@/app/Components/miniScroller/page';
 
-async function Sari() {  
+export const metadata = {
+  title: "RelaxShop | Sari",
+  description :"Explore a stunning collection of sarees at RelaxShop. Discover traditional Indian sarees, designer sarees, bridal sarees, silk sarees, and more. Shop now for high-quality sarees with fast shipping and easy returns.",
+  keywords: "RelaxShop ,traditional sarees, designer sarees, bridal sarees, silk sarees, party wear sarees, Indian ethnic sarees, buy sarees online, affordable sarees, discount sarees, latest saree designs, embroidered sarees, georgette sarees, Bollywood sarees, wedding sarees, fashion sarees, RelaxShop sarees.",
+};
 
-  const data = await fetchData();
-  const sari = data && data.filter((item)=>item.category === "sari"); 
-  
-  if(!data){
-    return <MiniScroller/>
-  }
-  
-  
-  return (
-    <div className="cards">
-      {sari.map((item ,i)=> {
-             return ( <Link key={i} href={`/Components/AllPages/${item._id}`}>
-                <div className={item.availableQty > 0 ? "card" : `qty0`}>
-                <div className="img">
-                  <img
-                    src={item.thumbnail}
-                   alt="Hoodie"
-                 />
-                 <span className='leftQty'>+{item.availableQty} more</span>
-               </div>
-               <p className="title">{item.title}</p>
-               <h3 className="price">
-                 <span>₹</span> {item.price} 
-                   <span className='onwards'>onwards</span>
-               </h3>
-               <p className='delivery'>Free Delivery</p>
-               <div className="rating">
-                 <strong>{item.rating}</strong>
-                 <span className="star">
-                   <CiStar className='star'/>
-                 </span>
-               </div>
-              </div>
-              </Link>  
-      )})}  
-    </div>
-  );
+
+
+function Sari() {
+  return <SariItems />;
 }
 
 export default Sari;

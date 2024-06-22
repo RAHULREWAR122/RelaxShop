@@ -20,6 +20,7 @@ import { jwtDecode } from "jwt-decode";
 
 import { HiMiniSpeakerWave } from "react-icons/hi2";
 import { PiSpeakerSimpleSlashFill } from "react-icons/pi";
+import Image from "next/image";
 
 
 function Navbar() {
@@ -161,8 +162,8 @@ function Navbar() {
   return (
     <>
       {pathName === "/Components/forgotPassword" && getToken ? null :
-
         <nav className={style.nav}>
+          
           <LoadingBar
             className={style.progressBar}
             color='#f11946'
@@ -175,7 +176,7 @@ function Navbar() {
 
           <div className={style.topNav}>
             <div className={style.logo}>
-              <h3><Link href="/"> Relax Shop</Link></h3>
+              <h3><Link href="/"> RelaxShop </Link></h3>
             </div>
             <div className={style.men_women}>
               <h4

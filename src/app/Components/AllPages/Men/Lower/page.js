@@ -1,45 +1,18 @@
-import { CiStar } from 'react-icons/ci';
-import Link from 'next/link';
-import { fetchData } from '../../fetchData';
-import MiniScroller from '@/app/Components/miniScroller/page';
+import LowerItems from ".";
 
-async function Lower() {  
-  
-  const data = await fetchData();
-  const lower = data && data.filter((item)=>item.category === "lower"); 
-  
-  if(!data){
-    return <MiniScroller/>
-  }
+export const metadata = {
+  title: "RelaxShop | Lower",
+  description :"Discover a wide range of affordable men's lower at RelaxShop. Explore casual trousers, formal pants, chinos, joggers, and more—all at budget-friendly prices. Shop now for comfortable and stylish men's pants with fast shipping and easy returns.",
+  keywords: "RelaxShop, affordable men's lower, cheap men's trousers, budget-friendly pants, men's casual trousers, men's formal pants, discount men's lower, stylish men's trousers, best men's pants deals, buy men's trousers online, comfortable men's pants, men's chinos, men's joggers, men's cargo pants, branded men's lower, RelaxShop men's lower",
+};
 
+
+function Lower() {  
+  
   return (
-    <div className="cards">
-      {lower.map((item ,i)=> {
-             return ( <Link  key={i}  href={`/Components/AllPages/${item._id}`}>
-                <div className={item.availableQty > 0 ? "card" : `qty0`}>
-                <div className="img">
-                  <img
-                    src={item.thumbnail}
-                   alt="Hoodie"
-                 />
-                 <span className='leftQty'>+{item.availableQty} more</span>
-               </div>
-               <p className="title">{item.title}</p>
-               <h3 className="price">
-                 <span>₹</span> {item.price} 
-                   <span className='onwards'>onwards</span>
-               </h3>
-               <p className='delivery'>Free Delivery</p>
-               <div className="rating">
-                 <strong>{item.rating}</strong>
-                 <span className="star">
-                   <CiStar className='star'/>
-                 </span>
-               </div>
-              </div>
-              </Link>  
-      )})}  
-    </div>
+  <>
+  <LowerItems/>
+  </>
   );
 }
 

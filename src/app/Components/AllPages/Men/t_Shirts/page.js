@@ -1,56 +1,15 @@
-import { CiStar } from 'react-icons/ci';
-import Link from 'next/link';
-import { fetchData } from '../../fetchData';
-import MiniScroller from '@/app/Components/miniScroller/page';
+import TShirtsItems from ".";
 
+export const metadata = {
+  title: "RelaxShop | t-shirts",
+  description :"Discover a wide range of affordable men's t-shirts at RelaxShop. Explore casual t-shirts, graphic tees, plain t-shirts, printed tees, and more—all at budget-friendly prices. Shop now for comfortable and stylish men's tees with fast shipping and easy returns.",
+  keywords: "RelaxShop, affordable men's t-shirts, cheap men's tees, budget-friendly t-shirts, men's casual t-shirts, men's graphic tees, discount men's t-shirts, stylish men's tees, best men's t-shirts deals, buy men's t-shirts online, comfortable men's tees, men's plain t-shirts, men's printed t-shirts, men's v-neck t-shirts, men's crew neck t-shirts, branded men's t-shirts, RelaxShop men's t-shirts.",
+};
 
-async function TShirts() {  
-   
-  let data = await fetchData();
-  
-  let tShirt = data && data.filter((item)=>item.category === "mTshirt");
-  
-
-  if(!data){
-     return <MiniScroller/>
-  }
-  if(tShirt.length === 0){
-     return <h3>item not available now.</h3>
-  }
-
-
+function TShirts() {
   return (
-    <div className="cards">
-      {tShirt && tShirt.map((item ,i)=> {
-             return (<Link key={item._id} href={`/Components/AllPages/${item._id}`}>
-                <div  className={item.availableQty > 0 ? "card" : `qty0`}>
-                <div className="img">
-                  <img
-                    src={item.thumbnail}
-                   alt={item.title}
-                 />
-                 <span className='leftQty'>{item.availableQty > 0 ? " + " + item.availableQty + " more" : "Not Available" }</span>
-               </div>
-               <p className="title">{item.title}</p>
-               <h3 className="price">
-                 <span>₹</span> {item.price} 
-                   <span className='onwards'>onwards</span>
-               </h3>
-               <p className='delivery'>Free Delivery</p>
-               <div className="rating">
-                 <strong>{item.rating}</strong>
-                 <span className="star">
-                   <CiStar className='star'/>
-                 </span>
-               </div>
-              </div>
-              </Link>  
-      )})}  
-    </div>
+   <><TShirtsItems/></>
   );
 }
-
-
-
 
 export default TShirts;

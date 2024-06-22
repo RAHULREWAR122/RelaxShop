@@ -1,45 +1,19 @@
-import { CiStar } from 'react-icons/ci';
-import Link from 'next/link';
-import { fetchData } from '../fetchData';
-import MiniScroller from '../../miniScroller/page';
+
+import FurnitureItems from "./index";
+
+export const metadata = {
+  title: "RelaxShop | Furniture",
+  description :"furniture , chairs",
+  keywords: "RelaxShop ,Cheap chairs online, Affordable home furniture,Budget-friendly home decor,Discounted office chairs",
+};
 
 
-async function Furniture() {
-  const data = await fetchData();
-  const furniture = data && data.filter((item)=>item.category === "furniture"); 
-  
-  if(!data ){
-     return <MiniScroller/>
-  }
+function Furniture() {
 
   return (
-    <div className="cards">
-      {furniture.map((item ,i)=> {
-             return ( <Link  key={i}  href={`/Components/AllPages/${item._id}`}>
-                <div className={item.availableQty > 0 ? "card" : `qty0`}>
-                <div className="img">
-                  <img
-                    src={item.thumbnail}
-                   alt="Hoodie"
-                 />
-                 <span className='leftQty'>+{item.availableQty} more</span>
-               </div>
-               <p className="title">{item.title}</p>
-               <h3 className="price">
-                 <span>₹</span> {item.price} 
-                   <span className='onwards'>onwards</span>
-               </h3>
-               <p className='delivery'>Free Delivery</p>
-               <div className="rating">
-                 <strong>{item.rating}</strong>
-                 <span className="star">
-                   <CiStar className='star'/>
-                 </span>
-               </div>
-              </div>
-              </Link>  
-      )})}  
-    </div>
+    <>
+    <FurnitureItems/>
+    </>
   );
 }
 

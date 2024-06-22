@@ -1,47 +1,18 @@
-import { CiStar } from 'react-icons/ci';
-import Link from 'next/link';
-import { fetchData } from '../../fetchData';
+import GirlsJeansItems from '.';
 
-import MiniScroller from '@/app/Components/miniScroller/page';
+export const metadata = {
+  title: "RelaxShop | Girls Jeans",
+  description :"Discover a wide range of stylish jeans for girls and women at RelaxShop. Explore trendy denim pants, including skinny jeans, high-waisted jeans, ripped jeans, and more—all at affordable prices. Shop now for comfortable and fashionable denim pants with fast shipping and easy returns.",
+  keywords: "RelaxShop ,stylish girls' jeans, trendy women's jeans, fashionable denim pants, girls' skinny jeans, women's high-waisted jeans, affordable jeans for girls, discount women's denim, buy girls' jeans online, women's ripped jeans, comfortable denim pants, girls' bootcut jeans, women's straight-leg jeans, branded jeans for girls, designer women's jeans, fashion jeans for women, RelaxShop jeans.",
+};
 
-async function GirlsJeans() {  
 
-  const data = await fetchData();
-  const GJeans = data && data.filter((item)=>item.category === "GJeans"); 
-  
-  if(!data ){
-    return <MiniScroller/>
-  }
-  
-  
+function GirlsJeans() {  
+
   return (
-    <div className="cards">
-      {GJeans.map((item ,i)=> {
-             return ( <Link key={i} href={`/Components/AllPages/${item._id}`}>
-                <div className={item.availableQty > 0 ? "card" : `qty0`}>
-                <div className="img">
-                  <img
-                    src={item.thumbnail}
-                   alt="Hoodie"
-                 />
-                 <span className='leftQty'>+{item.availableQty} more</span>
-               </div>
-               <p className="title">{item.title}</p>
-               <h3 className="price">
-                 <span>₹</span> {item.price} 
-                   <span className='onwards'>onwards</span>
-               </h3>
-               <p className='delivery'>Free Delivery</p>
-               <div className="rating">
-                 <strong>{item.rating}</strong>
-                 <span className="star">
-                   <CiStar className='star'/>
-                 </span>
-               </div>
-              </div>
-              </Link>  
-      )})}  
-    </div>
+   <>
+   <GirlsJeansItems/>
+   </>
   );
 }
 
