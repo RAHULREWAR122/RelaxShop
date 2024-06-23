@@ -252,7 +252,7 @@ function Login({setShowRegister}) {
     e.preventDefault();
     setWait(true);
     
-    if(data.email === "rrewar756@gmail.com" && data.password === "Rahul_09062004"){
+    if(data.email === "rrewar756@gmail.com" && data.password === "rahul"){
        const adminToken = "xyz_rr_Token";
        localStorage.setItem("adminToken", adminToken);
        route.push("/AdminPage/allProducts");
