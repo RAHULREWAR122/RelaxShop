@@ -1,7 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import style from "./buy.module.scss";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   cartSelector,
@@ -232,7 +233,10 @@ function CheckOut({ mainItem }) {
     e.preventDefault();
   
     if (!token) {
-      alert("Please Login");
+      toast.error(`Please login.`, {
+        position: "top-right",
+        autoClose: 1000,
+      });
       router.push("/Components/Auth/UserAuthentication");
     } else {
       const { email, complectAddress } = addressData;
@@ -262,7 +266,6 @@ function CheckOut({ mainItem }) {
             `${process.env.NEXT_PUBLIC_HOST_NAME}/api/status`,
             payload
           );
-            console.log(response.data)
           if (response.data.success) {
             for (const product of mainItem) {
               const localItem = items.find((item) => item._id === product._id);
@@ -282,23 +285,40 @@ function CheckOut({ mainItem }) {
                     );
                   }
                   localStorage.removeItem("cart");
-                  alert("Yay! Payment Success");
+                  toast.success(`Yeh, Payment Success.`, {
+                    position: "top-right",
+                    autoClose: 1000,
+                  });
                   router.push("/Components/Orders");
                 } else {
-                  alert(
-                    "Sorry! The maximum quantity limit has been exceeded for one or more items."
-                  );
+                  toast.error(`Sorry! The maximum quantity limit has been exceeded for one or more items.`, {
+                    position: "top-right",
+                    autoClose: 1000,
+                  });
                 }
               }
             }
           } else {
-            console.error("Payment failed. Please try again later.");
+            toast.error(`Payment failed. Please try again later.`, {
+              position: "top-right",
+              autoClose: 1000,
+            });
+      
           }
         } else {
-          alert("Payment failed.");
+          toast.error(`Payment failed.`, {
+            position: "top-right",
+            autoClose: 1000,
+          });
+    
         }
       } catch (error) {
-        console.error("Error occurred during payment:", error);
+        toast.error(`Sorry, Please try again later.`, {
+          position: "top-right",
+          autoClose: 1000,
+        });
+  
+       return;
       }
     }
   };

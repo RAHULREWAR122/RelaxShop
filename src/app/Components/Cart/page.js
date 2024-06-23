@@ -62,12 +62,6 @@ function Cart() {
 
     return;
 
-    
-
-    
-
-
-    // router.push(url);
   };
   
 

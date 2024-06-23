@@ -163,13 +163,12 @@ export default function Profile() {
     });
   };
 
- 
-  if(userData.email === ''){
-    return <MiniScroller/>
-  }
+
 
   return (
-    <div>
+    <div className={style.userProfilePage}>
+      {userData.email === "" && <MiniScroller/>}
+
       <ToastContainer position="top-right" autoClose={1000} />
       <div className={style.container}>
         <div className={style.row}>

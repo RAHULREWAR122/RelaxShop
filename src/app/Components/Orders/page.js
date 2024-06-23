@@ -114,7 +114,7 @@ function OrdersPage() {
 
    
   return (
-    <div className={style.MyOrders}>
+    <div className={style.myOrders}>
         <ToastContainer
           position="top-right"
           autoClose={1000}

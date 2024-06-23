@@ -20,7 +20,6 @@ import { jwtDecode } from "jwt-decode";
 
 import { HiMiniSpeakerWave } from "react-icons/hi2";
 import { PiSpeakerSimpleSlashFill } from "react-icons/pi";
-import Image from "next/image";
 
 
 function Navbar() {
