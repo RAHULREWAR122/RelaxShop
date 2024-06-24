@@ -94,7 +94,7 @@ function ProfileSetting({userData , handleChange ,handleUpdatePassword , handleU
             value={userData.password}
             onChange={handleChange}
             type="password"
-            id="account-pass"
+            id="account-pass-pass1"
           />
         </div>
       </div>
@@ -108,7 +108,7 @@ function ProfileSetting({userData , handleChange ,handleUpdatePassword , handleU
             type="password"
             value={userData.nwPassword}
             onChange={handleChange}
-            id="account-confirm-pass"
+            id="account-confirm-nPass"
           />
         </div>
       </div>
@@ -121,7 +121,7 @@ function ProfileSetting({userData , handleChange ,handleUpdatePassword , handleU
             type="password"
             value={userData.cPassword}
             onChange={handleChange}
-            id="account-confirm-pass"
+            id="account-confirm-nPass"
           />
         </div>
       </div>

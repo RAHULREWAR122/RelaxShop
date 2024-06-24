@@ -248,6 +248,7 @@ function ForgotPassword() {
                 name="cPassword"
                 onChange={handleChange}
                 placeholder="conform New Password"
+              
               />
               {passwordData.password !== passwordData.cPassword && (
                 <span className={style.msgErr}>password not matches</span>
