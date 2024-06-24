@@ -28,8 +28,9 @@ function OrdersPage() {
        setTimeout(()=>{
           setLoading(false)
        },5000)    
- }
+  }
   
+
 
   const fetchOrdersData = async () => {
     let getData = await fetchOrdersDataDB();

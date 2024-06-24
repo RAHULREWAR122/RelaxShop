@@ -19,6 +19,18 @@ function OrdersInfo() {
     setOrderData(getData.result);
     return getData;
   };
+ 
+  
+  if(userOrders.length >= 1){
+    setTimeout(()=>{
+      setLoading(false)  
+    },900) 
+ }else if(userOrders.length === 0){
+       setTimeout(()=>{
+          setLoading(false)
+       },5000)    
+ }
+  
 
   useEffect(() => {
     fetchOrdersData();
@@ -54,16 +66,10 @@ function OrdersInfo() {
   if (!userOrders) {
     return <MiniScroller />;
   }
+  
 
-  if (userOrders.length >= 1) {
-    setTimeout(() => {
-      setLoading(false);
-    }, 100);
-  } else if (userOrders.length === 0) {
-    setTimeout(() => {
-      setLoading(false);
-    }, 7000);
-  }
+  
+
 
   return (
     <>
