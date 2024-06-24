@@ -101,10 +101,14 @@ export default function Home() {
     }
   }, [token]);
 
-  console.log(showLoginPrompt)
+  
 
   useEffect(() => {
     topOffersData();
+    setTimeout(()=>{
+      localStorage.removeItem("loginPromptShown");   
+    },100000)
+  
   }, []);
 
   const topOffersData = async () => {
