@@ -1,15 +1,20 @@
+.OrdersDetails{
+  position: relative;
+  min-height: 70vh;
+}
 .back {
+
   color: #9baab2;
   position: absolute;
   cursor: pointer;
-  left: 20px;
-  background: #e7dbdb;
-  border-radius: 50%;
+  left: 0px;
+  top: 0px;
+  padding: 4px 10px;
+  background: #d04646;
   display: flex;
   align-items: center;
   &:hover {
     color: green;
-    font-size: 2.3rem;
     background: #bfd8e9;
   }
 }
@@ -19,7 +24,7 @@
 }
 
 .ordersPage {
-  
+    
   h3 {
     text-align: center;
     border-bottom: 1px solid #cacccd;
@@ -74,9 +79,10 @@
     }
   }
 }
+
 // [OrderPage]
 .OrderPage {
-  min-height: 50vh;
+  min-height: 80vh;
   width: 97%;
   margin: auto;
   display: flex;
@@ -158,4 +164,90 @@
       }
     }
   }
+}
+
+@media screen and (max-width : 800px) {
+   
+  
+.OrderPage {
+  
+  padding: 10px;
+  .singleItem {
+    width: 100%;
+    max-width: 1300px;
+    height: auto;
+    padding: 10px;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    .info {
+      width: 100%;
+
+      h2{
+        font-size: 1rem;
+      }
+
+      .itemsInfo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        table {
+          width: 100%;
+          margin: auto;
+          text-align: center;
+         
+          thead{
+             tr{
+               th{
+                 font-size: .9rem;
+               }
+             }
+          }
+          
+          tbody {
+            tr {
+              margin: 10px;
+              cursor: pointer;
+              font-weight: 300;
+              font-size: .8rem;
+            }
+            .active {
+              background: #bdbd40;
+              overflow: hidden;
+              &:hover {
+                background: #eaea42;
+              }
+            }
+          }
+        }
+      }
+      button {
+        padding: 10px;
+        background: green;
+        color: #fff;
+        font-weight: 600;
+        font-size: 1.2rem;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        &:hover {
+          background: #195a19;
+        }
+      }
+    }
+    .thumbnail {
+      width: 100%;
+      border: 1px solid #e5e9ed;
+      height: 70vh;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit:cover;
+      }
+    }
+  }
+}
+
 }

@@ -31,10 +31,10 @@ function OrdersPage() {
   }
   
 
-
   const fetchOrdersData = async () => {
     let getData = await fetchOrdersDataDB();
     if(getData.result.success){
+      console.log(getData)
       setOrderData(getData.result);
     }
     return;
@@ -70,7 +70,6 @@ function OrdersPage() {
 
   
   const handleUrl = (url)=>{
-    
     setLoading(true)
     if(path === url){
         router.push(path);

@@ -5,14 +5,21 @@ import { fetchOrdersDataDB } from "../orderFetchFunction";
 import { IoMdArrowBack } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import MiniScroller from "../../miniScroller/page";
+import OrderDetailsScroller from "../scroller";
    
 
 
 function OrderTrack({ params }) {
   const [orderData, setOrderData] = useState([]);
   const [selectItem , setSelectItem] = useState(0);
+  const [loading , setLoading] = useState(true);
 
   const router = useRouter();
+  useEffect(()=>{
+     setTimeout(()=>{
+        setLoading(false);
+     },1000)
+  },[])
 
   useEffect(() => {
     fetchOrdersData();
@@ -32,8 +39,9 @@ function OrderTrack({ params }) {
     orderData.find((item) => item._id === String(params.orderTrack));
 
   if (!item) {
-    return <MiniScroller/>;
+    return <OrderDetailsScroller/>;
   }
+  
 
   const handleSelectItem = (i)=>{
      setSelectItem(i);
@@ -45,7 +53,7 @@ function OrderTrack({ params }) {
   
   const { email, orderId, amount, paymentInfo, address, products , dis } = item;
 
-  return (<>
+  return (<div className={style.OrdersDetails}>
      <h1 onClick={()=>handleUrl("/Components/Orders")} className={style.back}><IoMdArrowBack/></h1>
      <div className={style.OrderPage}>
       <section className={style.singleItem}>
@@ -79,7 +87,7 @@ function OrderTrack({ params }) {
               </tbody>
             </table>
           </div>
-          <h4>Discount {dis}</h4>
+          <h4>Discount ₹{dis.toFixed(0)}</h4>
           <h3>Total Amount :₹ {amount}</h3>
         </div>
         <div className={style.thumbnail}>
@@ -90,7 +98,7 @@ function OrderTrack({ params }) {
         </div>
       </section>
     </div>
-    </>  );
+    </div>  );
 }
 
 export default OrderTrack;

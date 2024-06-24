@@ -38,10 +38,13 @@ export async function POST(req, res) {
 
     if (payload.email === result.email && payload.password === decPassword) {
       let myUser = { email: result.email, name: result.name };
+      const maxExpirationTime = 7 * 24 * 60 * 60;
+      const expirationTime = maxExpirationTime;
+      
       let token = jwt.sign(
         { email: result.email, name: result.name },
         process.env.JWT_SECRET,
-        { expiresIn: "1d"}
+        { expiresIn: expirationTime }
       );
       return NextResponse.json({ success: true, token, myUser });
     }
