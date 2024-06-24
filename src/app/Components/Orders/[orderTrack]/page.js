@@ -81,7 +81,6 @@ function OrderTrack({ params }) {
           </div>
           <h4>Discount {dis}</h4>
           <h3>Total Amount :₹ {amount}</h3>
-          <button>Track Order</button>
         </div>
         <div className={style.thumbnail}>
         {selectItem !== null && (
