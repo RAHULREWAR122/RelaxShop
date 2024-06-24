@@ -34,27 +34,24 @@ function generateToken(email) {
 export async function PUT(req, content) {
   try {
     const payload = await req.json();
-    const { getToken , password, cPassword , validToken} = payload.data;
-    
-    const { searchParams } = new URL(request.url);
-
-    const token = searchParams.get('token');
-      
+    const { getToken , password, cPassword } = payload.data;
+        
     let user = jwt.verify(getToken, process.env.JWT_SECRET);
   
     let filter = await User.findOne({ email: user.email });
-      
+    
     const bytes = CryptoJS.AES.decrypt(
       filter.password,
       process.env.ENCRYPTION_KEY
     );
     
+    
     let incPass = CryptoJS.AES.encrypt(
       password,
       process.env.ENCRYPTION_KEY
     ).toString();
-    
-    if(validToken !== getToken){
+  
+    if(!getToken){
       return NextResponse.json({
         result: "Something went wrong",
         success: false,
@@ -78,12 +75,9 @@ export async function PUT(req, content) {
     }
   } catch (error) {
     return NextResponse.json({
-      result: "Something went wrong",
+      result: "Something went wrong222",
       success: false,
       statue: 500,
     });
   }
 }
-// 
-// 
-// 

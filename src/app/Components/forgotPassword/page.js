@@ -24,7 +24,6 @@ function ForgotPassword() {
   const [showResetPage , setShowResetPage] = useState(false);
   const [reqResetPassUser , setReqResetPassUser] = useState("")
   
-
   let token = localStorage.getItem("token");
   useEffect(()=>{
         if(token){
@@ -70,8 +69,6 @@ function ForgotPassword() {
       );
       if (req.data.success) {
         setGetToken(req.data.result.token)  
-        let validToken = req.data.result.token;
-        localStorage.setItem("validToken",validToken)
         
         setReqResetPassUser(req.data.result.existUserName)
          toast.success('Request Send Successfully', {
@@ -109,24 +106,19 @@ function ForgotPassword() {
   
   const handleReset = async () => {
     let { password, cPassword } = passwordData;
-    let validToken = localStorage.getItem("validToken"); 
-
+     
     if (password === cPassword && password.length >= 1) {
-       
       let data = {
         password: password,
         cPassword: cPassword,
-        sendMail: false,
         getToken: checkToken,
-        validToken
       };
-
       toast.success('Wait...', {
         position: "top-right",
         autoClose: 1000,
         theme: "light",
       }); 
-    
+     
       try {
         let req = await axios.put(
           `${process.env.NEXT_PUBLIC_HOST_NAME}/api/forgotPassword`,
