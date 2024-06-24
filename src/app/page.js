@@ -91,9 +91,7 @@ export default function Home() {
 
   useEffect(() => {
     const hasPromptBeenShown = localStorage.getItem("loginPromptShown");
-    console.log(hasPromptBeenShown)
-     
-
+   
     if (hasPromptBeenShown === "true" && !token) {
       const timer = setTimeout(() => {
         setShowLoginPrompt(true);
