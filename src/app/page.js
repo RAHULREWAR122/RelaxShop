@@ -107,7 +107,7 @@ export default function Home() {
     topOffersData();
     setTimeout(()=>{
       localStorage.removeItem("loginPromptShown");   
-    },100000)
+    },1500000)
   
   }, []);
 
