@@ -86,20 +86,24 @@ export default function Home() {
   const [data, setData] = useState([]);
   const [progress , setProgress] = useState(0)
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
- 
-  let token = localStorage.getItem("token")
+
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     const hasPromptBeenShown = localStorage.getItem("loginPromptShown");
+    console.log(hasPromptBeenShown)
+     
 
-    if (!hasPromptBeenShown && !token) {
+    if (hasPromptBeenShown === "true" && !token) {
       const timer = setTimeout(() => {
         setShowLoginPrompt(true);
-        localStorage.setItem("loginPromptShown", "true");
-      }, 14000);
-
+        localStorage.setItem("loginPromptShown", "false");
+      }, 9000);
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [token]);
+
+  console.log(showLoginPrompt)
 
   useEffect(() => {
     topOffersData();

@@ -1,5 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
 
+.profit{
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   padding: 20px;
+   h5{
+     color: cadetblue;
+     font-size: 1rem;
+
+     strong{
+       color: #0895ff;
+     }
+   }
+}
+
+
 .allProductsTable {
   display: flex;
   align-self: center;

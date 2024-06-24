@@ -10,8 +10,9 @@ function AllOrdersShowPage() {
   const [showFullAddress, setShowFullAddress] = useState(null);
   const [selectedOrderInfo, setSelectedOrderInfo] = useState(null);
   const [prods, setProds] = useState([]);
+  const [totalOrders , setTotalOrders] = useState(0);
+  const [earn , setEarn] = useState(0);
   
-
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -20,7 +21,10 @@ function AllOrdersShowPage() {
     try {
       const { data } = await axios.get(`${process.env.NEXT_PUBLIC_HOST_NAME}/api/Orders`);
       if (data.success) {
+        setTotalOrders(data.result.length)
         setItems(data.result);
+        const money = data.result && data.result.reduce((a,b)=> a + b.amount ,0);
+        setEarn(money)
       }
     } catch (error) {
       console.log("Error in fetching data:", error);
@@ -42,7 +46,10 @@ function AllOrdersShowPage() {
 
   return (
       <>
-    
+      <div className={style.profit}>
+         <h5>Total Earn <strong> ₹{earn}</strong> </h5>
+         <h5>Total Orders <strong> {totalOrders}</strong></h5>
+        </div>     
       <div className={style.allProductsTable}>
         <table className={style.table}>
           <thead>
@@ -126,8 +133,9 @@ function AllOrdersShowPage() {
               Prev
             </button>
             <ul>
+              
               {[...Array(Math.ceil(items.length / 8))].map((_, i) => (
-                <li
+                 <li
                   className={
                     page === i + 1 ? style.active : style.selected_pagination
                   }
