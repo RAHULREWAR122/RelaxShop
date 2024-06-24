@@ -121,7 +121,7 @@ function ProfileSetting({userData , handleChange ,handleUpdatePassword , handleU
             type="password"
             value={userData.cPassword}
             onChange={handleChange}
-            id="account-confirm-nPass"
+            id="account-confirm-nPass2"
           />
         </div>
       </div>
