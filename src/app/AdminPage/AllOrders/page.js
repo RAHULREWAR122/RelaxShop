@@ -1,3 +1,6 @@
+
+
+
 "use client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -12,7 +15,7 @@ function AllOrdersShowPage() {
   const [prods, setProds] = useState([]);
   const [totalOrders , setTotalOrders] = useState(0);
   const [earn , setEarn] = useState(0);
-  
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -21,10 +24,10 @@ function AllOrdersShowPage() {
     try {
       const { data } = await axios.get(`${process.env.NEXT_PUBLIC_HOST_NAME}/api/Orders`);
       if (data.success) {
-        setTotalOrders(data.result.length)
+        setTotalOrders(data.result.length);
         setItems(data.result);
-        const money = data.result && data.result.reduce((a,b)=> a + b.amount ,0);
-        setEarn(money)
+        const money = data.result.reduce((a, b) => a + b.amount, 0);
+        setEarn(money);
       }
     } catch (error) {
       console.log("Error in fetching data:", error);
@@ -45,11 +48,11 @@ function AllOrdersShowPage() {
   }
 
   return (
-      <>
+    <>
       <div className={style.profit}>
-         <h5>Total Earn <strong> ₹{earn}</strong> </h5>
-         <h5>Total Orders <strong> {totalOrders}</strong></h5>
-        </div>     
+        <h5>Total Earn <strong> ₹{earn}</strong> </h5>
+        <h5>Total Orders <strong> {totalOrders}</strong></h5>
+      </div>     
       <div className={style.allProductsTable}>
         <table className={style.table}>
           <thead>
@@ -90,29 +93,27 @@ function AllOrdersShowPage() {
                     )}
                   </td>
                   <td>
-                    <button onClick={() => handleCheckClick(index)}>Check</button>
+                    <button onClick={() => handleCheckClick((page - 1) * 8 + index)}>Check</button>
                   </td>
                 </tr> 
-                {selectedOrderInfo === index && (
+                {selectedOrderInfo === (page - 1) * 8 + index && (
                   <tr>
                     <td colSpan={7} className={style.aboutOrder}>
                       <div className={style.orderInfo}>
-                      <h4 onClick={() => setSelectedOrderInfo(null)}>X</h4>
+                        <h4 onClick={() => setSelectedOrderInfo(null)}>X</h4>
                         <div className={style.showOrderDet}> 
-                        {prods.map((orderInfo, i) => (
-                          <div key={i} className={style.itemShowInfo}>
-                            <div className={style.imgs}>
-                                   <img src={orderInfo.img} alt={orderInfo.title} />
+                          {prods.map((orderInfo, i) => (
+                            <div key={i} className={style.itemShowInfo}>
+                              <div className={style.imgs}>
+                                <img src={orderInfo.img} alt={orderInfo.title} />
+                              </div>
+                              <div className={style.infos}>
+                                <h3>{orderInfo.title.slice(0,14) + "..."}</h3> 
+                                <h5>Rs. {orderInfo.price * orderInfo.qty}</h5> 
+                                <h3>Qty. {orderInfo.qty}</h3> 
+                              </div>
                             </div>
-                            <div className={style.infos}>
-                               <h3>{orderInfo.title.slice(0,14)+"..."}</h3> 
-                               <h5>Rs. {orderInfo.price * orderInfo.qty}</h5> 
-                               <hp>Qty. {orderInfo.qty}</hp> 
- 
-                            </div>
-
-                          </div>
-                        ))}
+                          ))}
                         </div>
                       </div>
                     </td>
@@ -133,9 +134,8 @@ function AllOrdersShowPage() {
               Prev
             </button>
             <ul>
-              
               {[...Array(Math.ceil(items.length / 8))].map((_, i) => (
-                 <li
+                <li
                   className={
                     page === i + 1 ? style.active : style.selected_pagination
                   }

@@ -27,11 +27,12 @@ import { useRouter } from 'next/navigation';
   
   const electric = data && data.filter((item)=>item.category === "electric"); 
   
-  if(!data){
+  if(!data ){
      return <MiniScroller/>
       
   }
-   const handleUrl = (url)=>{
+
+  const handleUrl = (url)=>{
         router.push(url)
    }
    
