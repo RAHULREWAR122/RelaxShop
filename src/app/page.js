@@ -12,8 +12,6 @@ import { fetchData } from "./Components/AllPages/fetchData";
 import LoadingBar from 'react-top-loading-bar'
 import Footer from "./Components/Footer/footer";
 import LoginShow from "./loginShow";
-// import OpenAiAsk from "./Components/AskSomething/page";
-// import CustomerSupport from "./Components/AskSomething/page";
 
 const fadeImages = [
   {
