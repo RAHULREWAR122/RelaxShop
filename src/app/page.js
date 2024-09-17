@@ -15,7 +15,6 @@ import LoginShow from "./loginShow";
 // import OpenAiAsk from "./Components/AskSomething/page";
 // import CustomerSupport from "./Components/AskSomething/page";
 
-
 const fadeImages = [
   {
     url: "/shopHeroImgs/1.jpg",
@@ -87,6 +86,8 @@ export default function Home() {
   const [data, setData] = useState([]);
   const [progress , setProgress] = useState(0)
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+ 
+  
 
   const token = localStorage.getItem("token");
 

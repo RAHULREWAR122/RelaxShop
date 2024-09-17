@@ -3,11 +3,12 @@ import { NextResponse } from "next/server";
 import { User } from "@/app/MongoDb/User";
 import CryptoJS from "crypto-js";
 import jwt from "jsonwebtoken";
-
 const { db } = require("@/app/MongoDb/mongoose");
 const {mongoose } = require("mongoose");
 
 export  async function GET(req ,content){     
+
+
     await mongoose.connect(db);
     let data = await User.find();
  
