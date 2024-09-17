@@ -1,8 +1,6 @@
 import ElectricItems from ".";
 
 
-
-
 export const metadata = {
   title: "RelaxShop | Electronic",
   description :"Electric items",

@@ -12,7 +12,8 @@ import { fetchData } from "./Components/AllPages/fetchData";
 import LoadingBar from 'react-top-loading-bar'
 import Footer from "./Components/Footer/footer";
 import LoginShow from "./loginShow";
-
+// import OpenAiAsk from "./Components/AskSomething/page";
+// import CustomerSupport from "./Components/AskSomething/page";
 
 
 const fadeImages = [
@@ -147,7 +148,7 @@ export default function Home() {
         {fadeImages.map((fadeImage, index) => (
           <div className={style.mainDiv} key={index}>
             <img  className={style.fadeImgs} src={fadeImage.url} />
-            {index === currentIndex && (
+               {index === currentIndex && (
                     <div className={style.texts}>
                         <div className={style.box}>
                              <h1>{fadeImage.h1text}</h1>
@@ -175,7 +176,8 @@ export default function Home() {
 
         <section className={style.summerSeason}></section>
       </div>
-
+      {/* <OpenAiAsk/>  */}
+      {/* <CustomerSupport/> */}
       <Footer/>
     </>
   );
