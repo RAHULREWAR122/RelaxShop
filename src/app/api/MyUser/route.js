@@ -1,62 +1,38 @@
-import jwt from "jsonwebtoken";
-import { NextResponse } from "next/server";
-import mongoose from "mongoose";
-import { db } from "@/app/MongoDb/mongoose";
-import CryptoJS from "crypto-js";
-import { User } from "@/app/MongoDb/User";
+import { connectDB } from "@/lib/server/db";
+import { ok, fail, handle, readJson } from "@/lib/server/respond";
+import { requireUser } from "@/lib/server/auth";
+import { findUserByEmail, publicUser } from "@/lib/server/users";
 
-export async function GET(req,content){
-    await mongoose.connect(db);
-    let data = await User.find();
-
-    if(data){
-         return NextResponse.json({result : data , status: 200, success : true});
-    }else{
-        return NextResponse.json({result : "Data not found" , status: 404, success : false});
-    } 
+async function currentProfile(auth) {
+  await connectDB();
+  const user = await findUserByEmail(auth.email);
+  return user ? ok(publicUser(user)) : fail("Account not found", 404);
 }
 
-export async function POST(req,content){
-       
-    const payload = await req.json();
-     
-    const {userData , token} = payload;
-    let user = jwt.verify(token , process.env.JWT_SECRET);
-    
-   
-    let dbUser = await User.findOne({email : user.email})
-    const { email ,pinCode , phone , name } = dbUser;
-    
+export const GET = handle(async (req) => currentProfile(requireUser(req)));
 
-    if(!dbUser){
-        return NextResponse.json({result : "Error User Not found" , success : false , statue : 404})
-    }
+// Kept for clients that send the token in the body.
+export const POST = handle(async (req) => {
+  const body = await readJson(req);
+  return currentProfile(requireUser(req, body));
+});
 
-    if(user && dbUser){
-         return NextResponse.json({result :{name , email , phone, pinCode } , success : true , statue : 200})
-    }else{
-        
-        return NextResponse.json({result : "Error in Update User" , success : false , statue : 404})
-    }
+export const PUT = handle(async (req) => {
+  const body = await readJson(req);
+  const auth = requireUser(req, body);
 
-}
+  const name = String(body.name ?? "").trim();
+  const phone = String(body.phone ?? "").trim();
+  const pinCode = String(body.pinCode ?? "").trim();
+  if (name.length < 2) return fail("Please enter your name.", 400);
+  if (phone && !/^\d{10}$/.test(phone)) return fail("Phone number should be 10 digits.", 400);
+  if (pinCode && !/^\d{6}$/.test(pinCode)) return fail("PIN code should be 6 digits.", 400);
 
-export async function PUT(req, content){
-    const payload = await req.json();
-    const {pinCode, email , phone , name , token} = payload;
-    let user = jwt.verify(token , process.env.JWT_SECRET);
-    
-    let filter = await User.findOne({email : email});
-    let userId = filter._id;
-    
-    const dbUser = await User.findByIdAndUpdate(filter._id , {name : name , pinCode  , phone })
-    
-   if(!token){
-        return NextResponse.json({result : "Can't Update You!" , success : false , statue : 404})
-    }
-    if(dbUser){
-         return NextResponse.json({result : {name , email , phone, pinCode }, success : true , statue : 200})
-    }else{
-        return NextResponse.json({result : "Error in Update User" , success : false , statue : 404})
-    }
-}
+  await connectDB();
+  // The email always comes from the verified token, never from the request body.
+  const user = await findUserByEmail(auth.email);
+  if (!user) return fail("Account not found", 404);
+  Object.assign(user, { name, phone, pinCode });
+  await user.save();
+  return ok(publicUser(user));
+});

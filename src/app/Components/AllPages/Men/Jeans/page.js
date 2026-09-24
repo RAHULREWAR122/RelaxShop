@@ -1,19 +1,11 @@
-import MJeansItems from ".";
-
+import CategoryView from "@/components/CategoryView/CategoryView";
 
 export const metadata = {
-  title: "RelaxShop | Mens Jeans",
-  description :"Discover a wide range of affordable men's jeans at RelaxShop. Explore classic blue jeans, trendy ripped jeans, and stylish skinny jeans—all at budget-friendly prices. Shop now for high-quality denim with fast shipping and easy returns.",
-  keywords: "RelaxShop , affordable men's jeans, cheap men's jeans, budget-friendly denim, men's blue jeans, men's ripped jeans, men's skinny jeans, discount men's jeans, stylish men's denim, best men's jeans deals, RelaxShop men's jeans",
+  title: "Men's Jeans",
+  description: "Shop men's jeans at RelaxShop: slim, straight and relaxed fits in every wash, at low prices.",
+  alternates: { canonical: "/Components/AllPages/Men/Jeans" },
 };
 
-
-function MJeans() {
-  return (
-   <>
-   <MJeansItems/>
-   </>
-  );
+export default function Page() {
+  return <CategoryView categoryKey="mJeans" />;
 }
-
-export default MJeans;

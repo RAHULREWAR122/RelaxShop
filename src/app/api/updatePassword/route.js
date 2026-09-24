@@ -1,36 +1,25 @@
-import jwt from "jsonwebtoken";
-import { NextResponse } from "next/server";
-import mongoose from "mongoose";
-import { db } from "@/app/MongoDb/mongoose";
-// import CryptoJS from "crypto-js";
-import { User } from "@/app/MongoDb/User";
+import { connectDB } from "@/lib/server/db";
+import { ok, fail, handle, readJson } from "@/lib/server/respond";
+import { requireUser } from "@/lib/server/auth";
+import { hashPassword, verifyPassword } from "@/lib/server/password";
+import { findUserByEmail } from "@/lib/server/users";
 
+export const PUT = handle(async (req) => {
+  const body = await readJson(req);
+  const auth = requireUser(req, body);
+  const { password, nwPassword, cPassword } = body;
 
-import CryptoJS from "crypto-js";
+  if (typeof nwPassword !== "string" || nwPassword.length < 6) {
+    return fail("New password must be at least 6 characters.", 400);
+  }
+  if (nwPassword !== cPassword) return fail("New passwords do not match.", 400);
 
-export async function PUT(req, content) {
-    try {
-        const payload = await req.json();
-        const { email, password, cPassword, nwPassword, token } = payload;
-         
-        let user = jwt.verify(token, process.env.JWT_SECRET);
-       
-        let filter = await User.findOne({ email: user.email });
-        
-        const bytes = CryptoJS.AES.decrypt(filter.password, process.env.ENCRYPTION_KEY);
-        const decPassword = bytes.toString(CryptoJS.enc.Utf8);
+  await connectDB();
+  const user = await findUserByEmail(auth.email, true);
+  if (!user) return fail("Account not found", 404);
+  if (!verifyPassword(user.password, password).ok) return fail("Your current password is incorrect.", 400);
 
-       
-        let incPass = CryptoJS.AES.encrypt(nwPassword, process.env.ENCRYPTION_KEY).toString();
-
-      
-        if (decPassword === password && nwPassword === cPassword) {
-            let dbUser = await User.findByIdAndUpdate(filter._id, { password: incPass });
-            return NextResponse.json({ result: dbUser, success: true, statue: 200 });
-        } else {
-            return NextResponse.json({ result: "Passwords do not match", success: false, statue: 400 });
-        }
-    } catch (error) {
-        return NextResponse.json({ result: "Something went wrong", success: false, statue: 500 });
-    }
-}
+  user.password = hashPassword(nwPassword);
+  await user.save();
+  return ok("Password updated");
+});

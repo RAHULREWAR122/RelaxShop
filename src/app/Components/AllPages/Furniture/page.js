@@ -1,20 +1,11 @@
-
-import FurnitureItems from "./index";
+import CategoryView from "@/components/CategoryView/CategoryView";
 
 export const metadata = {
-  title: "RelaxShop | Furniture",
-  description :"furniture , chairs",
-  keywords: "RelaxShop ,Cheap chairs online, Affordable home furniture,Budget-friendly home decor,Discounted office chairs",
+  title: "Furniture",
+  description: "Inexpensive furniture for homes and small apartments at RelaxShop.",
+  alternates: { canonical: "/Components/AllPages/Furniture" },
 };
 
-
-function Furniture() {
-
-  return (
-    <>
-    <FurnitureItems/>
-    </>
-  );
+export default function Page() {
+  return <CategoryView categoryKey="furniture" />;
 }
-
-export default Furniture;

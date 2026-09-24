@@ -1,32 +1,35 @@
-import { NextResponse } from "next/server";
+import { connectDB } from "@/lib/server/db";
+import { ok, fail, handle, readJson } from "@/lib/server/respond";
+import { getAuth, requireAdmin } from "@/lib/server/auth";
+import { cleanProduct } from "@/lib/server/products";
 import { Product } from "@/app/MongoDb/Products";
+import { getStoreProducts, productsChanged } from "@/lib/server/storeProducts";
 
+// Public: in-stock products, optionally ?category=shirts.
+// Admins can pass ?all=1 to include sold-out items.
+export const GET = handle(async (req) => {
+  const params = req.nextUrl.searchParams;
+  const all = params.get("all") && getAuth(req)?.role === "admin";
+  // The plain storefront list is served from the shared cache.
+  if (!all && !params.get("category")) return ok(await getStoreProducts());
 
-const { db } = require("@/app/MongoDb/mongoose");
-const {mongoose } = require("mongoose");
+  const filter = {};
+  if (!all) filter.availableQty = { $gt: 0 };
+  if (params.get("category")) filter.category = params.get("category");
 
-export  async function GET(req ,content){     
-    await mongoose.connect(db);
-    let data = await Product.find({ availableQty: { $gt: 0 } });
-   
-    if(data && data.length > 0){
-         return NextResponse.json({result : data , status: 200, success : true});
-    }else{
-        return NextResponse.json({result : "Data not found" , status: 404, success : false});
-    }
-}
+  await connectDB();
+  const products = await Product.find(filter).lean();
+  return ok(products);
+});
 
-export async function POST(req ,content){     
-    const payload = await req.json();
-    await mongoose.connect(db);
-    let products = new Product(payload.formData);
-    let result  = await products.save();
-    const {title , price , imgs , desc , thumbnail , category , rating , availableQty  } = payload.formData
+export const POST = handle(async (req) => {
+  requireAdmin(req);
+  const body = await readJson(req);
+  const { data, error } = cleanProduct(body.formData ?? body, { partial: false });
+  if (error) return fail(error, 400);
 
-    if(title != "" || price != "" || imgs != "" || desc != "" || thumbnail !== ""  || rating !== "" || availableQty !== "" || category !== ""  && result ){
-        return NextResponse.json({result : result , status : 200 ,success : true })  
-    }else{
-        return NextResponse.json({result :"Something went wrong" , status : 404 ,success : false })
-  }
-}
-
+  await connectDB();
+  const product = await Product.create(data);
+  productsChanged();
+  return ok(product, 201);
+});

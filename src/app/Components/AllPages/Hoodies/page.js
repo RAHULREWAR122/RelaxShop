@@ -1,17 +1,11 @@
-import HoodiesItems from ".";
+import CategoryView from "@/components/CategoryView/CategoryView";
+
 export const metadata = {
-  title: "RelaxShop | Hoodies",
-  description :"Hoodies",
-  keywords: "RelaxShop , Hoodies , hoodies , white hoodies , black hoodies , blue hoodies, yellow hoodies",
+  title: "Hoodies",
+  description: "Cosy, affordable hoodies and sweatshirts at RelaxShop.",
+  alternates: { canonical: "/Components/AllPages/Hoodies" },
 };
 
-
- function Hoodies() {  
-  
-  return (
-  <>
-  <HoodiesItems/>
-  </> );
+export default function Page() {
+  return <CategoryView categoryKey="hoodies" />;
 }
-
-export default Hoodies;

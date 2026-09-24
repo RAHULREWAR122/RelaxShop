@@ -1,0 +1,63 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: rgba(31, 27, 22, 0.5);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  animation: fade 0.2s ease;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.modal {
+  position: relative;
+  width: min(420px, 100%);
+  background: var(--paper);
+  border-radius: var(--r-xl);
+  padding: 40px 32px 28px;
+  text-align: center;
+  box-shadow: var(--shadow-2);
+  animation: up 0.35s var(--ease);
+
+  h2 {
+    font-size: 34px;
+  }
+
+  p {
+    margin-top: 10px;
+    color: var(--muted);
+  }
+}
+
+@keyframes up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+
+.arch {
+  width: 64px;
+  height: 78px;
+  margin: 0 auto 20px;
+  border-radius: var(--arch);
+  background: linear-gradient(180deg, var(--clay) 0 55%, var(--moss) 55% 100%);
+}
+
+.actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 24px;
+}

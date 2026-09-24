@@ -1,16 +1,11 @@
-import SariItems from ".";
-
+import CategoryView from "@/components/CategoryView/CategoryView";
 
 export const metadata = {
-  title: "RelaxShop | Sari",
-  description :"Explore a stunning collection of sarees at RelaxShop. Discover traditional Indian sarees, designer sarees, bridal sarees, silk sarees, and more. Shop now for high-quality sarees with fast shipping and easy returns.",
-  keywords: "RelaxShop ,traditional sarees, designer sarees, bridal sarees, silk sarees, party wear sarees, Indian ethnic sarees, buy sarees online, affordable sarees, discount sarees, latest saree designs, embroidered sarees, georgette sarees, Bollywood sarees, wedding sarees, fashion sarees, RelaxShop sarees.",
+  title: "Saris",
+  description: "Shop beautiful, affordable saris at RelaxShop for festivals, weddings and every day.",
+  alternates: { canonical: "/Components/AllPages/Women/Sari" },
 };
 
-
-
-function Sari() {
-  return <SariItems />;
+export default function Page() {
+  return <CategoryView categoryKey="sari" />;
 }
-
-export default Sari;

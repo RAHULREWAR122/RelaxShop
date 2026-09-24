@@ -1,1 +1,1 @@
-export const db = process.env.MONGO_URL;
+export { connectDB } from "@/lib/server/db";

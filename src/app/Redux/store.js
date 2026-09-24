@@ -1,10 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
-import cartReducer from "@/app/Redux/cartSlice";
+import cartReducer, { cartKey } from "@/app/Redux/cartSlice";
 
-const store = configureStore({
-  reducer: {
-    cart: cartReducer,
-  },
-});
+export function makeStore() {
+  const store = configureStore({ reducer: { cart: cartReducer } });
 
-export default store;
+  // Persist the bag, under its owner's key, once it has been loaded from storage.
+  let last;
+  store.subscribe(() => {
+    const { items, owner, hydrated } = store.getState().cart;
+    if (!hydrated || items === last) return;
+    last = items;
+    try {
+      localStorage.setItem(cartKey(owner), JSON.stringify(items));
+    } catch {}
+  });
+
+  return store;
+}

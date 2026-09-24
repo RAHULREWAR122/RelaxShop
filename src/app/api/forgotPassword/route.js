@@ -1,83 +1,53 @@
-import { NextResponse } from "next/server";
-import CryptoJS from "crypto-js";
-import jwt from "jsonwebtoken";
-import { User } from "@/app/MongoDb/User";
+import crypto from "crypto";
+import { connectDB } from "@/lib/server/db";
+import { ok, fail, handle, readJson } from "@/lib/server/respond";
+import { hashPassword } from "@/lib/server/password";
+import { findUserByEmail } from "@/lib/server/users";
+import { ResetPassword } from "@/app/MongoDb/resetPassword";
 
-export async function POST(req) {
-  let data = await req.json();
-  const { email, sendMail } = data.data;
-  const existUser = await User.findOne({ email: data.data.email});
-  
-  if(existUser && sendMail) {
-    const existUserName = existUser.name;
-    const token = generateToken(email);
-    return NextResponse.json({ result: {token , existUserName }, success: true, status: 200 });
-  
-  }else{
+const TTL_MINUTES = 15;
+const sha256 = (value) => crypto.createHash("sha256").update(value).digest("hex");
 
-    return NextResponse.json({
-      result: "User not exits",
-      success: false,
-      status: 404,
-    });
+// Step 1: look up the account by email and hand back a short-lived, one-time
+// reset token, which the page uses to open the "new password" step directly.
+// No email is sent, so anyone who knows an address can reset it.
+export const POST = handle(async (req) => {
+  const { email } = await readJson(req);
+  if (!email) return fail("Please enter your email.", 400);
+
+  await connectDB();
+  const user = await findUserByEmail(email);
+  if (!user) return fail("We couldn't find an account with that email.", 404);
+
+  const token = crypto.randomBytes(32).toString("hex");
+  await ResetPassword.findOneAndUpdate(
+    { email: user.email },
+    { email: user.email, tokenHash: sha256(token), expiresAt: new Date(Date.now() + TTL_MINUTES * 60_000) },
+    { upsert: true }
+  );
+
+  return ok({ token, name: user.name });
+});
+
+// Step 2: set the new password with that token. Each token works once.
+export const PUT = handle(async (req) => {
+  const { token, password, cPassword } = await readJson(req);
+  if (typeof password !== "string" || password.length < 6) {
+    return fail("Password must be at least 6 characters.", 400);
   }
-}
+  if (password !== cPassword) return fail("Passwords do not match.", 400);
+  if (!token) return fail("This reset link is invalid.", 400);
 
-function generateToken(email) {
-  const payload = {
-    email: email,
-    exp: Math.floor(Date.now() / 1000) + 60 * 60,
-  };
-  return jwt.sign(payload, process.env.JWT_SECRET);
-}
-
-export async function PUT(req, content) {
-  try {
-    const payload = await req.json();
-    const { getToken , password, cPassword } = payload.data;
-        
-    let user = jwt.verify(getToken, process.env.JWT_SECRET);
-  
-    let filter = await User.findOne({ email: user.email });
-    
-    const bytes = CryptoJS.AES.decrypt(
-      filter.password,
-      process.env.ENCRYPTION_KEY
-    );
-    
-    
-    let incPass = CryptoJS.AES.encrypt(
-      password,
-      process.env.ENCRYPTION_KEY
-    ).toString();
-  
-    if(!getToken){
-      return NextResponse.json({
-        result: "Something went wrong",
-        success: false,
-        statue: 500,
-      });   
-    }
-
-    if (password === cPassword) {
-      await User.findByIdAndUpdate(filter._id, { password: incPass });
-      return NextResponse.json({
-        result: "Success",
-        success: true,
-        statue: 200,
-     });
-    }else{
-      return NextResponse.json({
-        result: "Passwords do not match",
-        success: false,
-        statue: 400,
-      });
-    }
-  } catch (error) {
-    return NextResponse.json({
-      result: "Something went wrong222",
-      success: false,
-      statue: 500,
-    });
+  await connectDB();
+  const record = await ResetPassword.findOne({ tokenHash: sha256(String(token)) });
+  if (!record || record.expiresAt < new Date()) {
+    return fail("This reset link has expired. Please start again.", 400);
   }
-}
+
+  const user = await findUserByEmail(record.email, true);
+  if (!user) return fail("Account not found", 404);
+  user.password = hashPassword(password);
+  await user.save();
+  await ResetPassword.deleteOne({ _id: record._id });
+  return ok("Password reset");
+});

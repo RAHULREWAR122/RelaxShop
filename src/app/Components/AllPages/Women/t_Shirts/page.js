@@ -1,20 +1,11 @@
-import GirlsTShirtItems from ".";
+import CategoryView from "@/components/CategoryView/CategoryView";
 
 export const metadata = {
-  title: "RelaxShop | Girls t-shirts",
-  description :"Explore a wide selection of trendy t-shirts for girls at RelaxShop. Discover fashionable kids' tops, graphic tees, printed shirts, and more. Shop now for affordable and stylish girls' t-shirts with fast shipping and easy returns.",
-  keywords: "RelaxShop ,trendy girls' t-shirts, fashionable kids' tops, girls' graphic tees, cute girls' t-shirts, girls' printed tops, affordable girls' shirts, discount girls' clothing, buy girls' t-shirts online, girls' casual tops, stylish girls' tees, girls' summer tops, girls' long sleeve shirts, girls' athletic shirts, branded girls' apparel, fashion girls' tops, RelaxShop girls' t-shirts.",
+  title: "Women's T-Shirts",
+  description: "Trendy women's t-shirts and tops at RelaxShop, at prices you'll love.",
+  alternates: { canonical: "/Components/AllPages/Women/t_Shirts" },
 };
 
-
-
-
-function GirlsTShirt() {
-  return (
-    <>
-      <GirlsTShirtItems />
-    </>
-  );
+export default function Page() {
+  return <CategoryView categoryKey="GTShirt" />;
 }
-
-export default GirlsTShirt;

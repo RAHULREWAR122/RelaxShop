@@ -1,30 +1,70 @@
-import Head from "next/head";
-import { Inter } from "next/font/google";
-import "./globals.css"
+import { Fraunces, Manrope } from "next/font/google";
 import "react-toastify/dist/ReactToastify.css";
+import "./globals.css";
 import { DataProvider } from "./Redux/provider";
+import SiteChrome from "@/components/SiteChrome";
+import { getStoreProducts } from "@/lib/server/storeProducts";
+import { SITE_URL } from "@/lib/site";
 
+// Pages are pre-rendered with the product list and refreshed at most once a minute.
+export const revalidate = 60;
 
-const inter = Inter({ subsets: ["latin"] });
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  axes: ["SOFT", "opsz"],
+  style: ["normal", "italic"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
+});
 
 export const metadata = {
-  title: "RelaxShop",
-  description :"RelaxShop , Shop affordable fashion at RelaxShop ,Discover budget-friendly electronics, Find cheap home furniture, Best deals on men's and women's clothing, Affordable prices on top-quality items, RelaxShop: Your destination for low-cost fashion and gadgets, Buy discount fashion and electronics online, RelaxShop budget fashion ,RelaxShop affordable electronics,RelaxShop cheap furniture,RelaxShop discount clothing,RelaxShop low-cost gadgets, Best deals on men's and women's t-shirts, Best cheap jeans for men and women, Affordable girls' jeans online,Where to buy discount saris,Low-cost lehengas for weddings,Budget-friendly shoes for everyday wear, Affordable headphones with great sound quality, Cheap home office chairs, Inexpensive furniture for small apartments",
-  keywords: "RelaxShop, relaxshop, relaxShop, relax shop , Shop affordable fashion at RelaxShop ,Discover budget-friendly electronics, Find cheap home furniture, Best deals on men's and women's clothing, Affordable prices on top-quality items, RelaxShop: Your destination for low-cost fashion and gadgets, Buy discount fashion and electronics online, RelaxShop budget fashion ,RelaxShop affordable electronics,RelaxShop cheap furniture,RelaxShop discount clothing,RelaxShop low-cost gadgets, Best deals on men's and women's t-shirts, Best cheap jeans for men and women, Affordable girls' jeans online,Where to buy discount saris,Low-cost lehengas for weddings,Budget-friendly shoes for everyday wear, Affordable headphones with great sound quality, Cheap home office chairs, Inexpensive furniture for small apartments",
+  metadataBase: new URL(SITE_URL),
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    siteName: "RelaxShop",
+    images: [{ url: "/logo1.png", width: 2000, height: 1500, alt: "RelaxShop" }],
+  },
+  title: {
+    default: "RelaxShop | Affordable fashion, gadgets & home",
+    template: "%s | RelaxShop",
+  },
+  description:
+    "Shop affordable fashion, electronics and home furniture at RelaxShop. Men's and women's clothing, saris, lehengas, shoes, jewellery and more, with free delivery and bulk-order discounts.",
+  keywords:
+    "RelaxShop, affordable fashion, budget electronics, cheap furniture, men's t-shirts, women's jeans, saris, lehengas, shoes, jewellery, discount clothing",
+  applicationName: "RelaxShop",
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
+  twitter: { card: "summary_large_image" },
+  formatDetection: { telephone: false },
 };
 
-export default function RootLayout({ children }) {
-  
-  
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#f5efe6",
+};
+
+export default async function RootLayout({ children }) {
+  // If the database can't be reached, the browser fetches the list itself instead.
+  const products = await getStoreProducts().catch((err) => {
+    console.error(err.message);
+    return null;
+  });
+
   return (
-    <html lang="en">
-          <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"/>
-       
-      <body className={inter.className}>
-        <DataProvider>
-        {children}
+    <html lang="en" className={`${fraunces.variable} ${manrope.variable}`}>
+      <body>
+        <DataProvider initialProducts={products}>
+          <SiteChrome>{children}</SiteChrome>
         </DataProvider>
-        </body>
+      </body>
     </html>
   );
 }

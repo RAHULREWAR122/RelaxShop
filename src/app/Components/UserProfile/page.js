@@ -1,267 +1,193 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import "./uStyle.css";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ToastContainer, toast } from "react-toastify";
-import ProfileSetting from "./profileSetting";
-import OrdersInfo from "./orders";
+import { toast } from "react-toastify";
+import { FiUser, FiPackage, FiLock, FiLogOut } from "react-icons/fi";
+import { api } from "@/lib/client/api";
+import { useSession } from "@/app/Redux/provider";
+import useRequireAuth from "@/components/useRequireAuth";
+import OrdersList from "@/components/OrdersList/OrdersList";
+import style from "./profile.module.scss";
 
-import OrdersPage from "../Orders/page";
-import style from "./profileSetting.module.scss";
-import { FaUserAstronaut } from "react-icons/fa";
-import { GiShoppingCart } from "react-icons/gi";
-import MiniScroller from "../miniScroller/page";
+const TABS = [
+  { key: "profile", label: "Profile", icon: FiUser },
+  { key: "orders", label: "Orders", icon: FiPackage },
+  { key: "security", label: "Security", icon: FiLock },
+];
 
-export default function Profile() {
-  const [userOrders, setUserOrders] = useState([]);
-  const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    pinCode: "",
-    phone: "",
-    password: "",
-    cPassword: "",
-    nwPassword: "",
-  });
-  const [listState, setListState] = useState("profile_setting");
-
-  const handleListData = (data) => {
-    setListState(data);
-  };
-
-
-  let token = localStorage.getItem("token");
-  let router = useRouter();
+export default function ProfilePage() {
+  const session = useRequireAuth();
+  const { signOut } = useSession();
+  const router = useRouter();
+  const [tab, setTab] = useState("profile");
+  const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-    if (!token) {
-      router.push("/");
-      return;
-    } else {
-      fetchUserDetails();
-    }
-  }, [token]);
-  
-
-  const fetchUserDetails = async () => {
-    try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_HOST_NAME}/api/MyUser`,
-        { token: token }
-      );
-      if (response.data.success) {
-        const { email, name, phone, pinCode } = response.data.result;
-
-        setUserData((prevUserData) => ({
-          ...prevUserData,
-          email: email,
-          name: name,
-          phone: phone,
-          pinCode: pinCode,
-        }));
-      } else {
-        setUserData((prevUserData) => ({
-          ...prevUserData,
-          email: "",
-          name: "",
-          phone: "",
-          pinCode: "",
-        }));
-      }
-    } catch (error) {
-     return;
-    }
-  };
-
-  const handleUpdateUser = async () => {
-    try {
-      const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_HOST_NAME}/api/MyUser`,
-        {
-          token: token,
-          email: userData.email,
-          name: userData.name,
-          phone: userData.phone,
-          pinCode: userData.pinCode,
-        }
-      );
-
-      if (response.data.success) {
-        toast.success(`Profile Update Successfully`, {
-          position: "top-right",
-          autoClose: 1000,
-        });
-      } else {
-        toast.error(response.data.result, {
-          position: "top-right",
-          autoClose: 1000,
-        });
-      }
-      return;
-    } catch (error) {
-      toast.error(`Error in Update Profile`, {
-        position: "top-right",
-        autoClose: 1000,
-      });
+    if (!session) return;
+    if (session.role === "admin") {
+      router.replace("/AdminPage/allProducts");
       return;
     }
-  };
+    api("/api/MyUser").then((res) => res.success && setProfile(res.result));
+  }, [session, router]);
 
-  const handleUpdatePassword = async (e) => {
-    e.preventDefault();
-    try {
-      if (userData.cPassword === userData.nwPassword) {
-        const response = await axios.put(
-          `${process.env.NEXT_PUBLIC_HOST_NAME}/api/updatePassword`,
-          {
-            token: token,
-            email: userData.email,
-            password: userData.password,
-            cPassword: userData.cPassword,
-            nwPassword: userData.nwPassword,
-          }
-        );
-
-        if (response.data.success) {
-          toast.success(`Password Update Successfully`, {
-            position: "top-right",
-            autoClose: 1000,
-          });
-
-          return;
-        } else {
-          toast.error(`Error in Update user`, {
-            position: "top-right",
-            autoClose: 1000,
-          });
-
-          return;
-        }
-      } else {
-        toast.error(`Password Not Matches`, {
-          position: "top-right",
-          autoClose: 1000,
-        });
-        return;
-      }
-    } catch (error) {
-      toast.error(`Error updating user`, {
-        position: "top-right",
-        autoClose: 1000,
-      });
-
-      return;
-    }
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserData({
-      ...userData,
-      [name]: value,
-    });
-  };
-
-
+  if (!session || !profile) {
+    return (
+      <div className="page-loader">
+        <span className="spinner" />
+      </div>
+    );
+  }
 
   return (
-    <div className={style.userProfilePage}>
-      {userData.email === "" && <MiniScroller/>}
-
-      <ToastContainer position="top-right" autoClose={1000} />
-      <div className={style.container}>
-        <div className={style.row}>
-          <div className={style.col}>
-            <div className={style.author_card}>
-              <div
-                className={style.author_card_cover}
-                style={{
-                  backgroundImage:
-                    "url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg)",
-                }}
-              ></div>
-              <div className={style.author_card_profile}>
-                <div className={style.author_card_avatar}>
-                  <img
-                    src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                    alt="Daniel Adams"
-                  />
-                </div>
-                <div className="author-card-details">
-                  <h5 className="author-card-name text-lg">
-                   {userData.name}
-                  </h5>
-                  <span className="author-card-position">
-                    {userData.email}
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className={style.wizard}>
-              <nav className={style.list_group}>
-                <a
-                  className={
-                    listState === "Orders"
-                      ? `${style.list_group_item} ${style.active}`
-                      : style.list_group_item
-                  }
-                  href="#/"
-                  onClick={() => handleListData("Orders")}
-                >
-                  <div className={style.ord}>
-                    <div>
-                      <div className="d-inline-block font-weight-medium text-uppercase">
-                       <GiShoppingCart  className={style.icon}/>
-                        Orders
-                      </div>
-                    </div>
-                  </div>
-                </a>
-                <a
-                  className={
-                    listState === "profile_setting"
-                      ? `${style.list_group_item} ${style.active}`
-                      : style.list_group_item
-                  }
-                  href="#/"
-                  onClick={() => handleListData("profile_setting")}
-                >
-                  <FaUserAstronaut className={style.icon}/>Profile Settings
-                </a>
-              </nav>
-            </div>
-          </div>
-           <div className={style.aboutUserDetails}>
-               <div className={style.info}>
-               <h3>{userData.name}</h3>
-               <span style={{fontSize:".7rem"}}>{userData.email}</span>
-               </div>
-               <div className={style.links}>
-                  <ul>
-                    <li className={listState === "profile_setting" ? style.activeList: ""} onClick={() => handleListData("profile_setting")}>Profile</li>
-                    <li className={listState === "Orders" ? style.activeList : ""} onClick={() => handleListData("Orders")}>Orders</li>
-                    </ul>  
-               </div>
-           </div>
-          <div className={style.pages}>
-              
-
-            {listState === "Orders" && (
-              <OrdersInfo
-              />
-            )}
-            {listState === "profile_setting" && (
-              <ProfileSetting
-                userData={userData}
-                handleChange={handleChange}
-                handleUpdatePassword={handleUpdatePassword}
-                handleUpdateUser={handleUpdateUser}
-              />
-            )}
+    <div className={`container page ${style.layout}`}>
+      <aside className={style.side}>
+        <div className={style.identity}>
+          <span className={style.avatar}>{profile.name.charAt(0).toUpperCase()}</span>
+          <div>
+            <strong>{profile.name}</strong>
+            <span>{profile.email}</span>
           </div>
         </div>
-      </div>
+        <nav className={style.tabs} role="tablist" aria-label="Account sections">
+          {TABS.map(({ key, label, icon: Icon }) => (
+            <button key={key} role="tab" aria-selected={tab === key} onClick={() => setTab(key)}>
+              <Icon /> {label}
+            </button>
+          ))}
+          <button
+            className={style.signOut}
+            onClick={() => {
+              signOut();
+              router.push("/");
+            }}
+          >
+            <FiLogOut /> Sign out
+          </button>
+        </nav>
+      </aside>
+
+      <section className={style.content}>
+        {tab === "profile" && <ProfileForm profile={profile} onSaved={setProfile} />}
+        {tab === "orders" && (
+          <>
+            <Heading title="Your" em="orders" text="Follow deliveries and revisit past purchases." />
+            <OrdersList compact />
+          </>
+        )}
+        {tab === "security" && <PasswordForm />}
+      </section>
     </div>
+  );
+}
+
+function Heading({ title, em, text }) {
+  return (
+    <div className={style.heading}>
+      <h1>
+        {title} <em>{em}</em>
+      </h1>
+      {text && <p>{text}</p>}
+    </div>
+  );
+}
+
+function ProfileForm({ profile, onSaved }) {
+  const [form, setForm] = useState({ name: profile.name, phone: profile.phone, pinCode: profile.pinCode });
+  const [busy, setBusy] = useState(false);
+  const set = (k) => (e) => setForm({ ...form, [k]: k === "name" ? e.target.value : e.target.value.replace(/\D/g, "") });
+  const dirty = form.name !== profile.name || form.phone !== profile.phone || form.pinCode !== profile.pinCode;
+
+  const save = async (e) => {
+    e.preventDefault();
+    setBusy(true);
+    const res = await api("/api/MyUser", { method: "PUT", body: form });
+    setBusy(false);
+    if (res.success) {
+      onSaved(res.result);
+      toast.success("Profile saved");
+    } else toast.error(res.result);
+  };
+
+  return (
+    <form onSubmit={save}>
+      <Heading title="Your" em="details" text="We use these to speed up checkout." />
+      <div className={`form-grid ${style.card}`}>
+        <label className="field span-2">
+          <span>Full name</span>
+          <input className="input" value={form.name} onChange={set("name")} autoComplete="name" />
+        </label>
+        <label className="field span-2">
+          <span>Email</span>
+          <input className="input" value={profile.email} readOnly />
+          <small>Your email is your sign-in and can&apos;t be changed.</small>
+        </label>
+        <label className="field">
+          <span>Mobile number</span>
+          <input className="input" value={form.phone} onChange={set("phone")} inputMode="numeric" maxLength={10} placeholder="10 digits" />
+        </label>
+        <label className="field">
+          <span>PIN code</span>
+          <input className="input" value={form.pinCode} onChange={set("pinCode")} inputMode="numeric" maxLength={6} placeholder="6 digits" />
+        </label>
+        <div className={`span-2 ${style.actions}`}>
+          <button className="btn" disabled={!dirty || busy}>
+            {busy ? <span className="spinner" /> : "Save changes"}
+          </button>
+        </div>
+      </div>
+    </form>
+  );
+}
+
+function PasswordForm() {
+  const empty = { password: "", nwPassword: "", cPassword: "" };
+  const [form, setForm] = useState(empty);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
+
+  const save = async (e) => {
+    e.preventDefault();
+    setError("");
+    if (form.nwPassword.length < 6) return setError("New password must be at least 6 characters.");
+    if (form.nwPassword !== form.cPassword) return setError("New passwords don't match.");
+    setBusy(true);
+    const res = await api("/api/updatePassword", { method: "PUT", body: form });
+    setBusy(false);
+    if (res.success) {
+      setForm(empty);
+      toast.success("Password updated");
+    } else setError(res.result);
+  };
+
+  return (
+    <form onSubmit={save}>
+      <Heading title="Change" em="password" text="Use at least 6 characters. A mix of letters, numbers and symbols is stronger." />
+      <div className={`form-grid ${style.card}`}>
+        <label className="field span-2">
+          <span>Current password</span>
+          <input className="input" type="password" value={form.password} onChange={set("password")} autoComplete="current-password" />
+        </label>
+        <label className="field">
+          <span>New password</span>
+          <input className="input" type="password" value={form.nwPassword} onChange={set("nwPassword")} autoComplete="new-password" />
+        </label>
+        <label className="field">
+          <span>Confirm new password</span>
+          <input className="input" type="password" value={form.cPassword} onChange={set("cPassword")} autoComplete="new-password" />
+        </label>
+        {error && (
+          <p className={`span-2 ${style.error}`} role="alert">
+            {error}
+          </p>
+        )}
+        <div className={`span-2 ${style.actions}`}>
+          <button className="btn" disabled={busy || !form.password || !form.nwPassword}>
+            {busy ? <span className="spinner" /> : "Update password"}
+          </button>
+        </div>
+      </div>
+    </form>
   );
 }

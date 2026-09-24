@@ -1,19 +1,11 @@
-import LanghaItems from ".";
+import CategoryView from "@/components/CategoryView/CategoryView";
 
 export const metadata = {
-  title: "RelaxShop | Langha",
-  description:
-    "Explore a stunning collection of langhas at RelaxShop. Discover traditional Indian langha skirts, designer langha choli sets, bridal wear, and more. Shop now for exquisite embroidered langhas and stylish ethnic wear with fast shipping and easy returns.",
-  keywords:
-    "RelaxShop ,traditional langha, designer langha skirts, bridal langha choli, embroidered langha, Indian ethnic langha, buy langha online, affordable langha skirts, discount langha choli, party wear langha, wedding langha dress, latest langha designs, custom langha outfits, langha with dupatta, Bollywood style langha, fashion langha choli, RelaxShop langha.",
+  title: "Lehengas",
+  description: "Low-cost lehengas for weddings and celebrations at RelaxShop.",
+  alternates: { canonical: "/Components/AllPages/Women/Langha" },
 };
 
-function Langha() {
-  return (
-    <>
-      <LanghaItems />
-    </>
-  );
+export default function Page() {
+  return <CategoryView categoryKey="langha" />;
 }
-
-export default Langha;

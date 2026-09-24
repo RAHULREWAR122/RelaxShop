@@ -1,0 +1,70 @@
+.empty {
+  text-align: center;
+  padding: clamp(40px, 8vw, 80px) 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    font-size: clamp(26px, 3.5vw, 36px);
+  }
+
+  p {
+    margin-top: 10px;
+    max-width: 420px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+}
+
+.compact {
+  padding: 32px 16px;
+
+  .art {
+    transform: scale(0.75);
+    margin-bottom: 8px;
+  }
+}
+
+.action {
+  margin-top: 24px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* three stacked arches: the brand's signature shape */
+.art {
+  position: relative;
+  width: 120px;
+  height: 110px;
+  margin-bottom: 24px;
+
+  span {
+    position: absolute;
+    bottom: 0;
+    border-radius: var(--arch);
+  }
+
+  span:nth-child(1) {
+    left: 0;
+    width: 56px;
+    height: 80px;
+    background: var(--clay-soft);
+  }
+
+  span:nth-child(2) {
+    left: 32px;
+    width: 56px;
+    height: 110px;
+    background: var(--clay);
+  }
+
+  span:nth-child(3) {
+    right: 0;
+    width: 44px;
+    height: 64px;
+    background: var(--moss);
+  }
+}
